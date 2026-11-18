@@ -1178,6 +1178,97 @@ body:not(.page-accueil) .tp-mot2 { margin-left: .28em; }
 }
 .entete-banniere { z-index: 1; box-shadow: 0 0 40px rgba(0,0,0,.45); }
 
+
+/* ---------- Onglets spéciaux du menu ---------- */
+.main-nav ul { margin-left: 0; }
+.nav-inner { justify-content: center; }
+.main-nav ul a.onglet-frav {
+  background: var(--rouge);
+  color: #fff;
+  border-radius: 8px 8px 0 0;
+  margin-top: .3rem;
+  padding-top: .55rem;
+}
+.main-nav ul a.onglet-frav:hover { background: #8e0a1f; }
+.main-nav ul a.onglet-frav[aria-current="page"] { border-bottom-color: var(--jaune); }
+.main-nav ul a.onglet-externe { color: var(--jaune); }
+.main-nav ul a.onglet-externe:hover { color: #fff; }
+
+/* ---------- Page Français Avancé LMFA ---------- */
+.annee-1 { --an: #e85d04; }
+.annee-2 { --an: #d00000; }
+.annee-3 { --an: #9d0208; }
+.annee-4 { --an: #3a0ca3; }
+.annee-5 { --an: #14213d; }
+.frav-annees {
+  display: grid;
+  gap: .9rem;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 1.4rem 0 2rem;
+}
+@media (max-width: 900px) { .frav-annees { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .frav-annees { grid-template-columns: repeat(2, 1fr); } .frav-annees .frav-annee:last-child { grid-column: span 2; } }
+.frav-annee {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  min-height: 9rem;
+  padding: 1rem;
+  border-radius: 16px;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(145deg, var(--an), color-mix(in srgb, var(--an) 70%, #000));
+  box-shadow: 0 6px 16px rgba(20,30,60,.18);
+  overflow: hidden;
+  transition: transform .15s ease;
+}
+.frav-annee::after {
+  content: "";
+  position: absolute;
+  right: -1.5rem;
+  bottom: -1.5rem;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  border: 10px solid rgba(255,255,255,.14);
+}
+.frav-annee:hover { color: #fff; transform: translateY(-4px); }
+.frav-numero { font-family: var(--police-titres); font-weight: 800; font-size: 2.6rem; line-height: 1; }
+.frav-titre { font-weight: 800; font-size: 1.05rem; }
+.frav-cecrl { font-size: .82rem; opacity: .92; }
+.frav-entete {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 1.3rem;
+  border-radius: 16px;
+  color: #fff;
+  background: linear-gradient(145deg, var(--an), color-mix(in srgb, var(--an) 70%, #000));
+  margin-bottom: 1.2rem;
+}
+.frav-entete h1 { color: #fff; margin: 0; }
+.frav-entete .frav-numero { font-size: 3.2rem; }
+.frav-sur { margin: 0; font-size: .85rem; opacity: .85; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+.bloc-aprendo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2rem 0 1rem;
+  padding: 1.2rem 1.4rem;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-left: 6px solid var(--accent);
+  box-shadow: var(--ombre);
+}
+.bloc-aprendo h2 { margin: 0 0 .3rem; }
+.bloc-aprendo p { margin: 0; }
+.bloc-aprendo-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
+@media (prefers-reduced-motion: reduce) { .frav-annee { transition: none; } .frav-annee:hover { transform: none; } }
+
 </style>
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiMxZDNhNmUiLz48cmVjdCB4PSI0NCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjY0IiBmaWxsPSIjYzgxMDJlIiByeD0iMCIvPjx0ZXh0IHg9IjIyIiB5PSI0MiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5GQTwvdGV4dD48L3N2Zz4K" type="image/svg+xml">
 </head>
@@ -1196,17 +1287,15 @@ body:not(.page-accueil) .tp-mot2 { margin-left: .28em; }
   </header>
     <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
       <div class="nav-inner">
-        <a class="logo-lmfa" href="#/" aria-label="Accueil – LMFA Français Avancé">
-          <span class="logo-badge" aria-hidden="true">LMFA</span>
-          <span class="logo-txt">Français Avancé</span>
-        </a>
         <ul>
           <li><a href="#/" data-route="accueil">Accueil</a></li>
+          <li><a href="#/frav" data-route="frav" class="onglet-frav">Français Avancé LMFA</a></li>
           <li><a href="#/pratiques" data-route="pratiques">Pratiques DELF/DALF</a></li>
           <li><a href="#/materiel" data-route="materiel">Matériel</a></li>
           <li><a href="#/messagerie" data-route="messagerie">Messagerie</a></li>
           <li><a href="#/projets" data-route="projets">Projets</a></li>
           <li><a href="#/evaluations" data-route="evaluations">Évaluations</a></li>
+          <li><a href="https://aprendo-pura-vida.learningpassport.org/" target="_blank" rel="noopener" class="onglet-externe">Aprendo Pura Vida <span aria-hidden="true">↗</span><span class="sr-only"> (nouvel onglet)</span></a></li>
         </ul>
       </div>
     </nav>
@@ -1233,7 +1322,7 @@ body:not(.page-accueil) .tp-mot2 { margin-left: .28em; }
    ========================================================== */
 window.DONNEES_SITE = {
   "site": {
-    "titre": "Passeport DELF",
+    "titre": "Passeport DELF-DALF",
     "sousTitre": "Pratiques DELF/DALF · MSc. Eduardo Umaña Álvarez",
     "auteur": "MSc. Eduardo Umaña Álvarez",
     "fonction": "Enseignant de Français Avancé, formateur France Éducation International",
@@ -1280,8 +1369,8 @@ window.DONNEES_SITE = {
         "cadrageCompact": "center 35%",
         "nom": {
           "mot1": "Passeport",
-          "mot2": "DELF",
-          "etiquette": "LMFA · Français Avancé",
+          "mot2": "DELF-DALF",
+          "etiquette": "",
           "slogan": "Ton aventure en français, du A1 au C1",
           "bouton": "Je commence",
           "lienBouton": "#/pratiques",
@@ -3128,7 +3217,62 @@ window.DONNEES_SITE = {
       "consignes": "Lisez attentivement chaque document. Pour les questions vrai/faux, recopiez la phrase qui justifie votre réponse.",
       "consignes_es": "Lea con atención cada documento. En las preguntas verdadero/falso, copie la frase que justifica su respuesta."
     }
-  ]
+  ],
+  "frav": {
+    "_aide": "Programme Français Avancé (FRAV) du LMFA. Complétez pour chaque année : description, niveauCECRL (ex. A1, A2…), objectifs (liste) et liens (liste de {titre, url}). Les champs vides ne s'affichent pas.",
+    "titre": "Français Avancé LMFA",
+    "intro": "Le programme Français Avancé (FRAV) du Liceo Mauro Fernández, de la 7e à la 11e année. Choisis ton année pour voir ce que tu vas apprendre et les ressources de ta classe.",
+    "intro_es": "El programa Francés Avanzado (FRAV) del Liceo Mauro Fernández, de sétimo a undécimo año. Elige tu año para ver lo que vas a aprender y los recursos de tu clase.",
+    "annees": [
+      {
+        "id": "7e",
+        "titre": "7e année",
+        "niveauCECRL": "",
+        "description": "",
+        "objectifs": [],
+        "liens": []
+      },
+      {
+        "id": "8e",
+        "titre": "8e année",
+        "niveauCECRL": "",
+        "description": "",
+        "objectifs": [],
+        "liens": []
+      },
+      {
+        "id": "9e",
+        "titre": "9e année",
+        "niveauCECRL": "",
+        "description": "",
+        "objectifs": [],
+        "liens": []
+      },
+      {
+        "id": "10e",
+        "titre": "10e année",
+        "niveauCECRL": "",
+        "description": "",
+        "objectifs": [],
+        "liens": []
+      },
+      {
+        "id": "11e",
+        "titre": "11e année",
+        "niveauCECRL": "",
+        "description": "",
+        "objectifs": [],
+        "liens": []
+      }
+    ],
+    "aprendo": {
+      "titre": "Aprendo Pura Vida",
+      "texte": "La plateforme de cours en ligne du MEP. Connecte-toi avec ton compte étudiant @est.mep.go.cr.",
+      "texte_es": "La plataforma de cursos en línea del MEP. Ingresa con tu cuenta de estudiante @est.mep.go.cr.",
+      "url": "https://aprendo-pura-vida.learningpassport.org/",
+      "guide": "https://www.mep.go.cr/sites/default/files/2023-10/como-ingresar-aprendo-pura-vida.pdf"
+    }
+  }
 };
 </script>
 <script>
@@ -3147,7 +3291,8 @@ window.DONNEES_SITE = {
     ressources: [],
     groupes: [],
     projets: [],
-    evaluations: []
+    evaluations: [],
+    frav: null
   };
 
   var NIVEAUX = ["A1", "A2", "B1", "B2", "C1"];
@@ -3264,6 +3409,7 @@ window.DONNEES_SITE = {
       DATA.groupes = sansAide(D.groupes);
       DATA.projets = sansAide(D.projets);
       DATA.evaluations = sansAide(D.evaluations);
+      DATA.frav = D.frav || null;
       return Promise.resolve();
     }
     return charger("data/site.json").then(function (site) {
@@ -3276,7 +3422,8 @@ window.DONNEES_SITE = {
         charger("data/ressources.json").catch(function () { return []; }),
         charger("data/groupes.json").catch(function () { return []; }),
         charger("data/projets.json").catch(function () { return []; }),
-        charger("data/evaluations.json").catch(function () { return []; })
+        charger("data/evaluations.json").catch(function () { return []; }),
+        charger("data/frav.json").catch(function () { return null; })
       ]);
     }).then(function (r) {
       DATA.exercices = sansAide([].concat.apply([], r[0]));
@@ -3284,6 +3431,7 @@ window.DONNEES_SITE = {
       DATA.groupes = sansAide(r[2]);
       DATA.projets = sansAide(r[3]);
       DATA.evaluations = sansAide(r[4]);
+      DATA.frav = r[5];
     });
   }
 
@@ -3331,7 +3479,8 @@ window.DONNEES_SITE = {
     materiel: pageMateriel,
     messagerie: pageMessagerie,
     projets: pageProjets,
-    evaluations: pageEvaluations
+    evaluations: pageEvaluations,
+    frav: pageFrav
   };
 
   var SECTION_NAV = { exercice: "pratiques" };
@@ -3402,6 +3551,61 @@ window.DONNEES_SITE = {
         (a.avertissement_es ? '<p class="es" lang="es">' + esc(a.avertissement_es) + "</p>" : "") + "</div>";
     }
     app.innerHTML = h;
+  }
+
+  /* ==========================================================
+     FRANÇAIS AVANCÉ LMFA : programme de la 7e à la 11e année
+     ========================================================== */
+
+  function blocAprendo(ap) {
+    if (!ap || !ap.url) return "";
+    return '<section class="bloc-aprendo">' +
+      '<div><h2>' + esc(ap.titre || "Aprendo Pura Vida") + "</h2>" + bi(ap.texte || "", ap.texte_es) + "</div>" +
+      '<div class="bloc-aprendo-actions"><a class="btn btn-accent" href="' + esc(ap.url) + '" target="_blank" rel="noopener">Ouvrir Aprendo Pura Vida ↗</a>' +
+      (ap.guide ? '<a class="btn btn-secondaire" href="' + esc(ap.guide) + '" target="_blank" rel="noopener">Guide de connexion (PDF) ↗</a>' : "") +
+      "</div></section>";
+  }
+
+  function pageFrav(r) {
+    var F = DATA.frav;
+    if (!F) { app.innerHTML = '<h1>Français Avancé LMFA</h1><p class="vide">Contenu à venir.</p>'; return; }
+    var annees = F.annees || [];
+    if (r.id) {
+      var A = annees.filter(function (x) { return x.id === r.id; })[0];
+      if (!A) { pageIntrouvable(); return; }
+      var i = annees.indexOf(A);
+      var h = '<p class="breadcrumb"><a href="#/frav">← ' + esc(F.titre) + "</a></p>" +
+        '<div class="frav-entete annee-' + (i + 1) + '"><span class="frav-numero">' + esc(A.id) + "</span><div>" +
+        '<p class="frav-sur">' + esc(F.titre) + "</p><h1>" + esc(A.titre) + "</h1>" +
+        (A.niveauCECRL ? tagNiveau(A.niveauCECRL) : "") + "</div></div>";
+      var vide = !A.description && !(A.objectifs || []).length && !(A.liens || []).length;
+      if (A.description) h += paragraphes(A.description);
+      if ((A.objectifs || []).length) {
+        h += "<h2>Ce que tu vas apprendre</h2><ul>" + A.objectifs.map(function (o) { return "<li>" + esc(o) + "</li>"; }).join("") + "</ul>";
+      }
+      if ((A.liens || []).length) {
+        h += '<h2>Ressources</h2><div class="grille">' + A.liens.map(function (l) {
+          return '<a class="carte carte-lien" href="' + esc(l.url) + '" target="_blank" rel="noopener"><h3>' + esc(l.titre) + " ↗</h3>" + (l.description ? "<p>" + esc(l.description) + "</p>" : "") + "</a>";
+        }).join("") + "</div>";
+      }
+      if (vide) h += '<div class="encart info"><p>Le contenu de la ' + esc(A.titre) + ' sera bientôt disponible.</p><p class="es" lang="es">El contenido de este año estará disponible pronto.</p></div>';
+      if (A.niveauCECRL) h += '<p><a class="btn" href="#/pratiques?niveau=' + esc(A.niveauCECRL) + '">S\'entraîner au niveau ' + esc(A.niveauCECRL) + "</a></p>";
+      h += blocAprendo(F.aprendo);
+      app.innerHTML = h;
+      return;
+    }
+    var h2 = "<h1>" + esc(F.titre) + "</h1>" + '<p class="lead">' + esc(F.intro || "") + "</p>" +
+      (F.intro_es ? '<p class="es" lang="es">' + esc(F.intro_es) + "</p>" : "") +
+      '<div class="frav-annees">';
+    annees.forEach(function (A, i) {
+      h2 += '<a class="frav-annee annee-' + (i + 1) + '" href="#/frav/' + encodeURIComponent(A.id) + '">' +
+        '<span class="frav-numero">' + esc(A.id) + "</span>" +
+        '<span class="frav-titre">' + esc(A.titre) + "</span>" +
+        (A.niveauCECRL ? '<span class="frav-cecrl">Niveau visé : ' + esc(A.niveauCECRL) + "</span>" : "") +
+        '<span class="tuile-fleche">' + ICONES.fleche + "</span></a>";
+    });
+    h2 += "</div>" + blocAprendo(F.aprendo);
+    app.innerHTML = h2;
   }
 
   /* ==========================================================
