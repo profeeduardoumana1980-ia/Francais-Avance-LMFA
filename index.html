@@ -961,6 +961,223 @@ main:focus, main:focus-visible { outline: none; }
   to   { transform: translateX(-50%); }
 }
 
+
+/* ==========================================================
+   Nom du site sur la photo : « Passeport DELF »
+   ========================================================== */
+
+/* Voile dégradé à gauche pour que le titre se lise sur la photo */
+.entete-banniere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(100deg, rgba(14,28,58,.88) 0%, rgba(14,28,58,.62) 34%, rgba(14,28,58,0) 62%),
+    radial-gradient(circle at 12% 18%, rgba(255,209,102,.18), transparent 40%);
+  transition: opacity .35s ease;
+}
+.banniere-bandeau { z-index: 2; }
+.entete-outils { z-index: 4; }
+
+.titre-passeport {
+  position: absolute;
+  z-index: 3;
+  left: clamp(1rem, 4vw, 3rem);
+  top: 50%;
+  transform: translateY(-62%);
+  max-width: min(36rem, 62%);
+  color: #fff;
+  animation: tp-entree .9s cubic-bezier(.2,.8,.2,1) both;
+}
+.tp-etiquette {
+  display: inline-block;
+  font-family: var(--police-titres);
+  font-weight: 700;
+  font-size: clamp(.7rem, 1.2vw, .85rem);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  background: var(--rouge);
+  color: #fff;
+  padding: .3rem .75rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(180,13,39,.4);
+}
+.tp-nom {
+  margin: .35rem 0 0;
+  font-family: var(--police-titres);
+  font-weight: 800;
+  line-height: .92;
+  letter-spacing: -.03em;
+  text-shadow: 0 4px 18px rgba(0,0,0,.45);
+}
+.tp-mot1 {
+  display: block;
+  font-size: clamp(2.3rem, 7.2vw, 5.4rem);
+}
+.tp-mot2 {
+  display: inline-block;
+  font-size: clamp(2.8rem, 9vw, 6.8rem);
+  background: linear-gradient(100deg, #ffd166 0%, #ffb703 45%, #ff8a3d 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,.45));
+  position: relative;
+}
+/* soulignement « coup de pinceau » */
+.tp-mot2::after {
+  content: "";
+  position: absolute;
+  left: .05em;
+  right: .05em;
+  bottom: -.02em;
+  height: .09em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--rouge), #ff8a3d);
+  transform: skewX(-18deg);
+}
+.tp-slogan {
+  margin: .7rem 0 0;
+  font-weight: 700;
+  font-size: clamp(.95rem, 1.9vw, 1.35rem);
+  text-shadow: 0 2px 8px rgba(0,0,0,.5);
+}
+.tp-bouton {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: 1rem;
+  padding: .7rem 1.3rem;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--bleu-fonce);
+  font-family: var(--police-titres);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 22px rgba(0,0,0,.3);
+  transition: transform .15s ease, background .15s ease;
+}
+.tp-bouton:hover { color: #fff; background: var(--accent); transform: translateY(-2px); }
+.tp-bouton .icone { width: 1.1rem; height: 1.1rem; }
+
+/* Tampon de passeport */
+.tampon {
+  position: absolute;
+  z-index: 3;
+  right: clamp(1rem, 5vw, 4rem);
+  top: clamp(3.6rem, 9vw, 5rem);
+  width: clamp(6.5rem, 13vw, 9.5rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 4px double rgba(255,209,102,.95);
+  background: rgba(14,28,58,.35);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  color: #ffd166;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--police-titres);
+  font-weight: 800;
+  text-transform: uppercase;
+  transform: rotate(-14deg);
+  box-shadow: 0 0 0 4px rgba(255,209,102,.18);
+  animation: tampon-coup .7s .6s cubic-bezier(.3,1.6,.5,1) both;
+}
+.tampon::before {
+  content: "";
+  position: absolute;
+  inset: 9%;
+  border-radius: 50%;
+  border: 2px dashed rgba(255,209,102,.7);
+}
+.tampon-haut { font-size: clamp(.8rem, 1.6vw, 1.15rem); letter-spacing: .18em; }
+.tampon-milieu {
+  font-size: clamp(.62rem, 1.1vw, .8rem);
+  letter-spacing: .06em;
+  border-top: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  padding: .12rem .3rem;
+  margin: .2rem 0;
+  white-space: nowrap;
+}
+.tampon-bas { font-size: clamp(.68rem, 1.2vw, .9rem); letter-spacing: .1em; }
+
+@keyframes tp-entree {
+  from { opacity: 0; transform: translate(-30px, -62%); }
+  to   { opacity: 1; transform: translate(0, -62%); }
+}
+@keyframes tampon-coup {
+  0%   { opacity: 0; transform: rotate(-14deg) scale(2.2); }
+  70%  { opacity: 1; transform: rotate(-14deg) scale(.92); }
+  100% { opacity: 1; transform: rotate(-14deg) scale(1); }
+}
+
+/* Pages intérieures : bannière compacte, nom sur une ligne */
+body:not(.page-accueil) .titre-passeport { top: 38%; transform: translateY(-50%); animation: none; max-width: 80%; }
+body:not(.page-accueil) .tp-etiquette,
+body:not(.page-accueil) .tp-slogan,
+body:not(.page-accueil) .tp-bouton,
+body:not(.page-accueil) .tampon { display: none; }
+body:not(.page-accueil) .tp-nom { margin: 0; }
+body:not(.page-accueil) .tp-mot1,
+body:not(.page-accueil) .tp-mot2 { display: inline; font-size: clamp(1.6rem, 4vw, 2.8rem); }
+body:not(.page-accueil) .tp-mot2::after { display: none; }
+
+/* Téléphone */
+@media (max-width: 600px) {
+  .entete-banniere::before {
+    background: linear-gradient(180deg, rgba(14,28,58,.85) 0%, rgba(14,28,58,.55) 45%, rgba(14,28,58,.1) 75%);
+  }
+  .titre-passeport { top: 3.6rem; transform: none; max-width: 70%; animation-name: tp-entree-mobile; }
+  .tp-bouton { margin-top: .6rem; padding: .5rem 1rem; font-size: .9rem; }
+  .tampon { top: auto; bottom: 30%; right: .8rem; }
+  body:not(.page-accueil) .titre-passeport { top: 40%; transform: translateY(-50%); }
+}
+@keyframes tp-entree-mobile { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .titre-passeport, .tampon { animation: none; }
+}
+
+/* Ajustements : le titre se pose en bas à gauche pour laisser les visages visibles */
+body.page-accueil .titre-passeport { top: auto; bottom: calc(6% + 4.6rem); transform: none; animation-name: tp-entree-bas; }
+.entete-banniere::before {
+  background:
+    linear-gradient(15deg, rgba(14,28,58,.92) 0%, rgba(14,28,58,.7) 30%, rgba(14,28,58,0) 58%),
+    radial-gradient(circle at 10% 90%, rgba(255,209,102,.16), transparent 45%);
+}
+.tp-mot1 { font-size: clamp(2.1rem, 5.6vw, 4.3rem); }
+.tp-mot2 { font-size: clamp(2.6rem, 7vw, 5.4rem); }
+@keyframes tp-entree-bas { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: none; } }
+body:not(.page-accueil) .tp-mot2 { margin-left: .28em; }
+
+@media (max-width: 600px) {
+  body.page-accueil .entete-banniere { height: 460px; }
+  body.page-accueil .titre-passeport { top: auto; bottom: calc(6% + 3.6rem); max-width: 78%; }
+  .entete-banniere::before {
+    background: linear-gradient(0deg, rgba(14,28,58,.92) 0%, rgba(14,28,58,.75) 40%, rgba(14,28,58,0) 72%);
+  }
+  .tampon { top: 3.6rem; bottom: auto; right: .8rem; width: 5.6rem; }
+  .tp-slogan { font-size: .95rem; }
+}
+
+/* Fond flou de la photo autour de la bannière sur les grands écrans */
+.site-header { position: relative; overflow: hidden; background: var(--bleu-fonce); }
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  background: var(--img-ban, none) center / cover no-repeat;
+  filter: blur(26px) brightness(.4) saturate(1.2);
+}
+.entete-banniere { z-index: 1; box-shadow: 0 0 40px rgba(0,0,0,.45); }
+
 </style>
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiMxZDNhNmUiLz48cmVjdCB4PSI0NCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjY0IiBmaWxsPSIjYzgxMDJlIiByeD0iMCIvPjx0ZXh0IHg9IjIyIiB5PSI0MiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5GQTwvdGV4dD48L3N2Zz4K" type="image/svg+xml">
 </head>
@@ -1016,7 +1233,7 @@ main:focus, main:focus-visible { outline: none; }
    ========================================================== */
 window.DONNEES_SITE = {
   "site": {
-    "titre": "Français Avancé",
+    "titre": "Passeport DELF",
     "sousTitre": "Pratiques DELF/DALF · MSc. Eduardo Umaña Álvarez",
     "auteur": "MSc. Eduardo Umaña Álvarez",
     "fonction": "Enseignant de Français Avancé, formateur France Éducation International",
@@ -1060,7 +1277,20 @@ window.DONNEES_SITE = {
         "alt": "Classe de Français Avancé : un professeur s'entretient en français avec un élève pendant que la classe travaille.",
         "message": "Français Avancé et FLE · Pratiques DELF/DALF · MSc. Eduardo Umaña Álvarez · Formateur FEI",
         "cadrage": "center 40%",
-        "cadrageCompact": "center 35%"
+        "cadrageCompact": "center 35%",
+        "nom": {
+          "mot1": "Passeport",
+          "mot2": "DELF",
+          "etiquette": "LMFA · Français Avancé",
+          "slogan": "Ton aventure en français, du A1 au C1",
+          "bouton": "Je commence",
+          "lienBouton": "#/pratiques",
+          "tampon": [
+            "LMFA",
+            "DELF · DALF",
+            "A1 → C1"
+          ]
+        }
       },
       "titre": "Choisis ton niveau et entraîne-toi !",
       "texte": "Des exercices de compréhension de l'oral et des écrits pour préparer le DELF et le DALF, avec la correction tout de suite.",
@@ -4015,9 +4245,25 @@ window.DONNEES_SITE = {
       '<div class="banniere-bandeau" aria-hidden="true"><div class="banniere-piste">' +
       '<div class="banniere-serie">' + serie + '</div><div class="banniere-serie">' + serie + "</div>" +
       "</div></div>");
+    /* Nom du site posé sur la photo, façon passeport */
+    var nom = ban.nom;
+    if (nom) {
+      var t = nom.tampon || [];
+      zone.insertAdjacentHTML("beforeend",
+        '<div class="titre-passeport">' +
+        (nom.etiquette ? '<span class="tp-etiquette">' + esc(nom.etiquette) + "</span>" : "") +
+        '<p class="tp-nom"><span class="tp-mot1">' + esc(nom.mot1) + '</span> <span class="tp-mot2">' + esc(nom.mot2) + "</span></p>" +
+        (nom.slogan ? '<p class="tp-slogan">' + esc(nom.slogan) + "</p>" : "") +
+        (nom.bouton ? '<a class="tp-bouton" href="' + esc(nom.lienBouton || "#/pratiques") + '">' + esc(nom.bouton) + " " + ICONES.fleche + "</a>" : "") +
+        "</div>" +
+        (t.length ? '<div class="tampon" aria-hidden="true"><span class="tampon-haut">' + esc(t[0] || "") + '</span><span class="tampon-milieu">' + esc(t[1] || "") + '</span><span class="tampon-bas">' + esc(t[2] || "") + "</span></div>" : ""));
+    }
     zone.querySelector(".entete-outils").insertAdjacentHTML("afterbegin",
       '<button type="button" class="banniere-pause" id="banniere-pause" aria-pressed="false" aria-label="Mettre le texte défilant en pause">❚❚</button>');
     var img = zone.querySelector(".banniere-img");
+    /* Fond flou de la même photo sur les côtés (grands écrans) */
+    var entete = document.querySelector(".site-header");
+    if (entete) entete.style.setProperty("--img-ban", 'url("' + ban.image.replace(/"/g, "") + '")');
     function cadrer() {
       var acc = document.body.classList.contains("page-accueil");
       img.style.objectPosition = acc ? (ban.cadrage || "center") : (ban.cadrageCompact || ban.cadrage || "center");
