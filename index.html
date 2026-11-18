@@ -17,6 +17,9 @@
   <title>Français Avancé – Pratiques DELF/DALF</title>
   <meta name="description" content="Site pédagogique de FLE : entraînement DELF/DALF (CO et CE, A1 à C1), matériel, projets, messagerie des groupes et évaluations.">
   <meta name="author" content="MSc. Eduardo Umaña Álvarez">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
   <style>
 /* ==========================================================
    Français Avancé – Pratiques DELF/DALF
@@ -41,7 +44,16 @@
   --blanc: #ffffff;
   --rayon: 10px;
   --ombre: 0 1px 3px rgba(20, 30, 60, .08), 0 4px 14px rgba(20, 30, 60, .06);
-  --police: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --police: "Nunito", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --police-titres: "Poppins", "Nunito", "Segoe UI", system-ui, sans-serif;
+  --accent: #c2410c;
+  --accent-fonce: #9a330a;
+  --jaune: #ffd166;
+  --niv-A1: #17803d; --niv-A1-clair: #e3f4e8;
+  --niv-A2: #0b7a85; --niv-A2-clair: #e0f3f4;
+  --niv-B1: #1d4ed8; --niv-B1-clair: #e4ebfc;
+  --niv-B2: #6d28d9; --niv-B2-clair: #efe7fc;
+  --niv-C1: #9a6700; --niv-C1-clair: #fbf1dc;
   --police-texte: Georgia, "Times New Roman", serif;
 }
 
@@ -149,108 +161,6 @@ a:hover { color: var(--rouge); }
 .toggle-es[aria-pressed="true"] { background: #fff; color: var(--bleu); }
 .toggle-es[aria-pressed="true"] span[aria-hidden] { background: var(--bleu); color: #fff; }
 
-/* ---------- Menu défilant (bandeau type télévision) ---------- */
-
-.bandeau {
-  display: flex;
-  align-items: stretch;
-  background: var(--bleu-fonce);
-  overflow: hidden;
-}
-.bandeau-etiquette {
-  flex: none;
-  display: flex;
-  align-items: center;
-  padding: 0 .9rem;
-  background: var(--rouge);
-  color: #fff;
-  font-weight: 800;
-  font-size: .78rem;
-  letter-spacing: .12em;
-  position: relative;
-  z-index: 1;
-  box-shadow: 6px 0 10px rgba(0,0,0,.25);
-}
-.bandeau-fenetre {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 2.5rem, #000 calc(100% - 2.5rem), transparent 100%);
-          mask-image: linear-gradient(90deg, transparent 0, #000 2.5rem, #000 calc(100% - 2.5rem), transparent 100%);
-}
-.bandeau-piste {
-  display: flex;
-  width: max-content;
-  animation: defilement var(--duree-bandeau, 28s) linear infinite;
-}
-.bandeau ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex: none;
-  min-width: 100vw; /* évite un trou dans le bandeau sur les grands écrans */
-  justify-content: space-around;
-}
-.bandeau li { display: flex; align-items: center; }
-.bandeau li::after {
-  content: "◆";
-  color: var(--rouge);
-  font-size: .55rem;
-  margin: 0 .2rem;
-}
-.bandeau a {
-  display: block;
-  color: #dfe6f3;
-  text-decoration: none;
-  white-space: nowrap;
-  padding: .75rem 1.1rem;
-  font-size: .97rem;
-  border-bottom: 3px solid transparent;
-}
-.bandeau a:hover { color: #fff; background: rgba(255,255,255,.08); }
-.bandeau a[aria-current="page"] {
-  color: #fff;
-  font-weight: 700;
-  border-bottom-color: var(--rouge);
-}
-@keyframes defilement {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-/* Le bandeau s'arrête au survol, au toucher, au clavier ou avec le bouton pause */
-.bandeau:hover .bandeau-piste,
-.bandeau:focus-within .bandeau-piste,
-.bandeau.en-pause .bandeau-piste { animation-play-state: paused; }
-
-.bandeau-pause {
-  flex: none;
-  font: inherit;
-  font-size: .8rem;
-  width: 2.8rem;
-  border: 0;
-  border-left: 1px solid rgba(255,255,255,.15);
-  background: var(--bleu-fonce);
-  color: #fff;
-  cursor: pointer;
-}
-.bandeau-pause:hover { background: var(--bleu); }
-
-/* Si l'appareil demande moins d'animations : menu fixe sur plusieurs lignes */
-@media (prefers-reduced-motion: reduce) {
-  .bandeau-piste { animation: none; width: auto; }
-  .bandeau-piste ul[aria-hidden="true"], .bandeau-pause { display: none; }
-  .bandeau ul { flex-wrap: wrap; min-width: 0; justify-content: flex-start; }
-  .bandeau-fenetre { -webkit-mask-image: none; mask-image: none; }
-}
-
-@media (max-width: 760px) {
-  .toggle-label { display: none; }
-  .brand-sub { display: none; }
-  .bandeau a { padding: .7rem .9rem; font-size: .93rem; }
-  .bandeau-etiquette { padding: 0 .6rem; font-size: .7rem; }
-}
-
 /* ---------- Contenu ---------- */
 
 main {
@@ -260,7 +170,7 @@ main {
   outline: none;
 }
 
-h1, h2, h3 { color: var(--bleu-fonce); line-height: 1.25; }
+h1, h2, h3 { color: var(--bleu-fonce); line-height: 1.25; font-family: var(--police-titres); letter-spacing: -.01em; }
 h1 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); margin: .2rem 0 .6rem; }
 h2 { font-size: 1.35rem; margin-top: 2rem; }
 h3 { font-size: 1.1rem; }
@@ -388,13 +298,6 @@ body:not(.page-accueil) .ban-msg { font-size: clamp(.95rem, 1.8vw, 1.2rem); padd
   .ban-msg { white-space: normal; text-align: center; padding: .6rem 1rem; }
 }
 
-/* Le menu défilant reste visible en haut de l'écran */
-.main-nav.bandeau {
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  border-bottom: 4px solid var(--rouge);
-}
 
 .hero {
   background: linear-gradient(135deg, var(--bleu) 0%, #2b4f8f 100%);
@@ -855,6 +758,209 @@ dl.fiche dd { margin: 0; }
 
 main:focus, main:focus-visible { outline: none; }
 
+
+/* ==========================================================
+   Version 3 : menu fixe, couleurs par niveau, accueil allégé
+   ========================================================== */
+
+/* ---------- Menu fixe avec le sceau LMFA ---------- */
+.main-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bleu-fonce);
+  border-bottom: 4px solid var(--rouge);
+  box-shadow: 0 2px 10px rgba(10,20,40,.18);
+}
+.nav-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+.logo-lmfa {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  color: #fff;
+  text-decoration: none;
+  flex: none;
+  padding: .45rem 0;
+}
+.logo-lmfa:hover { color: #fff; }
+.logo-badge {
+  display: inline-grid;
+  place-items: center;
+  height: 2.2rem;
+  padding: 0 .55rem;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--bleu-fonce);
+  font-family: var(--police-titres);
+  font-weight: 800;
+  font-size: .85rem;
+  letter-spacing: .06em;
+  box-shadow: inset 0 -4px 0 var(--rouge);
+}
+.logo-txt { font-family: var(--police-titres); font-weight: 700; font-size: .98rem; }
+.main-nav ul {
+  list-style: none;
+  margin: 0 0 0 auto;
+  padding: 0;
+  display: flex;
+  gap: .15rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.main-nav ul::-webkit-scrollbar { display: none; }
+.main-nav li { flex: none; }
+.main-nav ul a {
+  display: block;
+  color: #dfe6f3;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: .85rem .8rem .75rem;
+  font-weight: 700;
+  font-size: .95rem;
+  border-bottom: 3px solid transparent;
+}
+.main-nav ul a:hover { color: #fff; background: rgba(255,255,255,.07); }
+.main-nav ul a[aria-current="page"] { color: #fff; border-bottom-color: var(--jaune); }
+@media (max-width: 860px) {
+  .logo-txt { display: none; }
+  .nav-inner { gap: .4rem; padding-right: 0; }
+  .main-nav ul a { padding: .8rem .65rem .7rem; font-size: .9rem; }
+  /* indique qu'on peut faire défiler le menu avec le doigt */
+  .main-nav ul { -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+}
+.zone-exercice.avec-document .document { top: 4.8rem; }
+
+/* ---------- Couleurs par niveau ---------- */
+.niv-A1 { --niv: var(--niv-A1); --niv-clair: var(--niv-A1-clair); }
+.niv-A2 { --niv: var(--niv-A2); --niv-clair: var(--niv-A2-clair); }
+.niv-B1 { --niv: var(--niv-B1); --niv-clair: var(--niv-B1-clair); }
+.niv-B2 { --niv: var(--niv-B2); --niv-clair: var(--niv-B2-clair); }
+.niv-C1 { --niv: var(--niv-C1); --niv-clair: var(--niv-C1-clair); }
+.tag-niv { background: var(--niv-clair); color: var(--niv); font-weight: 800; }
+.tag .icone { width: 1em; height: 1em; vertical-align: -.15em; margin-right: .25em; }
+.carte-exercice { border-top: 5px solid var(--niv); }
+.carte-exercice:hover { border-color: var(--niv); }
+.stat[class*="niv-"] strong { color: var(--niv); }
+.stat[class*="niv-"] .barre > i { background: var(--niv); }
+.exercice-entete[class*="niv-"] h1 { color: var(--bleu-fonce); }
+.exercice-entete[class*="niv-"] h1::before {
+  content: "";
+  display: inline-block;
+  width: .55rem;
+  height: 1.6rem;
+  margin-right: .6rem;
+  vertical-align: -.2rem;
+  border-radius: 4px;
+  background: var(--niv);
+}
+
+/* ---------- Accueil ---------- */
+.accueil-intro { text-align: center; margin: .5rem auto 1.4rem; max-width: 760px; }
+.accueil-intro h1 { font-size: clamp(1.7rem, 4.2vw, 2.6rem); margin-bottom: .4rem; }
+.accueil-intro h1::after {
+  content: "";
+  display: block;
+  width: 4rem;
+  height: 5px;
+  margin: .6rem auto 0;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--rouge), var(--jaune));
+}
+.accueil-intro .lead { margin: .6rem auto; }
+.accueil-intro .es { text-align: left; }
+
+.tuiles-niveaux {
+  display: grid;
+  gap: .9rem;
+  grid-template-columns: repeat(5, 1fr);
+  margin-bottom: 2rem;
+}
+@media (max-width: 900px) { .tuiles-niveaux { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .tuiles-niveaux { grid-template-columns: repeat(2, 1fr); } }
+.tuile-niveau {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  padding: 1rem 1rem 1.1rem;
+  min-height: 9.5rem;
+  border-radius: 16px;
+  background: var(--niv);
+  color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(20,30,60,.16);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.tuile-niveau::after {
+  content: "";
+  position: absolute;
+  right: -1.6rem;
+  bottom: -1.6rem;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: rgba(255,255,255,.14);
+}
+.tuile-niveau:hover { color: #fff; transform: translateY(-4px); box-shadow: 0 10px 22px rgba(20,30,60,.24); }
+.tuile-code { font-family: var(--police-titres); font-weight: 800; font-size: 2.3rem; line-height: 1; }
+.tuile-nom { font-weight: 800; font-size: 1.05rem; }
+.tuile-info { font-size: .82rem; opacity: .92; }
+.tuile-faits {
+  align-self: flex-start;
+  margin-top: .35rem;
+  font-size: .75rem;
+  font-weight: 800;
+  background: var(--jaune);
+  color: #3d2a00;
+  border-radius: 999px;
+  padding: .1rem .55rem;
+}
+.tuile-fleche { position: absolute; right: .9rem; top: .9rem; opacity: .85; }
+.tuile-fleche .icone { width: 1.3rem; height: 1.3rem; }
+@media (max-width: 520px) { .tuiles-niveaux .tuile-niveau:last-child { grid-column: span 2; } }
+
+.titre-section { margin-top: .5rem; }
+.grille-services { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.carte-service { align-items: flex-start; }
+.pastille-icone {
+  display: inline-grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 12px;
+  background: var(--bleu-clair);
+  color: var(--bleu);
+  margin-bottom: .2rem;
+}
+.pastille-icone .icone { width: 1.5rem; height: 1.5rem; }
+.grille-services .carte-service:nth-child(2) .pastille-icone { background: #fff1e6; color: var(--accent); }
+.grille-services .carte-service:nth-child(3) .pastille-icone { background: var(--niv-A1-clair); color: var(--niv-A1); }
+.grille-services .carte-service:nth-child(4) .pastille-icone { background: var(--niv-B2-clair); color: var(--niv-B2); }
+.grille-services .carte-service:nth-child(5) .pastille-icone { background: var(--rouge-clair); color: var(--rouge); }
+
+/* ---------- Boutons d'action ---------- */
+.btn-accent { background: var(--accent); border-color: var(--accent); }
+.btn-accent:hover { background: var(--accent-fonce); border-color: var(--accent-fonce); }
+.retour.juste strong::after { content: " ★"; color: #c58b00; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tuile-niveau, .carte-lien { transition: none; }
+  .tuile-niveau:hover, .carte-lien:hover { transform: none; }
+}
+
+@keyframes defilement {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 </style>
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiMxZDNhNmUiLz48cmVjdCB4PSI0NCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjY0IiBmaWxsPSIjYzgxMDJlIiByeD0iMCIvPjx0ZXh0IHg9IjIyIiB5PSI0MiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5GQTwvdGV4dD48L3N2Zz4K" type="image/svg+xml">
 </head>
@@ -871,29 +977,21 @@ main:focus, main:focus-visible { outline: none; }
       </div>
     </div>
   </header>
-    <nav class="main-nav bandeau" id="main-nav" aria-label="Navigation principale">
-      <span class="bandeau-etiquette" aria-hidden="true">MENU</span>
-      <div class="bandeau-fenetre">
-        <div class="bandeau-piste">
-          <ul>
-        <li><a href="#/" data-route="accueil">Accueil</a></li>
-        <li><a href="#/pratiques" data-route="pratiques">Pratiques DELF/DALF</a></li>
-        <li><a href="#/materiel" data-route="materiel">Matériel pédagogique</a></li>
-        <li><a href="#/messagerie" data-route="messagerie">Messagerie</a></li>
-        <li><a href="#/projets" data-route="projets">Projets</a></li>
-        <li><a href="#/evaluations" data-route="evaluations">Évaluations</a></li>
-          </ul>
-          <ul aria-hidden="true">
-        <li><a tabindex="-1" href="#/" data-route="accueil">Accueil</a></li>
-        <li><a tabindex="-1" href="#/pratiques" data-route="pratiques">Pratiques DELF/DALF</a></li>
-        <li><a tabindex="-1" href="#/materiel" data-route="materiel">Matériel pédagogique</a></li>
-        <li><a tabindex="-1" href="#/messagerie" data-route="messagerie">Messagerie</a></li>
-        <li><a tabindex="-1" href="#/projets" data-route="projets">Projets</a></li>
-        <li><a tabindex="-1" href="#/evaluations" data-route="evaluations">Évaluations</a></li>
-          </ul>
-        </div>
+    <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+      <div class="nav-inner">
+        <a class="logo-lmfa" href="#/" aria-label="Accueil – LMFA Français Avancé">
+          <span class="logo-badge" aria-hidden="true">LMFA</span>
+          <span class="logo-txt">Français Avancé</span>
+        </a>
+        <ul>
+          <li><a href="#/" data-route="accueil">Accueil</a></li>
+          <li><a href="#/pratiques" data-route="pratiques">Pratiques DELF/DALF</a></li>
+          <li><a href="#/materiel" data-route="materiel">Matériel</a></li>
+          <li><a href="#/messagerie" data-route="messagerie">Messagerie</a></li>
+          <li><a href="#/projets" data-route="projets">Projets</a></li>
+          <li><a href="#/evaluations" data-route="evaluations">Évaluations</a></li>
+        </ul>
       </div>
-      <button type="button" class="bandeau-pause" id="bandeau-pause" aria-pressed="false" aria-label="Mettre le menu en pause">❚❚</button>
     </nav>
 
   <main id="main" tabindex="-1">
@@ -958,49 +1056,61 @@ window.DONNEES_SITE = {
     ],
     "accueil": {
       "banniere": {
-        "image": "banniere-lmfa.jpg",
-        "alt": "Classe de Français Avancé du Liceo Mauro Fernández : un professeur s'entretient en français avec un élève, sous une bannière « Certifications officielles en français : DELF junior et DALF ».",
+        "image": "banniere-lmfa-2.jpg",
+        "alt": "Classe de Français Avancé : un professeur s'entretient en français avec un élève pendant que la classe travaille.",
         "message": "Français Avancé et FLE · Pratiques DELF/DALF · MSc. Eduardo Umaña Álvarez · Formateur FEI",
-        "cadrage": "center 42%",
-        "cadrageCompact": "center 22%"
+        "cadrage": "center 40%",
+        "cadrageCompact": "center 35%"
       },
-      "titre": "Bienvenue sur l'espace Français Avancé",
-      "texte": "Cet espace accompagne votre préparation au DELF et au DALF ainsi que le travail de nos groupes de Français Avancé.\n\nVous y trouverez des exercices autocorrigés de compréhension de l'oral et des écrits du niveau A1 au niveau C1, du matériel pédagogique, les projets du cours, les annonces de votre groupe et les évaluations en ligne.",
-      "texte_es": "Este espacio acompaña su preparación para el DELF y el DALF, así como el trabajo de los grupos de Francés Avanzado: ejercicios autocorregidos de comprensión oral y escrita (A1 a C1), material didáctico, proyectos, anuncios del grupo y evaluaciones en línea.",
+      "titre": "Choisis ton niveau et entraîne-toi !",
+      "texte": "Des exercices de compréhension de l'oral et des écrits pour préparer le DELF et le DALF, avec la correction tout de suite.",
+      "texte_es": "Ejercicios de comprensión oral y escrita para preparar el DELF y el DALF, con corrección inmediata.",
       "modeEmploi": [
         {
-          "titre": "1. Je m'entraîne",
-          "texte": "Choisissez un niveau et une compétence, faites l'exercice dans les conditions de l'examen, puis lisez la correction.",
-          "texte_es": "Elija un nivel y una competencia, haga el ejercicio en condiciones de examen y lea la corrección.",
+          "icone": "entrainement",
+          "titre": "Je m'entraîne",
+          "texte": "Un niveau, une compétence, et c'est parti ! La correction s'affiche tout de suite.",
+          "texte_es": "Un nivel, una competencia, ¡y a practicar! La corrección aparece de inmediato.",
           "lien": "#/pratiques"
         },
         {
-          "titre": "2. Je consulte le matériel",
-          "texte": "Fiches de grammaire, de lexique et de méthodologie, et liens vers des ressources fiables.",
-          "texte_es": "Fichas de gramática, léxico y metodología, y enlaces a recursos confiables.",
+          "icone": "materiel",
+          "titre": "Je révise",
+          "texte": "Fiches, méthodes et liens fiables pour progresser à ton rythme.",
+          "texte_es": "Fichas, métodos y enlaces confiables para avanzar a tu ritmo.",
           "lien": "#/materiel"
         },
         {
-          "titre": "3. Je suis mon groupe",
-          "texte": "Lisez les annonces de votre groupe de Français Avancé et participez aux échanges.",
-          "texte_es": "Lea los anuncios de su grupo de Francés Avanzado y participe en los intercambios.",
+          "icone": "groupe",
+          "titre": "Mon groupe",
+          "texte": "Les annonces et l'espace d'échange de ta classe.",
+          "texte_es": "Los anuncios y el espacio de intercambio de tu clase.",
           "lien": "#/messagerie"
         },
         {
-          "titre": "4. Je réalise les projets",
-          "texte": "Consultez la tâche finale, les étapes, le calendrier et la grille d'évaluation de chaque projet.",
-          "texte_es": "Consulte la tarea final, las etapas, el calendario y la rúbrica de cada proyecto.",
+          "icone": "projets",
+          "titre": "Nos projets",
+          "texte": "La tâche finale, les étapes et la grille de chaque projet.",
+          "texte_es": "La tarea final, las etapas y la rúbrica de cada proyecto.",
           "lien": "#/projets"
         },
         {
-          "titre": "5. Je passe les évaluations",
-          "texte": "Les évaluations notées se font sur un formulaire en ligne, pendant leur période d'ouverture.",
-          "texte_es": "Las evaluaciones calificadas se hacen en un formulario en línea, durante su período de apertura.",
+          "icone": "evaluations",
+          "titre": "Mes évaluations",
+          "texte": "Les évaluations notées, en ligne, pendant leur période d'ouverture.",
+          "texte_es": "Las evaluaciones calificadas, en línea, durante su período de apertura.",
           "lien": "#/evaluations"
         }
       ],
-      "avertissement": "Vos résultats aux exercices d'entraînement restent dans votre navigateur : ils ne sont pas transmis au professeur. Seules les évaluations faites sur les formulaires en ligne sont notées.",
-      "avertissement_es": "Sus resultados de práctica quedan en su navegador y no se envían al profesor. Solo se califican las evaluaciones hechas en los formularios en línea."
+      "avertissement": "Tes résultats d'entraînement restent dans ton navigateur : ton professeur ne les voit pas. Seules les évaluations en ligne sont notées.",
+      "avertissement_es": "Tus resultados de práctica quedan en tu navegador: tu profesor no los ve. Solo se califican las evaluaciones en línea.",
+      "niveaux": {
+        "A1": "Découverte",
+        "A2": "Survie",
+        "B1": "Seuil",
+        "B2": "Avancé",
+        "C1": "Autonome"
+      }
     }
   },
   "exercices": [
@@ -2812,6 +2922,21 @@ window.DONNEES_SITE = {
 
   var NIVEAUX = ["A1", "A2", "B1", "B2", "C1"];
   var COMPETENCES = { CO: "Compréhension de l'oral", CE: "Compréhension des écrits" };
+  /* Icônes (traits simples, couleur héritée du texte) */
+  function svg(chemin) {
+    return '<svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + chemin + "</svg>";
+  }
+  var ICONES = {
+    entrainement: svg('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>'),
+    materiel: svg('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 7h6"/>'),
+    groupe: svg('<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/>'),
+    projets: svg('<path d="M5 15c-1.5 1.5-2 4-2 6 2 0 4.5-.5 6-2"/><path d="M9 15l-3-3 6-7c2-2 5-2.5 7-2-.5 2 0 5-2 7l-7 6z"/><circle cx="15" cy="9" r="1.5"/>'),
+    evaluations: svg('<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M9 12l2 2 4-4"/>'),
+    CO: svg('<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>'),
+    CE: svg('<path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"/><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>'),
+    fleche: svg('<path d="M5 12h14M13 6l6 6-6 6"/>')
+  };
+
   var CLE_PROGRESSION = "fle-progression-v1";
   var CLE_ES = "fle-espagnol";
   var app = document.getElementById("app");
@@ -2863,9 +2988,9 @@ window.DONNEES_SITE = {
     return null;
   }
 
-  function tagNiveau(n) { return '<span class="tag">' + esc(n) + "</span>"; }
+  function tagNiveau(n) { return '<span class="tag tag-niv niv-' + esc(n) + '">' + esc(n) + "</span>"; }
   function tagCompetence(c) {
-    return '<span class="tag tag-' + esc(String(c).toLowerCase()) + '">' + esc(c) + "</span>";
+    return '<span class="tag tag-' + esc(String(c).toLowerCase()) + '">' + (ICONES[c] || "") + esc(c) + "</span>";
   }
 
   function formatDate(iso, avecHeure) {
@@ -3010,30 +3135,34 @@ window.DONNEES_SITE = {
   function pageAccueil() {
     var s = DATA.site;
     var a = s.accueil || {};
+    var noms = a.niveaux || {};
     var compte = {};
     DATA.exercices.forEach(function (e) { compte[e.niveau] = (compte[e.niveau] || 0) + 1; });
+    var prog = progression();
 
-    var h = "";
-    h += '<section class="hero">' +
+    var h = '<section class="accueil-intro">' +
       "<h1>" + esc(a.titre || s.titre) + "</h1>" +
-      paragraphes(a.texte) +
+      '<p class="lead">' + esc(a.texte || "") + "</p>" +
       (a.texte_es ? '<p class="es" lang="es">' + esc(a.texte_es) + "</p>" : "") +
       "</section>";
 
-    h += "<h2>Accès rapide par niveau</h2>" +
-      bi("Choisissez votre niveau pour accéder directement aux exercices.",
-        "Elija su nivel para acceder directamente a los ejercicios.") +
-      '<div class="niveaux-rapides">';
+    h += '<div class="tuiles-niveaux">';
     NIVEAUX.forEach(function (n) {
-      h += '<a class="btn-niveau" href="#/pratiques?niveau=' + n + '">' + n +
-        "<small>" + (n === "C1" ? "DALF" : "DELF") + " · " + (compte[n] || 0) + " ex.</small></a>";
+      var faits = DATA.exercices.filter(function (e) { return e.niveau === n && prog[e.id]; }).length;
+      var total = compte[n] || 0;
+      h += '<a class="tuile-niveau niv-' + n + '" href="#/pratiques?niveau=' + n + '">' +
+        '<span class="tuile-code">' + n + "</span>" +
+        '<span class="tuile-nom">' + esc(noms[n] || "") + "</span>" +
+        '<span class="tuile-info">' + (n === "C1" ? "DALF" : "DELF") + " · " + total + " exercices</span>" +
+        (faits ? '<span class="tuile-faits">' + faits + " / " + total + " faits</span>" : "") +
+        '<span class="tuile-fleche">' + ICONES.fleche + "</span></a>";
     });
     h += "</div>";
 
-    h += "<h2>Mode d'emploi</h2>";
-    h += '<div class="grille">';
+    h += '<h2 class="titre-section">Sur ce site</h2><div class="grille grille-services">';
     (a.modeEmploi || []).forEach(function (m) {
-      h += '<a class="carte carte-lien" href="' + esc(m.lien) + '">' +
+      h += '<a class="carte carte-lien carte-service" href="' + esc(m.lien) + '">' +
+        '<span class="pastille-icone">' + (ICONES[m.icone] || ICONES.fleche) + "</span>" +
         "<h3>" + esc(m.titre) + "</h3>" + bi(m.texte, m.texte_es) + "</a>";
     });
     h += "</div>";
@@ -3082,7 +3211,7 @@ window.DONNEES_SITE = {
     h += '<div class="grille">';
     liste.forEach(function (e) {
       var p = prog[e.id];
-      h += '<a class="carte carte-lien" href="#/exercice/' + encodeURIComponent(e.id) + '">' +
+      h += '<a class="carte carte-lien carte-exercice niv-' + esc(e.niveau) + '" href="#/exercice/' + encodeURIComponent(e.id) + '">' +
         '<div class="tags">' + tagNiveau(e.niveau) + tagCompetence(e.competence) +
         (p ? '<span class="tag tag-ok">Fait · meilleur ' + p.meilleur + " %</span>" : "") + "</div>" +
         "<h3>" + esc(e.titre) + "</h3>" +
@@ -3129,7 +3258,7 @@ window.DONNEES_SITE = {
         var total = DATA.exercices.filter(function (e) { return e.niveau === n; }).length;
         var faits = ids.filter(function (id) { return prog[id].niveau === n && DATA.exercices.some(function (e) { return e.id === id; }); });
         var moy = faits.length ? Math.round(faits.reduce(function (s, id) { return s + prog[id].meilleur; }, 0) / faits.length) : 0;
-        h += '<div class="stat"><span>' + n + "</span><strong>" + faits.length + " / " + total + "</strong>" +
+        h += '<div class="stat niv-' + n + '"><span>' + n + "</span><strong>" + faits.length + " / " + total + "</strong>" +
           "<span>" + (faits.length ? "moyenne " + moy + " %" : "—") + "</span>" +
           '<div class="barre" aria-hidden="true"><i style="width:' + (total ? Math.round(faits.length / total * 100) : 0) + '%"></i></div></div>';
       });
@@ -3178,7 +3307,7 @@ window.DONNEES_SITE = {
     var total = questions.reduce(function (s, q) { return s + (Number(q.points) || 1); }, 0);
 
     var h = '<p class="breadcrumb"><a href="#/pratiques?niveau=' + esc(ex.niveau) + '">← Exercices ' + esc(ex.niveau) + "</a></p>";
-    h += '<div class="exercice-entete"><div>' +
+    h += '<div class="exercice-entete niv-' + esc(ex.niveau) + '"><div>' +
       '<div class="tags">' + tagNiveau(ex.niveau) + tagCompetence(ex.competence) +
       '<span class="tag tag-ferme">' + (ex.niveau === "C1" ? "DALF" : "DELF") + "</span></div>" +
       "<h1>" + esc(ex.titre) + "</h1></div>";
@@ -3197,7 +3326,7 @@ window.DONNEES_SITE = {
     h += '<form id="form-ex" class="questions" novalidate>';
     questions.forEach(function (q, i) { h += renduQuestion(q, i); });
     h += '<div class="barre-validation">' +
-      '<button type="submit" class="btn" id="valider">Valider mes réponses</button>' +
+      '<button type="submit" class="btn btn-accent" id="valider">Valider mes réponses</button>' +
       '<span class="note-discrete">Total : ' + nb(total) + " point" + (total > 1 ? "s" : "") + "</span></div>";
     h += "</form></div>";
     h += '<div id="resultat"></div>';
@@ -3871,44 +4000,6 @@ window.DONNEES_SITE = {
     });
   }
 
-  /* Menu défilant : pause au toucher et bouton pause/lecture */
-  function initMenu() {
-    var nav = document.getElementById("main-nav");
-    var b = document.getElementById("bandeau-pause");
-    var piste = nav.querySelector(".bandeau-piste");
-    var bloque = !!stockage("fle-bandeau-pause");
-    var minuterie = null;
-
-    /* Vitesse constante, quelle que soit la largeur du menu */
-    function ajusterVitesse() {
-      var largeur = piste.scrollWidth / 2;
-      nav.style.setProperty("--duree-bandeau", Math.max(14, Math.round(largeur / 45)) + "s");
-    }
-    function appliquer() {
-      nav.classList.toggle("en-pause", bloque);
-      b.setAttribute("aria-pressed", bloque ? "true" : "false");
-      b.setAttribute("aria-label", bloque ? "Relancer le défilement du menu" : "Mettre le menu en pause");
-      b.textContent = bloque ? "▶" : "❚❚";
-    }
-    b.addEventListener("click", function () {
-      bloque = !bloque;
-      stockage("fle-bandeau-pause", bloque);
-      appliquer();
-    });
-    /* Sur téléphone : toucher le bandeau l'arrête quelques secondes pour choisir */
-    nav.addEventListener("touchstart", function () {
-      nav.classList.add("en-pause");
-      clearTimeout(minuterie);
-    }, { passive: true });
-    nav.addEventListener("touchend", function () {
-      clearTimeout(minuterie);
-      minuterie = setTimeout(function () { if (!bloque) nav.classList.remove("en-pause"); }, 4000);
-    }, { passive: true });
-    window.addEventListener("resize", ajusterVitesse);
-    ajusterVitesse();
-    appliquer();
-  }
-
   /* Bannière d'en-tête : image + message défilant (grande sur l'accueil, compacte ailleurs) */
   function initBanniere() {
     var s = DATA.site;
@@ -3952,7 +4043,6 @@ window.DONNEES_SITE = {
   }
 
   initEspagnol();
-  initMenu();
   if ("speechSynthesis" in window) { window.speechSynthesis.getVoices(); }
 
   chargerTout().then(function () {
