@@ -8,8 +8,7 @@
   puis activez GitHub Pages (Settings > Pages > Deploy from a branch > main / root).
 
   POUR MODIFIER LE CONTENU : cherchez « DONNÉES DU SITE » plus bas.
-  Les exercices, ressources, groupes, projets et évaluations s'y trouvent,
-  au format JSON. Les audios se placent dans un dossier « audio » à côté de ce fichier.
+  Les audios se placent dans un dossier « audio » à côté de ce fichier.
 -->
 <html lang="fr">
 <head>
@@ -130,7 +129,7 @@ a:hover { color: var(--rouge); }
 
 .header-tools { display: flex; gap: .5rem; align-items: center; }
 
-.toggle-es, .menu-btn {
+.toggle-es {
   font: inherit;
   font-size: .9rem;
   border: 1px solid rgba(255,255,255,.55);
@@ -153,41 +152,106 @@ a:hover { color: var(--rouge); }
 .toggle-es[aria-pressed="true"] { background: #fff; color: var(--bleu); }
 .toggle-es[aria-pressed="true"] span[aria-hidden] { background: var(--bleu); color: #fff; }
 
-.menu-btn { display: none; }
+/* ---------- Menu défilant (bandeau type télévision) ---------- */
 
-.main-nav { background: var(--bleu-fonce); }
-.main-nav ul {
-  list-style: none;
-  margin: 0 auto;
-  padding: 0 .5rem;
-  max-width: 1160px;
+.bandeau {
   display: flex;
-  flex-wrap: wrap;
+  align-items: stretch;
+  background: var(--bleu-fonce);
+  overflow: hidden;
 }
-.main-nav a {
+.bandeau-etiquette {
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding: 0 .9rem;
+  background: var(--rouge);
+  color: #fff;
+  font-weight: 800;
+  font-size: .78rem;
+  letter-spacing: .12em;
+  position: relative;
+  z-index: 1;
+  box-shadow: 6px 0 10px rgba(0,0,0,.25);
+}
+.bandeau-fenetre {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 2.5rem, #000 calc(100% - 2.5rem), transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 2.5rem, #000 calc(100% - 2.5rem), transparent 100%);
+}
+.bandeau-piste {
+  display: flex;
+  width: max-content;
+  animation: defilement var(--duree-bandeau, 28s) linear infinite;
+}
+.bandeau ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex: none;
+  min-width: 100vw; /* évite un trou dans le bandeau sur les grands écrans */
+  justify-content: space-around;
+}
+.bandeau li { display: flex; align-items: center; }
+.bandeau li::after {
+  content: "◆";
+  color: var(--rouge);
+  font-size: .55rem;
+  margin: 0 .2rem;
+}
+.bandeau a {
   display: block;
   color: #dfe6f3;
   text-decoration: none;
-  padding: .7rem .9rem;
-  font-size: .95rem;
+  white-space: nowrap;
+  padding: .75rem 1.1rem;
+  font-size: .97rem;
   border-bottom: 3px solid transparent;
 }
-.main-nav a:hover { color: #fff; background: rgba(255,255,255,.06); }
-.main-nav a[aria-current="page"] {
+.bandeau a:hover { color: #fff; background: rgba(255,255,255,.08); }
+.bandeau a[aria-current="page"] {
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
   border-bottom-color: var(--rouge);
+}
+@keyframes defilement {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+/* Le bandeau s'arrête au survol, au toucher, au clavier ou avec le bouton pause */
+.bandeau:hover .bandeau-piste,
+.bandeau:focus-within .bandeau-piste,
+.bandeau.en-pause .bandeau-piste { animation-play-state: paused; }
+
+.bandeau-pause {
+  flex: none;
+  font: inherit;
+  font-size: .8rem;
+  width: 2.8rem;
+  border: 0;
+  border-left: 1px solid rgba(255,255,255,.15);
+  background: var(--bleu-fonce);
+  color: #fff;
+  cursor: pointer;
+}
+.bandeau-pause:hover { background: var(--bleu); }
+
+/* Si l'appareil demande moins d'animations : menu fixe sur plusieurs lignes */
+@media (prefers-reduced-motion: reduce) {
+  .bandeau-piste { animation: none; width: auto; }
+  .bandeau-piste ul[aria-hidden="true"], .bandeau-pause { display: none; }
+  .bandeau ul { flex-wrap: wrap; min-width: 0; justify-content: flex-start; }
+  .bandeau-fenetre { -webkit-mask-image: none; mask-image: none; }
 }
 
 @media (max-width: 760px) {
   .toggle-label { display: none; }
-  .menu-btn { display: inline-flex; }
-  .main-nav { display: none; }
-  .main-nav.open { display: block; }
-  .main-nav ul { flex-direction: column; padding: 0; }
-  .main-nav a { border-bottom: 1px solid rgba(255,255,255,.08); border-left: 4px solid transparent; }
-  .main-nav a[aria-current="page"] { border-left-color: var(--rouge); border-bottom-color: rgba(255,255,255,.08); }
   .brand-sub { display: none; }
+  .bandeau a { padding: .7rem .9rem; font-size: .93rem; }
+  .bandeau-etiquette { padding: 0 .6rem; font-size: .7rem; }
 }
 
 /* ---------- Contenu ---------- */
@@ -707,18 +771,31 @@ main:focus, main:focus-visible { outline: none; }
           <span aria-hidden="true">ES</span>
           <span class="toggle-label">Consignes en espagnol</span>
         </button>
-        <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="main-nav">Menu</button>
       </div>
     </div>
-    <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
-      <ul>
+    <nav class="main-nav bandeau" id="main-nav" aria-label="Navigation principale">
+      <span class="bandeau-etiquette" aria-hidden="true">MENU</span>
+      <div class="bandeau-fenetre">
+        <div class="bandeau-piste">
+          <ul>
         <li><a href="#/" data-route="accueil">Accueil</a></li>
         <li><a href="#/pratiques" data-route="pratiques">Pratiques DELF/DALF</a></li>
         <li><a href="#/materiel" data-route="materiel">Matériel pédagogique</a></li>
         <li><a href="#/messagerie" data-route="messagerie">Messagerie</a></li>
         <li><a href="#/projets" data-route="projets">Projets</a></li>
         <li><a href="#/evaluations" data-route="evaluations">Évaluations</a></li>
-      </ul>
+          </ul>
+          <ul aria-hidden="true">
+        <li><a tabindex="-1" href="#/" data-route="accueil">Accueil</a></li>
+        <li><a tabindex="-1" href="#/pratiques" data-route="pratiques">Pratiques DELF/DALF</a></li>
+        <li><a tabindex="-1" href="#/materiel" data-route="materiel">Matériel pédagogique</a></li>
+        <li><a tabindex="-1" href="#/messagerie" data-route="messagerie">Messagerie</a></li>
+        <li><a tabindex="-1" href="#/projets" data-route="projets">Projets</a></li>
+        <li><a tabindex="-1" href="#/evaluations" data-route="evaluations">Évaluations</a></li>
+          </ul>
+        </div>
+      </div>
+      <button type="button" class="bandeau-pause" id="bandeau-pause" aria-pressed="false" aria-label="Mettre le menu en pause">❚❚</button>
     </nav>
   </header>
 
@@ -2809,8 +2886,6 @@ window.DONNEES_SITE = {
       if (a.getAttribute("data-route") === actif) a.setAttribute("aria-current", "page");
       else a.removeAttribute("aria-current");
     });
-    document.getElementById("main-nav").classList.remove("open");
-    document.getElementById("menu-btn").setAttribute("aria-expanded", "false");
     fn(r);
     var titre = app.querySelector("h1");
     document.title = (titre ? titre.textContent + " – " : "") + (DATA.site && DATA.site.titre || "Français Avancé");
@@ -3690,13 +3765,42 @@ window.DONNEES_SITE = {
     });
   }
 
+  /* Menu défilant : pause au toucher et bouton pause/lecture */
   function initMenu() {
-    var b = document.getElementById("menu-btn");
     var nav = document.getElementById("main-nav");
+    var b = document.getElementById("bandeau-pause");
+    var piste = nav.querySelector(".bandeau-piste");
+    var bloque = !!stockage("fle-bandeau-pause");
+    var minuterie = null;
+
+    /* Vitesse constante, quelle que soit la largeur du menu */
+    function ajusterVitesse() {
+      var largeur = piste.scrollWidth / 2;
+      nav.style.setProperty("--duree-bandeau", Math.max(14, Math.round(largeur / 45)) + "s");
+    }
+    function appliquer() {
+      nav.classList.toggle("en-pause", bloque);
+      b.setAttribute("aria-pressed", bloque ? "true" : "false");
+      b.setAttribute("aria-label", bloque ? "Relancer le défilement du menu" : "Mettre le menu en pause");
+      b.textContent = bloque ? "▶" : "❚❚";
+    }
     b.addEventListener("click", function () {
-      var ouvert = nav.classList.toggle("open");
-      b.setAttribute("aria-expanded", ouvert ? "true" : "false");
+      bloque = !bloque;
+      stockage("fle-bandeau-pause", bloque);
+      appliquer();
     });
+    /* Sur téléphone : toucher le bandeau l'arrête quelques secondes pour choisir */
+    nav.addEventListener("touchstart", function () {
+      nav.classList.add("en-pause");
+      clearTimeout(minuterie);
+    }, { passive: true });
+    nav.addEventListener("touchend", function () {
+      clearTimeout(minuterie);
+      minuterie = setTimeout(function () { if (!bloque) nav.classList.remove("en-pause"); }, 4000);
+    }, { passive: true });
+    window.addEventListener("resize", ajusterVitesse);
+    ajusterVitesse();
+    appliquer();
   }
 
   function initSite() {
