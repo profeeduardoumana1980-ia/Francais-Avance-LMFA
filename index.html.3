@@ -1,1 +1,4311 @@
+<!DOCTYPE html>
+<!--
+  Français Avancé – Pratiques DELF/DALF
+  Site complet en un seul fichier (HTML + CSS + JavaScript + contenus).
+  Auteur : MSc. Eduardo Umaña Álvarez – Licence CC BY-NC-SA 4.0
+
+  POUR PUBLIER : déposez ce fichier sur GitHub sous le nom index.html,
+  puis activez GitHub Pages (Settings > Pages > Deploy from a branch > main / root).
+
+  POUR MODIFIER LE CONTENU : cherchez « DONNÉES DU SITE » plus bas.
+  Les audios se placent dans un dossier « audio » à côté de ce fichier.
+-->
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Français Avancé – Pratiques DELF/DALF</title>
+  <meta name="description" content="Site pédagogique de FLE : entraînement DELF/DALF (CO et CE, A1 à C1), matériel, projets, messagerie des groupes et évaluations.">
+  <meta name="author" content="MSc. Eduardo Umaña Álvarez">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+/* ==========================================================
+   Français Avancé – Pratiques DELF/DALF
+   Feuille de style principale
+   Palette : bleu institutionnel, blanc, rouge discret
+   ========================================================== */
+
+:root {
+  --bleu: #1d3a6e;
+  --bleu-fonce: #142a52;
+  --bleu-clair: #e8eef8;
+  --rouge: #b40d27;
+  --rouge-clair: #fbe9ec;
+  --vert: #1d6b3a;
+  --vert-clair: #e6f4ea;
+  --orange: #8a4b00;
+  --orange-clair: #fff3e0;
+  --texte: #1c2230;
+  --texte-doux: #4a5468;
+  --bord: #d5dbe6;
+  --fond: #f6f7fa;
+  --blanc: #ffffff;
+  --rayon: 10px;
+  --ombre: 0 1px 3px rgba(20, 30, 60, .08), 0 4px 14px rgba(20, 30, 60, .06);
+  --police: "Nunito", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+  --police-titres: "Poppins", "Nunito", "Segoe UI", system-ui, sans-serif;
+  --accent: #c2410c;
+  --accent-fonce: #9a330a;
+  --jaune: #ffd166;
+  --niv-A1: #17803d; --niv-A1-clair: #e3f4e8;
+  --niv-A2: #0b7a85; --niv-A2-clair: #e0f3f4;
+  --niv-B1: #1d4ed8; --niv-B1-clair: #e4ebfc;
+  --niv-B2: #6d28d9; --niv-B2-clair: #efe7fc;
+  --niv-C1: #9a6700; --niv-C1-clair: #fbf1dc;
+  --police-texte: Georgia, "Times New Roman", serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--police);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--texte);
+  background: var(--fond);
+}
+
+img { max-width: 100%; height: auto; }
+
+a { color: var(--bleu); }
+a:hover { color: var(--rouge); }
+
+:focus-visible {
+  outline: 3px solid #f2b705;
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--bleu);
+  color: #fff;
+  padding: .6rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus { left: 1rem; top: 1rem; }
+
+/* ---------- En-tête ---------- */
+
+.site-header {
+  background: var(--bleu);
+  color: #fff;
+  border-bottom: 4px solid var(--rouge);
+}
+
+.header-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: .7rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  color: #fff;
+  text-decoration: none;
+}
+.brand:hover { color: #fff; }
+
+.brand-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--bleu);
+  font-weight: 800;
+  font-size: .85rem;
+  letter-spacing: .03em;
+  box-shadow: inset -6px 0 0 var(--rouge);
+}
+
+.brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+.brand-title { font-weight: 700; font-size: 1.1rem; }
+.brand-sub { font-size: .85rem; opacity: .85; }
+
+.header-tools { display: flex; gap: .5rem; align-items: center; }
+
+.toggle-es {
+  font: inherit;
+  font-size: .9rem;
+  border: 1px solid rgba(255,255,255,.55);
+  background: transparent;
+  color: #fff;
+  border-radius: 999px;
+  padding: .35rem .8rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+}
+.toggle-es span[aria-hidden] {
+  font-weight: 800;
+  font-size: .75rem;
+  background: rgba(255,255,255,.2);
+  border-radius: 4px;
+  padding: 0 .3rem;
+}
+.toggle-es[aria-pressed="true"] { background: #fff; color: var(--bleu); }
+.toggle-es[aria-pressed="true"] span[aria-hidden] { background: var(--bleu); color: #fff; }
+
+/* ---------- Contenu ---------- */
+
+main {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  outline: none;
+}
+
+h1, h2, h3 { color: var(--bleu-fonce); line-height: 1.25; font-family: var(--police-titres); letter-spacing: -.01em; }
+h1 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); margin: .2rem 0 .6rem; }
+h2 { font-size: 1.35rem; margin-top: 2rem; }
+h3 { font-size: 1.1rem; }
+
+.lead { font-size: 1.12rem; color: var(--texte-doux); max-width: 70ch; }
+
+.es { display: none; }
+body.show-es .es { display: block; }
+body.show-es span.es { display: inline; }
+.es {
+  color: #5a3d00;
+  background: #fff8e6;
+  border-left: 3px solid #e0a800;
+  padding: .25rem .6rem;
+  border-radius: 0 6px 6px 0;
+  font-size: .95em;
+  margin: .3rem 0 .6rem;
+}
+.es::before { content: "ES · "; font-weight: 700; font-size: .8em; }
+
+.loading, .vide {
+  color: var(--texte-doux);
+  font-style: italic;
+}
+
+.breadcrumb { font-size: .9rem; margin-bottom: .5rem; }
+.breadcrumb a { text-decoration: none; }
+
+/* ---------- Bannière d'en-tête (image + message défilant) ---------- */
+
+.site-header { padding: 0; border-bottom: 0; }
+.entete-banniere {
+  position: relative;
+  max-width: 1160px;
+  margin: 0 auto;
+  height: clamp(300px, 50vw, 600px);
+  overflow: hidden;
+  background: var(--bleu-fonce);
+  transition: height .35s ease;
+}
+body:not(.page-accueil) .entete-banniere { height: clamp(150px, 20vw, 230px); }
+.banniere-lien { display: block; height: 100%; }
+.banniere-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.entete-banniere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20,42,82,.35) 0%, rgba(20,42,82,0) 25%, rgba(20,42,82,0) 55%, rgba(20,42,82,.55) 100%);
+  pointer-events: none;
+}
+.banniere-bandeau {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6%;
+  z-index: 1;
+  overflow: hidden;
+  background: rgba(20, 42, 82, .82);
+  border-top: 3px solid var(--rouge);
+  border-bottom: 3px solid var(--rouge);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+}
+body:not(.page-accueil) .banniere-bandeau { bottom: 8%; }
+.banniere-piste {
+  display: flex;
+  width: max-content;
+  animation: defilement 40s linear infinite;
+}
+.banniere-serie { display: flex; align-items: center; flex: none; }
+.ban-msg {
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(1.05rem, 2.6vw, 1.75rem);
+  letter-spacing: .01em;
+  white-space: nowrap;
+  padding: .6rem 0;
+  text-shadow: 0 2px 6px rgba(0,0,0,.35);
+}
+body:not(.page-accueil) .ban-msg { font-size: clamp(.95rem, 1.8vw, 1.2rem); padding: .4rem 0; }
+.ban-sep { color: var(--rouge); margin: 0 1.6rem; font-size: .9rem; }
+.entete-banniere:hover .banniere-piste,
+.entete-banniere.en-pause .banniere-piste { animation-play-state: paused; }
+
+/* Boutons posés sur l'image : pause et espagnol */
+.entete-outils {
+  position: absolute;
+  top: .7rem;
+  right: .7rem;
+  z-index: 2;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+}
+.entete-outils .toggle-es {
+  background: rgba(15,26,46,.7);
+  border-color: rgba(255,255,255,.8);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  min-height: 40px;
+}
+.entete-outils .toggle-es[aria-pressed="true"] { background: #fff; color: var(--bleu); }
+.banniere-pause {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.8);
+  background: rgba(15,26,46,.7);
+  color: #fff;
+  font: inherit;
+  font-size: .75rem;
+  cursor: pointer;
+}
+.banniere-pause:hover, .entete-outils .toggle-es[aria-pressed="false"]:hover { background: rgba(15,26,46,.9); }
+.entete-outils .toggle-es[aria-pressed="true"]:hover { background: #e8eef8; color: var(--bleu-fonce); }
+@media (prefers-reduced-motion: reduce) {
+  .entete-banniere { transition: none; }
+  .banniere-piste { animation: none; width: auto; justify-content: center; }
+  .banniere-serie + .banniere-serie, .banniere-serie .ban-msg ~ .ban-msg, .banniere-serie .ban-sep, .banniere-pause { display: none; }
+  .ban-msg { white-space: normal; text-align: center; padding: .6rem 1rem; }
+}
+
+
+.hero {
+  background: linear-gradient(135deg, var(--bleu) 0%, #2b4f8f 100%);
+  color: #fff;
+  border-radius: var(--rayon);
+  padding: 2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 10px;
+  background: var(--rouge);
+}
+.hero h1 { color: #fff; }
+.hero p { max-width: 68ch; }
+.hero .es { color: #3d2a00; }
+
+.grille {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.carte {
+  background: var(--blanc);
+  border: 1px solid var(--bord);
+  border-radius: var(--rayon);
+  padding: 1.1rem 1.2rem;
+  box-shadow: var(--ombre);
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+.carte h3 { margin: 0; }
+.carte p { margin: 0; }
+.carte .actions { margin-top: auto; padding-top: .6rem; }
+.carte-lien { text-decoration: none; color: inherit; transition: transform .12s ease, border-color .12s; }
+.carte-lien:hover { color: inherit; border-color: var(--bleu); transform: translateY(-2px); }
+
+.niveaux-rapides { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1rem 0; }
+.btn-niveau {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 5.5rem;
+  padding: .7rem 1rem;
+  border-radius: var(--rayon);
+  background: #fff;
+  border: 2px solid var(--bord);
+  text-decoration: none;
+  color: var(--bleu-fonce);
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+.btn-niveau small { font-weight: 500; font-size: .75rem; color: var(--texte-doux); }
+.btn-niveau:hover { border-color: var(--bleu); color: var(--bleu); }
+
+/* Étiquettes */
+.tags { display: flex; flex-wrap: wrap; gap: .35rem; }
+.tag {
+  display: inline-block;
+  font-size: .78rem;
+  font-weight: 600;
+  padding: .12rem .55rem;
+  border-radius: 999px;
+  background: var(--bleu-clair);
+  color: var(--bleu-fonce);
+}
+.tag-co { background: #e9e4f7; color: #3c2a7a; }
+.tag-ce { background: #e2f1f1; color: #0f5050; }
+.tag-ok { background: var(--vert-clair); color: var(--vert); }
+.tag-attente { background: var(--orange-clair); color: var(--orange); }
+.tag-ferme { background: #eceef2; color: #4a5468; }
+.tag-rouge { background: var(--rouge-clair); color: var(--rouge); }
+
+/* Boutons */
+.btn {
+  font: inherit;
+  font-size: .95rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  padding: .55rem 1.1rem;
+  border-radius: 8px;
+  border: 2px solid var(--bleu);
+  background: var(--bleu);
+  color: #fff;
+  cursor: pointer;
+  text-decoration: none;
+  min-height: 44px;
+}
+.btn:hover { background: var(--bleu-fonce); border-color: var(--bleu-fonce); color: #fff; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-secondaire { background: #fff; color: var(--bleu); }
+.btn-secondaire:hover { background: var(--bleu-clair); color: var(--bleu-fonce); }
+.btn-rouge { background: var(--rouge); border-color: var(--rouge); }
+.btn-rouge:hover { background: #8e0a1f; border-color: #8e0a1f; }
+.btn-petit { min-height: 36px; padding: .3rem .8rem; font-size: .88rem; }
+
+/* Filtres */
+.filtres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem 1.2rem;
+  align-items: flex-end;
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-radius: var(--rayon);
+  padding: .9rem 1rem;
+  margin: 1rem 0;
+}
+.filtres label { display: flex; flex-direction: column; font-size: .85rem; font-weight: 600; color: var(--texte-doux); gap: .25rem; }
+.filtres select, .filtres input[type="search"] {
+  font: inherit;
+  font-size: .95rem;
+  padding: .45rem .6rem;
+  border: 1px solid #b8c1d1;
+  border-radius: 6px;
+  min-width: 10rem;
+  min-height: 42px;
+  background: #fff;
+}
+.filtres input[type="search"] { min-width: 16rem; }
+.compteur { font-size: .9rem; color: var(--texte-doux); margin: .5rem 0; }
+
+/* Tableau de bord */
+.tableau-bord {
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-radius: var(--rayon);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0 1.5rem;
+}
+.tableau-bord h2 { margin-top: 0; font-size: 1.15rem; }
+.stats-niveaux {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: .7rem;
+}
+.stat {
+  border: 1px solid var(--bord);
+  border-radius: 8px;
+  padding: .6rem .7rem;
+  text-align: center;
+}
+.stat strong { display: block; font-size: 1.2rem; color: var(--bleu); }
+.stat span { font-size: .82rem; color: var(--texte-doux); }
+.barre { height: 6px; background: var(--bleu-clair); border-radius: 3px; margin-top: .4rem; overflow: hidden; }
+.barre > i { display: block; height: 100%; background: var(--bleu); }
+.tableau-bord .actions { margin-top: .8rem; display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+.note-discrete { font-size: .85rem; color: var(--texte-doux); }
+
+/* ---------- Exercice ---------- */
+
+.exercice-entete {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.consigne {
+  background: var(--bleu-clair);
+  border-left: 4px solid var(--bleu);
+  padding: .8rem 1rem;
+  border-radius: 0 8px 8px 0;
+  margin: 1rem 0;
+}
+.consigne p { margin: 0; }
+.consigne .es { margin-top: .5rem; }
+
+.zone-exercice {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 980px) {
+  .zone-exercice.avec-document { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  .zone-exercice.avec-document .document { position: sticky; top: 4.5rem; max-height: calc(100vh - 6rem); overflow: auto; }
+}
+
+.document {
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-radius: var(--rayon);
+  padding: 1.2rem 1.4rem;
+  font-family: var(--police-texte);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  box-shadow: var(--ombre);
+}
+.document h2 { font-family: var(--police); margin-top: 0; font-size: 1.15rem; }
+.document .doc-meta { font-family: var(--police); font-size: .85rem; color: var(--texte-doux); margin-bottom: .6rem; }
+.document p { margin: 0 0 .8rem; }
+
+.lecteur p { margin: 0; }
+.lecteur {
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-radius: var(--rayon);
+  padding: 1rem 1.2rem;
+  box-shadow: var(--ombre);
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+.lecteur-ligne { display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; }
+.ecoutes { display: flex; gap: .3rem; }
+.ecoutes i {
+  width: 14px; height: 14px; border-radius: 50%;
+  border: 2px solid var(--bleu);
+  display: inline-block;
+}
+.ecoutes i.faite { background: var(--bleu); }
+.lecteur-statut { font-size: .9rem; color: var(--texte-doux); }
+.avertissement-tts {
+  font-size: .85rem;
+  background: var(--orange-clair);
+  color: var(--orange);
+  border-radius: 6px;
+  padding: .35rem .6rem;
+}
+.onde { display: inline-flex; gap: 3px; align-items: flex-end; height: 18px; }
+.onde i { width: 3px; background: var(--bleu); animation: onde 1s infinite ease-in-out; }
+.onde i:nth-child(2) { animation-delay: .15s; }
+.onde i:nth-child(3) { animation-delay: .3s; }
+.onde i:nth-child(4) { animation-delay: .45s; }
+@keyframes onde { 0%,100% { height: 4px; } 50% { height: 18px; } }
+@media (prefers-reduced-motion: reduce) { .onde i { animation: none; height: 10px; } }
+
+.minuteur {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-radius: 999px;
+  padding: .35rem .9rem;
+  font-size: .9rem;
+}
+.minuteur output { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--bleu); }
+.minuteur.urgent output { color: var(--rouge); }
+
+.questions { display: flex; flex-direction: column; gap: 1rem; }
+.question {
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-radius: var(--rayon);
+  padding: 1rem 1.1rem;
+  margin: 0;
+}
+.question legend, .question .enonce {
+  font-weight: 600;
+  padding: 0;
+  margin-bottom: .5rem;
+  display: flex;
+  gap: .5rem;
+  width: 100%;
+}
+fieldset.question legend { float: left; }
+fieldset.question legend + * { clear: both; }
+.question .num {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  width: 1.7rem; height: 1.7rem;
+  border-radius: 50%;
+  background: var(--bleu);
+  color: #fff;
+  font-size: .85rem;
+}
+.question .pts { margin-left: auto; font-weight: 500; font-size: .82rem; color: var(--texte-doux); white-space: nowrap; }
+
+.options { display: flex; flex-direction: column; gap: .35rem; }
+.options.ligne { flex-direction: row; flex-wrap: wrap; gap: .5rem; }
+.option {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  border: 1px solid var(--bord);
+  border-radius: 8px;
+  padding: .5rem .7rem;
+  cursor: pointer;
+  min-height: 44px;
+}
+.option:hover { border-color: var(--bleu); }
+.option input { width: 1.15rem; height: 1.15rem; accent-color: var(--bleu); flex: none; }
+.option.juste { border-color: var(--vert); background: var(--vert-clair); }
+.option.faux { border-color: var(--rouge); background: var(--rouge-clair); }
+
+.champ {
+  font: inherit;
+  width: 100%;
+  padding: .55rem .7rem;
+  border: 1px solid #b8c1d1;
+  border-radius: 8px;
+  min-height: 44px;
+}
+textarea.champ { min-height: 5rem; resize: vertical; }
+.champ-label { display: block; font-size: .88rem; font-weight: 600; color: var(--texte-doux); margin: .7rem 0 .25rem; }
+
+.retour {
+  margin-top: .7rem;
+  border-radius: 8px;
+  padding: .6rem .8rem;
+  font-size: .95rem;
+}
+.retour.juste { background: var(--vert-clair); color: #134a28; border-left: 4px solid var(--vert); }
+.retour.faux { background: var(--rouge-clair); color: #7a0a1b; border-left: 4px solid var(--rouge); }
+.retour.neutre { background: var(--bleu-clair); color: var(--bleu-fonce); border-left: 4px solid var(--bleu); }
+.retour p { margin: .2rem 0; }
+.autoeval { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .5rem; align-items: center; }
+
+.barre-validation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  align-items: center;
+  margin: 1.4rem 0;
+}
+
+.resultat {
+  background: #fff;
+  border: 2px solid var(--bleu);
+  border-radius: var(--rayon);
+  padding: 1.1rem 1.3rem;
+  margin: 1.2rem 0;
+}
+.resultat h2 { margin: 0 0 .4rem; font-size: 1.2rem; }
+.score-grand { font-size: 2rem; font-weight: 800; color: var(--bleu); }
+.resultat .actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .8rem; }
+
+.transcription {
+  background: #fff;
+  border: 1px dashed var(--bleu);
+  border-radius: var(--rayon);
+  padding: 1rem 1.2rem;
+  margin-top: 1rem;
+  font-family: var(--police-texte);
+}
+.transcription h2 { font-family: var(--police); margin-top: 0; font-size: 1.1rem; }
+
+.encart {
+  border-radius: var(--rayon);
+  padding: .9rem 1.1rem;
+  margin: 1rem 0;
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-left: 5px solid var(--bleu);
+}
+.encart.info { border-left-color: var(--bleu); }
+.encart.attention { border-left-color: #c77700; background: #fffaf0; }
+.encart p { margin: .2rem 0; }
+
+/* Messagerie / évaluations */
+.annonces { display: flex; flex-direction: column; gap: .6rem; margin: 1rem 0; }
+.annonce {
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-left: 4px solid var(--rouge);
+  border-radius: 8px;
+  padding: .7rem 1rem;
+}
+.annonce time { font-size: .82rem; color: var(--texte-doux); }
+.annonce h3 { margin: .1rem 0 .3rem; font-size: 1.02rem; }
+.annonce p { margin: 0; }
+
+.cadre-integre {
+  width: 100%;
+  border: 1px solid var(--bord);
+  border-radius: var(--rayon);
+  background: #fff;
+  overflow: hidden;
+}
+.cadre-integre iframe {
+  display: block;
+  width: 100%;
+  min-height: 75vh;
+  border: 0;
+}
+
+/* Projets */
+.etapes { counter-reset: etape; list-style: none; padding: 0; }
+.etapes li {
+  counter-increment: etape;
+  position: relative;
+  padding: .5rem 0 .5rem 2.6rem;
+  border-left: 2px solid var(--bord);
+  margin-left: .9rem;
+}
+.etapes li::before {
+  content: counter(etape);
+  position: absolute;
+  left: -.95rem;
+  top: .45rem;
+  width: 1.8rem; height: 1.8rem;
+  border-radius: 50%;
+  background: var(--bleu);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: .85rem;
+}
+.etapes li strong { display: block; }
+
+.tableau-wrap { overflow-x: auto; }
+table.grille-eval {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  font-size: .93rem;
+}
+.grille-eval th, .grille-eval td { border: 1px solid var(--bord); padding: .5rem .6rem; text-align: left; vertical-align: top; }
+.grille-eval thead th { background: var(--bleu); color: #fff; }
+.grille-eval tfoot td { font-weight: 700; background: var(--bleu-clair); }
+
+.deux-colonnes { display: grid; gap: 1.2rem; grid-template-columns: 1fr; }
+@media (min-width: 860px) { .deux-colonnes { grid-template-columns: 1fr 1fr; } }
+
+dl.fiche { display: grid; grid-template-columns: max-content 1fr; gap: .3rem 1rem; margin: 0; }
+dl.fiche dt { font-weight: 600; color: var(--texte-doux); }
+dl.fiche dd { margin: 0; }
+
+/* Pied de page */
+.site-footer {
+  background: var(--bleu-fonce);
+  color: #cfd8ea;
+  text-align: center;
+  padding: 1.4rem 1rem;
+  font-size: .9rem;
+  border-top: 4px solid var(--rouge);
+}
+.site-footer p { margin: .2rem 0; }
+.site-footer a { color: #fff; }
+
+.noscript { background: var(--rouge); color: #fff; padding: 1rem; text-align: center; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* Impression (grilles d'évaluation) */
+@media print {
+  .site-header, .site-footer, .breadcrumb, .no-print, .btn { display: none !important; }
+  body { background: #fff; font-size: 11pt; }
+  main { padding: 0; max-width: none; }
+  .carte, .encart, .document { box-shadow: none; }
+  .grille-eval thead th { background: #ddd !important; color: #000 !important; }
+}
+
+main:focus, main:focus-visible { outline: none; }
+
+
+/* ==========================================================
+   Version 3 : menu fixe, couleurs par niveau, accueil allégé
+   ========================================================== */
+
+/* ---------- Menu fixe avec le sceau LMFA ---------- */
+.main-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bleu-fonce);
+  border-bottom: 4px solid var(--rouge);
+  box-shadow: 0 2px 10px rgba(10,20,40,.18);
+}
+.nav-inner {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+.logo-lmfa {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  color: #fff;
+  text-decoration: none;
+  flex: none;
+  padding: .45rem 0;
+}
+.logo-lmfa:hover { color: #fff; }
+.logo-badge {
+  display: inline-grid;
+  place-items: center;
+  height: 2.2rem;
+  padding: 0 .55rem;
+  border-radius: 8px;
+  background: #fff;
+  color: var(--bleu-fonce);
+  font-family: var(--police-titres);
+  font-weight: 800;
+  font-size: .85rem;
+  letter-spacing: .06em;
+  box-shadow: inset 0 -4px 0 var(--rouge);
+}
+.logo-txt { font-family: var(--police-titres); font-weight: 700; font-size: .98rem; }
+.main-nav ul {
+  list-style: none;
+  margin: 0 0 0 auto;
+  padding: 0;
+  display: flex;
+  gap: .15rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.main-nav ul::-webkit-scrollbar { display: none; }
+.main-nav li { flex: none; }
+.main-nav ul a {
+  display: block;
+  color: #dfe6f3;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: .85rem .8rem .75rem;
+  font-weight: 700;
+  font-size: .95rem;
+  border-bottom: 3px solid transparent;
+}
+.main-nav ul a:hover { color: #fff; background: rgba(255,255,255,.07); }
+.main-nav ul a[aria-current="page"] { color: #fff; border-bottom-color: var(--jaune); }
+@media (max-width: 860px) {
+  .logo-txt { display: none; }
+  .nav-inner { gap: .4rem; padding-right: 0; }
+  .main-nav ul a { padding: .8rem .65rem .7rem; font-size: .9rem; }
+  /* indique qu'on peut faire défiler le menu avec le doigt */
+  .main-nav ul { -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+}
+.zone-exercice.avec-document .document { top: 4.8rem; }
+
+/* ---------- Couleurs par niveau ---------- */
+.niv-A1 { --niv: var(--niv-A1); --niv-clair: var(--niv-A1-clair); }
+.niv-A2 { --niv: var(--niv-A2); --niv-clair: var(--niv-A2-clair); }
+.niv-B1 { --niv: var(--niv-B1); --niv-clair: var(--niv-B1-clair); }
+.niv-B2 { --niv: var(--niv-B2); --niv-clair: var(--niv-B2-clair); }
+.niv-C1 { --niv: var(--niv-C1); --niv-clair: var(--niv-C1-clair); }
+.tag-niv { background: var(--niv-clair); color: var(--niv); font-weight: 800; }
+.tag .icone { width: 1em; height: 1em; vertical-align: -.15em; margin-right: .25em; }
+.carte-exercice { border-top: 5px solid var(--niv); }
+.carte-exercice:hover { border-color: var(--niv); }
+.stat[class*="niv-"] strong { color: var(--niv); }
+.stat[class*="niv-"] .barre > i { background: var(--niv); }
+.exercice-entete[class*="niv-"] h1 { color: var(--bleu-fonce); }
+.exercice-entete[class*="niv-"] h1::before {
+  content: "";
+  display: inline-block;
+  width: .55rem;
+  height: 1.6rem;
+  margin-right: .6rem;
+  vertical-align: -.2rem;
+  border-radius: 4px;
+  background: var(--niv);
+}
+
+/* ---------- Accueil ---------- */
+.accueil-intro { text-align: center; margin: .5rem auto 1.4rem; max-width: 760px; }
+.accueil-intro h1 { font-size: clamp(1.7rem, 4.2vw, 2.6rem); margin-bottom: .4rem; }
+.accueil-intro h1::after {
+  content: "";
+  display: block;
+  width: 4rem;
+  height: 5px;
+  margin: .6rem auto 0;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--rouge), var(--jaune));
+}
+.accueil-intro .lead { margin: .6rem auto; }
+.accueil-intro .es { text-align: left; }
+
+.tuiles-niveaux {
+  display: grid;
+  gap: .9rem;
+  grid-template-columns: repeat(5, 1fr);
+  margin-bottom: 2rem;
+}
+@media (max-width: 900px) { .tuiles-niveaux { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 520px) { .tuiles-niveaux { grid-template-columns: repeat(2, 1fr); } }
+.tuile-niveau {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  padding: 1rem 1rem 1.1rem;
+  min-height: 9.5rem;
+  border-radius: 16px;
+  background: var(--niv);
+  color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(20,30,60,.16);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.tuile-niveau::after {
+  content: "";
+  position: absolute;
+  right: -1.6rem;
+  bottom: -1.6rem;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: rgba(255,255,255,.14);
+}
+.tuile-niveau:hover { color: #fff; transform: translateY(-4px); box-shadow: 0 10px 22px rgba(20,30,60,.24); }
+.tuile-code { font-family: var(--police-titres); font-weight: 800; font-size: 2.3rem; line-height: 1; }
+.tuile-nom { font-weight: 800; font-size: 1.05rem; }
+.tuile-info { font-size: .82rem; opacity: .92; }
+.tuile-faits {
+  align-self: flex-start;
+  margin-top: .35rem;
+  font-size: .75rem;
+  font-weight: 800;
+  background: var(--jaune);
+  color: #3d2a00;
+  border-radius: 999px;
+  padding: .1rem .55rem;
+}
+.tuile-fleche { position: absolute; right: .9rem; top: .9rem; opacity: .85; }
+.tuile-fleche .icone { width: 1.3rem; height: 1.3rem; }
+@media (max-width: 520px) { .tuiles-niveaux .tuile-niveau:last-child { grid-column: span 2; } }
+
+.titre-section { margin-top: .5rem; }
+.grille-services { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.carte-service { align-items: flex-start; }
+.pastille-icone {
+  display: inline-grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 12px;
+  background: var(--bleu-clair);
+  color: var(--bleu);
+  margin-bottom: .2rem;
+}
+.pastille-icone .icone { width: 1.5rem; height: 1.5rem; }
+.grille-services .carte-service:nth-child(2) .pastille-icone { background: #fff1e6; color: var(--accent); }
+.grille-services .carte-service:nth-child(3) .pastille-icone { background: var(--niv-A1-clair); color: var(--niv-A1); }
+.grille-services .carte-service:nth-child(4) .pastille-icone { background: var(--niv-B2-clair); color: var(--niv-B2); }
+.grille-services .carte-service:nth-child(5) .pastille-icone { background: var(--rouge-clair); color: var(--rouge); }
+
+/* ---------- Boutons d'action ---------- */
+.btn-accent { background: var(--accent); border-color: var(--accent); }
+.btn-accent:hover { background: var(--accent-fonce); border-color: var(--accent-fonce); }
+.retour.juste strong::after { content: " ★"; color: #c58b00; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tuile-niveau, .carte-lien { transition: none; }
+  .tuile-niveau:hover, .carte-lien:hover { transform: none; }
+}
+
+@keyframes defilement {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+
+/* ==========================================================
+   Nom du site sur la photo : « Passeport DELF »
+   ========================================================== */
+
+/* Voile dégradé à gauche pour que le titre se lise sur la photo */
+.entete-banniere::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(100deg, rgba(14,28,58,.88) 0%, rgba(14,28,58,.62) 34%, rgba(14,28,58,0) 62%),
+    radial-gradient(circle at 12% 18%, rgba(255,209,102,.18), transparent 40%);
+  transition: opacity .35s ease;
+}
+.banniere-bandeau { z-index: 2; }
+.entete-outils { z-index: 4; }
+
+.titre-passeport {
+  position: absolute;
+  z-index: 3;
+  left: clamp(1rem, 4vw, 3rem);
+  top: 50%;
+  transform: translateY(-62%);
+  max-width: min(36rem, 62%);
+  color: #fff;
+  animation: tp-entree .9s cubic-bezier(.2,.8,.2,1) both;
+}
+.tp-etiquette {
+  display: inline-block;
+  font-family: var(--police-titres);
+  font-weight: 700;
+  font-size: clamp(.7rem, 1.2vw, .85rem);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  background: var(--rouge);
+  color: #fff;
+  padding: .3rem .75rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px rgba(180,13,39,.4);
+}
+.tp-nom {
+  margin: .35rem 0 0;
+  font-family: var(--police-titres);
+  font-weight: 800;
+  line-height: .92;
+  letter-spacing: -.03em;
+  text-shadow: 0 4px 18px rgba(0,0,0,.45);
+}
+.tp-mot1 {
+  display: block;
+  font-size: clamp(2.3rem, 7.2vw, 5.4rem);
+}
+.tp-mot2 {
+  display: inline-block;
+  font-size: clamp(2.8rem, 9vw, 6.8rem);
+  background: linear-gradient(100deg, #ffd166 0%, #ffb703 45%, #ff8a3d 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 4px 14px rgba(0,0,0,.45));
+  position: relative;
+}
+/* soulignement « coup de pinceau » */
+.tp-mot2::after {
+  content: "";
+  position: absolute;
+  left: .05em;
+  right: .05em;
+  bottom: -.02em;
+  height: .09em;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--rouge), #ff8a3d);
+  transform: skewX(-18deg);
+}
+.tp-slogan {
+  margin: .7rem 0 0;
+  font-weight: 700;
+  font-size: clamp(.95rem, 1.9vw, 1.35rem);
+  text-shadow: 0 2px 8px rgba(0,0,0,.5);
+}
+.tp-bouton {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: 1rem;
+  padding: .7rem 1.3rem;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--bleu-fonce);
+  font-family: var(--police-titres);
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 22px rgba(0,0,0,.3);
+  transition: transform .15s ease, background .15s ease;
+}
+.tp-bouton:hover { color: #fff; background: var(--accent); transform: translateY(-2px); }
+.tp-bouton .icone { width: 1.1rem; height: 1.1rem; }
+
+/* Tampon de passeport */
+.tampon {
+  position: absolute;
+  z-index: 3;
+  right: clamp(1rem, 5vw, 4rem);
+  top: clamp(3.6rem, 9vw, 5rem);
+  width: clamp(6.5rem, 13vw, 9.5rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 4px double rgba(255,209,102,.95);
+  background: rgba(14,28,58,.35);
+  -webkit-backdrop-filter: blur(2px);
+          backdrop-filter: blur(2px);
+  color: #ffd166;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--police-titres);
+  font-weight: 800;
+  text-transform: uppercase;
+  transform: rotate(-14deg);
+  box-shadow: 0 0 0 4px rgba(255,209,102,.18);
+  animation: tampon-coup .7s .6s cubic-bezier(.3,1.6,.5,1) both;
+}
+.tampon::before {
+  content: "";
+  position: absolute;
+  inset: 9%;
+  border-radius: 50%;
+  border: 2px dashed rgba(255,209,102,.7);
+}
+.tampon-haut { font-size: clamp(.8rem, 1.6vw, 1.15rem); letter-spacing: .18em; }
+.tampon-milieu {
+  font-size: clamp(.62rem, 1.1vw, .8rem);
+  letter-spacing: .06em;
+  border-top: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  padding: .12rem .3rem;
+  margin: .2rem 0;
+  white-space: nowrap;
+}
+.tampon-bas { font-size: clamp(.68rem, 1.2vw, .9rem); letter-spacing: .1em; }
+
+@keyframes tp-entree {
+  from { opacity: 0; transform: translate(-30px, -62%); }
+  to   { opacity: 1; transform: translate(0, -62%); }
+}
+@keyframes tampon-coup {
+  0%   { opacity: 0; transform: rotate(-14deg) scale(2.2); }
+  70%  { opacity: 1; transform: rotate(-14deg) scale(.92); }
+  100% { opacity: 1; transform: rotate(-14deg) scale(1); }
+}
+
+/* Pages intérieures : bannière compacte, nom sur une ligne */
+body:not(.page-accueil) .titre-passeport { top: 38%; transform: translateY(-50%); animation: none; max-width: 80%; }
+body:not(.page-accueil) .tp-etiquette,
+body:not(.page-accueil) .tp-slogan,
+body:not(.page-accueil) .tp-bouton,
+body:not(.page-accueil) .tampon { display: none; }
+body:not(.page-accueil) .tp-nom { margin: 0; }
+body:not(.page-accueil) .tp-mot1,
+body:not(.page-accueil) .tp-mot2 { display: inline; font-size: clamp(1.6rem, 4vw, 2.8rem); }
+body:not(.page-accueil) .tp-mot2::after { display: none; }
+
+/* Téléphone */
+@media (max-width: 600px) {
+  .entete-banniere::before {
+    background: linear-gradient(180deg, rgba(14,28,58,.85) 0%, rgba(14,28,58,.55) 45%, rgba(14,28,58,.1) 75%);
+  }
+  .titre-passeport { top: 3.6rem; transform: none; max-width: 70%; animation-name: tp-entree-mobile; }
+  .tp-bouton { margin-top: .6rem; padding: .5rem 1rem; font-size: .9rem; }
+  .tampon { top: auto; bottom: 30%; right: .8rem; }
+  body:not(.page-accueil) .titre-passeport { top: 40%; transform: translateY(-50%); }
+}
+@keyframes tp-entree-mobile { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: none; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .titre-passeport, .tampon { animation: none; }
+}
+
+/* Ajustements : le titre se pose en bas à gauche pour laisser les visages visibles */
+body.page-accueil .titre-passeport { top: auto; bottom: calc(6% + 4.6rem); transform: none; animation-name: tp-entree-bas; }
+.entete-banniere::before {
+  background:
+    linear-gradient(15deg, rgba(14,28,58,.92) 0%, rgba(14,28,58,.7) 30%, rgba(14,28,58,0) 58%),
+    radial-gradient(circle at 10% 90%, rgba(255,209,102,.16), transparent 45%);
+}
+.tp-mot1 { font-size: clamp(2.1rem, 5.6vw, 4.3rem); }
+.tp-mot2 { font-size: clamp(2.6rem, 7vw, 5.4rem); }
+@keyframes tp-entree-bas { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: none; } }
+body:not(.page-accueil) .tp-mot2 { margin-left: .28em; }
+
+@media (max-width: 600px) {
+  body.page-accueil .entete-banniere { height: 460px; }
+  body.page-accueil .titre-passeport { top: auto; bottom: calc(6% + 3.6rem); max-width: 78%; }
+  .entete-banniere::before {
+    background: linear-gradient(0deg, rgba(14,28,58,.92) 0%, rgba(14,28,58,.75) 40%, rgba(14,28,58,0) 72%);
+  }
+  .tampon { top: 3.6rem; bottom: auto; right: .8rem; width: 5.6rem; }
+  .tp-slogan { font-size: .95rem; }
+}
+
+/* Fond flou de la photo autour de la bannière sur les grands écrans */
+.site-header { position: relative; overflow: hidden; background: var(--bleu-fonce); }
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  background: var(--img-ban, none) center / cover no-repeat;
+  filter: blur(26px) brightness(.4) saturate(1.2);
+}
+.entete-banniere { z-index: 1; box-shadow: 0 0 40px rgba(0,0,0,.45); }
+
+</style>
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiMxZDNhNmUiLz48cmVjdCB4PSI0NCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjY0IiBmaWxsPSIjYzgxMDJlIiByeD0iMCIvPjx0ZXh0IHg9IjIyIiB5PSI0MiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5GQTwvdGV4dD48L3N2Zz4K" type="image/svg+xml">
+</head>
+<body>
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="site-header">
+    <div class="entete-banniere" id="entete-banniere">
+      <div class="entete-outils">
+        <button type="button" class="toggle-es" id="toggle-es" aria-pressed="false" lang="es">
+          <span aria-hidden="true">ES</span>
+          <span class="toggle-label">Ver consignas en español</span>
+        </button>
+      </div>
+    </div>
+  </header>
+    <nav class="main-nav" id="main-nav" aria-label="Navigation principale">
+      <div class="nav-inner">
+        <a class="logo-lmfa" href="#/" aria-label="Accueil – LMFA Français Avancé">
+          <span class="logo-badge" aria-hidden="true">LMFA</span>
+          <span class="logo-txt">Français Avancé</span>
+        </a>
+        <ul>
+          <li><a href="#/" data-route="accueil">Accueil</a></li>
+          <li><a href="#/pratiques" data-route="pratiques">Pratiques DELF/DALF</a></li>
+          <li><a href="#/materiel" data-route="materiel">Matériel</a></li>
+          <li><a href="#/messagerie" data-route="messagerie">Messagerie</a></li>
+          <li><a href="#/projets" data-route="projets">Projets</a></li>
+          <li><a href="#/evaluations" data-route="evaluations">Évaluations</a></li>
+        </ul>
+      </div>
+    </nav>
+
+  <main id="main" tabindex="-1">
+    <div id="app" aria-live="polite">
+      <p class="loading">Chargement…</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p id="footer-text">© MSc. Eduardo Umaña Álvarez</p>
+    <p class="footer-licence" id="footer-licence"></p>
+  </footer>
+
+  <noscript>
+    <p class="noscript">Ce site nécessite JavaScript. / Este sitio requiere JavaScript.</p>
+  </noscript>
+  <script>
+/* ==========================================================
+   DONNÉES DU SITE
+   Modifiez ici le contenu. Règles : textes entre guillemets droits "…",
+   virgule entre les éléments, pas de virgule après le dernier.
+   ========================================================== */
+window.DONNEES_SITE = {
+  "site": {
+    "titre": "Passeport DELF",
+    "sousTitre": "Pratiques DELF/DALF · MSc. Eduardo Umaña Álvarez",
+    "auteur": "MSc. Eduardo Umaña Álvarez",
+    "fonction": "Enseignant de Français Avancé, formateur France Éducation International",
+    "licence": {
+      "nom": "CC BY-NC-SA 4.0",
+      "url": "https://creativecommons.org/licenses/by-nc-sa/4.0/deed.fr"
+    },
+    "mentionFEI": "Les exercices de ce site sont des créations originales d'entraînement ; ils ne sont ni produits ni validés par France Éducation International.",
+    "fichiersExercices": [
+      "data/exercices/a1.json",
+      "data/exercices/a2.json",
+      "data/exercices/b1.json",
+      "data/exercices/b2.json",
+      "data/exercices/c1.json"
+    ],
+    "liensOfficiels": [
+      {
+        "titre": "DELF A1 – exemples de sujets",
+        "url": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-a1/exemples-sujets"
+      },
+      {
+        "titre": "DELF A2 – exemples de sujets",
+        "url": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-a2/exemples-sujets"
+      },
+      {
+        "titre": "DELF B1 – exemples de sujets",
+        "url": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-b1/exemples-sujets"
+      },
+      {
+        "titre": "DELF B2 – exemples de sujets",
+        "url": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-b2/exemples-sujets"
+      },
+      {
+        "titre": "DALF C1 – exemples de sujets",
+        "url": "https://www.france-education-international.fr/diplome/dalf/exemples-sujets"
+      }
+    ],
+    "accueil": {
+      "banniere": {
+        "image": "banniere-lmfa-2.jpg",
+        "alt": "Classe de Français Avancé : un professeur s'entretient en français avec un élève pendant que la classe travaille.",
+        "message": "Français Avancé et FLE · Pratiques DELF/DALF · MSc. Eduardo Umaña Álvarez · Formateur FEI",
+        "cadrage": "center 40%",
+        "cadrageCompact": "center 35%",
+        "nom": {
+          "mot1": "Passeport",
+          "mot2": "DELF",
+          "etiquette": "LMFA · Français Avancé",
+          "slogan": "Ton aventure en français, du A1 au C1",
+          "bouton": "Je commence",
+          "lienBouton": "#/pratiques",
+          "tampon": [
+            "LMFA",
+            "DELF · DALF",
+            "A1 → C1"
+          ]
+        }
+      },
+      "titre": "Choisis ton niveau et entraîne-toi !",
+      "texte": "Des exercices de compréhension de l'oral et des écrits pour préparer le DELF et le DALF, avec la correction tout de suite.",
+      "texte_es": "Ejercicios de comprensión oral y escrita para preparar el DELF y el DALF, con corrección inmediata.",
+      "modeEmploi": [
+        {
+          "icone": "entrainement",
+          "titre": "Je m'entraîne",
+          "texte": "Un niveau, une compétence, et c'est parti ! La correction s'affiche tout de suite.",
+          "texte_es": "Un nivel, una competencia, ¡y a practicar! La corrección aparece de inmediato.",
+          "lien": "#/pratiques"
+        },
+        {
+          "icone": "materiel",
+          "titre": "Je révise",
+          "texte": "Fiches, méthodes et liens fiables pour progresser à ton rythme.",
+          "texte_es": "Fichas, métodos y enlaces confiables para avanzar a tu ritmo.",
+          "lien": "#/materiel"
+        },
+        {
+          "icone": "groupe",
+          "titre": "Mon groupe",
+          "texte": "Les annonces et l'espace d'échange de ta classe.",
+          "texte_es": "Los anuncios y el espacio de intercambio de tu clase.",
+          "lien": "#/messagerie"
+        },
+        {
+          "icone": "projets",
+          "titre": "Nos projets",
+          "texte": "La tâche finale, les étapes et la grille de chaque projet.",
+          "texte_es": "La tarea final, las etapas y la rúbrica de cada proyecto.",
+          "lien": "#/projets"
+        },
+        {
+          "icone": "evaluations",
+          "titre": "Mes évaluations",
+          "texte": "Les évaluations notées, en ligne, pendant leur période d'ouverture.",
+          "texte_es": "Las evaluaciones calificadas, en línea, durante su período de apertura.",
+          "lien": "#/evaluations"
+        }
+      ],
+      "avertissement": "Tes résultats d'entraînement restent dans ton navigateur : ton professeur ne les voit pas. Seules les évaluations en ligne sont notées.",
+      "avertissement_es": "Tus resultados de práctica quedan en tu navegador: tu profesor no los ve. Solo se califican las evaluaciones en línea.",
+      "niveaux": {
+        "A1": "Découverte",
+        "A2": "Survie",
+        "B1": "Seuil",
+        "B2": "Avancé",
+        "C1": "Autonome"
+      }
+    }
+  },
+  "exercices": [
+    {
+      "id": "a1-co-1",
+      "niveau": "A1",
+      "competence": "CO",
+      "titre": "Un message sur le répondeur",
+      "resume": "Comprendre une invitation laissée sur un répondeur.",
+      "consigne": "Lisez les questions. Écoutez le document deux fois, puis répondez.",
+      "consigne_es": "Lea las preguntas. Escuche el documento dos veces y luego responda.",
+      "audio": "audio/a1-co-1.mp3",
+      "ecoutesMax": 2,
+      "tempsLecture": 30,
+      "dureeMinutes": 6,
+      "transcription": "Bonjour Camille, c'est Julie. Samedi, c'est mon anniversaire ! J'organise une petite fête chez moi, à quinze heures. Mon adresse, c'est 12, rue des Lilas. Tu peux apporter des jus de fruits ? Appelle-moi au 06 45 21 38 70. À samedi !",
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Julie organise une fête pour…",
+          "options": [
+            "son anniversaire.",
+            "son mariage.",
+            "la fin de l'année scolaire."
+          ],
+          "reponse": 0,
+          "points": 1,
+          "explication": "« Samedi, c'est mon anniversaire ! »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "La fête commence à quelle heure ?",
+          "options": [
+            "13 h",
+            "15 h",
+            "17 h"
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« à quinze heures »"
+        },
+        {
+          "type": "courte",
+          "enonce": "Julie habite au numéro … de la rue des Lilas. (Écrivez le numéro.)",
+          "reponses": [
+            "12",
+            "douze"
+          ],
+          "points": 1,
+          "explication": "« Mon adresse, c'est 12, rue des Lilas. »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Qu'est-ce que Camille doit apporter ?",
+          "options": [
+            "Un gâteau.",
+            "Des jus de fruits.",
+            "Des fleurs."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« Tu peux apporter des jus de fruits ? »"
+        }
+      ]
+    },
+    {
+      "id": "a1-co-2",
+      "niveau": "A1",
+      "competence": "CO",
+      "titre": "Annonce au supermarché",
+      "resume": "Comprendre une annonce publique simple dans un magasin.",
+      "consigne": "Lisez les questions. Écoutez le document deux fois, puis répondez.",
+      "consigne_es": "Lea las preguntas. Escuche el documento dos veces y luego responda.",
+      "audio": "audio/a1-co-2.mp3",
+      "ecoutesMax": 2,
+      "tempsLecture": 30,
+      "dureeMinutes": 6,
+      "transcription": "Chers clients, bienvenue au supermarché Bonprix. Aujourd'hui, mardi, les fruits sont à moitié prix : les bananes, les oranges et les fraises. Au rayon boulangerie, pour deux baguettes achetées, une baguette est offerte. Attention : ce soir, le magasin ferme à vingt heures. Merci et bonnes courses !",
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Où entendez-vous cette annonce ?",
+          "options": [
+            "À la gare.",
+            "Au supermarché.",
+            "À l'école."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« bienvenue au supermarché Bonprix »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Quel jour sommes-nous ?",
+          "options": [
+            "Lundi.",
+            "Mardi.",
+            "Mercredi."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« Aujourd'hui, mardi… »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Aujourd'hui, les fruits sont…",
+          "options": [
+            "gratuits.",
+            "à moitié prix.",
+            "nouveaux."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« les fruits sont à moitié prix »"
+        },
+        {
+          "type": "courte",
+          "enonce": "À quelle heure le magasin ferme-t-il ce soir ? (Ex. : 18 h)",
+          "reponses": [
+            "20 h",
+            "20h",
+            "20 heures",
+            "vingt heures",
+            "20:00",
+            "20h00"
+          ],
+          "points": 1,
+          "explication": "« le magasin ferme à vingt heures »"
+        }
+      ]
+    },
+    {
+      "id": "a1-ce-1",
+      "niveau": "A1",
+      "competence": "CE",
+      "titre": "Un courriel de vacances",
+      "resume": "Comprendre un courriel personnel court.",
+      "consigne": "Lisez le document, puis répondez aux questions.",
+      "consigne_es": "Lea el documento y luego responda las preguntas.",
+      "dureeMinutes": 8,
+      "document": {
+        "type": "texte",
+        "titre": "Bonjour de Nice !",
+        "source": "De : Léa · À : Sofía",
+        "contenu": "Salut Sofía,\n\nJe suis à Nice avec ma famille depuis lundi. Il fait beau et chaud ! Le matin, nous allons à la plage. L'après-midi, nous visitons la vieille ville et nous mangeons des glaces. Mon frère Hugo adore le musée Matisse.\n\nNous rentrons à Lyon dimanche. Et toi, tu vas bien ?\n\nBisous,\nLéa"
+      },
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Léa est à Nice avec…",
+          "options": [
+            "ses amis.",
+            "sa famille.",
+            "sa classe."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« Je suis à Nice avec ma famille »"
+        },
+        {
+          "type": "vf",
+          "nsp": true,
+          "enonce": "Il pleut à Nice.",
+          "reponse": "faux",
+          "points": 1,
+          "explication": "« Il fait beau et chaud ! »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Que fait Léa le matin ?",
+          "options": [
+            "Elle va à la plage.",
+            "Elle visite un musée.",
+            "Elle travaille."
+          ],
+          "reponse": 0,
+          "points": 1,
+          "explication": "« Le matin, nous allons à la plage. »"
+        },
+        {
+          "type": "vf",
+          "nsp": true,
+          "enonce": "Léa adore le musée Matisse.",
+          "reponse": "nsp",
+          "points": 1,
+          "explication": "C'est son frère Hugo qui adore le musée. Le texte ne dit pas ce que Léa en pense."
+        },
+        {
+          "type": "courte",
+          "enonce": "Quel jour Léa rentre-t-elle à Lyon ?",
+          "reponses": [
+            "dimanche",
+            "le dimanche"
+          ],
+          "points": 1,
+          "explication": "« Nous rentrons à Lyon dimanche. »"
+        }
+      ]
+    },
+    {
+      "id": "a1-ce-2",
+      "niveau": "A1",
+      "competence": "CE",
+      "titre": "Une affiche au centre culturel",
+      "resume": "Comprendre les informations essentielles d'une affiche.",
+      "consigne": "Lisez l'affiche, puis répondez aux questions.",
+      "consigne_es": "Lea el afiche y luego responda las preguntas.",
+      "dureeMinutes": 8,
+      "document": {
+        "type": "texte",
+        "titre": "CENTRE CULTUREL LA ROSERAIE",
+        "source": "Affiche",
+        "contenu": "Cours de danse salsa pour débutants !\n\nQuand ? Le mercredi, de 18 h à 19 h 30\nOù ? Salle 3, premier étage\nPrix : 20 euros par mois\nÂge : à partir de 16 ans\n\nInscription à l'accueil ou par téléphone : 01 42 55 67 89\n\nVenez avec des chaussures confortables !"
+      },
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "C'est un cours de…",
+          "options": [
+            "danse.",
+            "cuisine.",
+            "musique."
+          ],
+          "reponse": 0,
+          "points": 1,
+          "explication": "« Cours de danse salsa »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Le cours a lieu…",
+          "options": [
+            "le lundi.",
+            "le mercredi.",
+            "le samedi."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« Le mercredi, de 18 h à 19 h 30 »"
+        },
+        {
+          "type": "courte",
+          "enonce": "Combien coûte le cours par mois ? (Écrivez le prix.)",
+          "reponses": [
+            "20",
+            "20 euros",
+            "20 €",
+            "20€",
+            "vingt euros"
+          ],
+          "points": 1,
+          "explication": "« Prix : 20 euros par mois »"
+        },
+        {
+          "type": "vf",
+          "enonce": "Un enfant de 10 ans peut participer au cours.",
+          "reponse": "faux",
+          "points": 1,
+          "explication": "« Âge : à partir de 16 ans »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Pour le cours, il faut…",
+          "options": [
+            "un livre.",
+            "des chaussures confortables.",
+            "un instrument."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« Venez avec des chaussures confortables ! »"
+        }
+      ]
+    },
+    {
+      "id": "a2-co-1",
+      "niveau": "A2",
+      "competence": "CO",
+      "titre": "Annonce à l'aéroport",
+      "resume": "Comprendre une annonce de retard et de changement de porte.",
+      "consigne": "Lisez les questions. Écoutez le document deux fois, puis répondez.",
+      "consigne_es": "Lea las preguntas. Escuche el documento dos veces y luego responda.",
+      "audio": "audio/a2-co-1.mp3",
+      "ecoutesMax": 2,
+      "tempsLecture": 30,
+      "dureeMinutes": 6,
+      "transcription": "Mesdames et messieurs, votre attention, s'il vous plaît. Le vol AF 432 à destination de San José, au Costa Rica, prévu à quatorze heures dix, partira avec un retard d'environ une heure. L'embarquement se fera porte 27, et non porte 12. Les passagers peuvent retirer un bon pour une boisson gratuite au comptoir de la compagnie, à côté de la pharmacie. Nous vous remercions de votre compréhension.",
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Quelle est la destination du vol ?",
+          "options": [
+            "Paris.",
+            "San José.",
+            "Madrid."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« à destination de San José, au Costa Rica »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Le vol va partir…",
+          "options": [
+            "à l'heure prévue.",
+            "avec environ une heure de retard.",
+            "demain matin."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« partira avec un retard d'environ une heure »"
+        },
+        {
+          "type": "courte",
+          "enonce": "Quelle est la nouvelle porte d'embarquement ? (Écrivez le numéro.)",
+          "reponses": [
+            "27",
+            "porte 27",
+            "vingt-sept"
+          ],
+          "points": 1,
+          "explication": "« porte 27, et non porte 12 »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Les passagers peuvent recevoir…",
+          "options": [
+            "un repas.",
+            "une boisson gratuite.",
+            "un billet gratuit."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« un bon pour une boisson gratuite »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Où se trouve le comptoir de la compagnie ?",
+          "options": [
+            "À côté de la pharmacie.",
+            "À côté de la porte 12.",
+            "Au premier étage."
+          ],
+          "reponse": 0,
+          "points": 1,
+          "explication": "« au comptoir de la compagnie, à côté de la pharmacie »"
+        }
+      ]
+    },
+    {
+      "id": "a2-co-2",
+      "niveau": "A2",
+      "competence": "CO",
+      "titre": "Au guichet du cinéma",
+      "resume": "Comprendre un échange simple pour acheter des places.",
+      "consigne": "Lisez les questions. Écoutez le dialogue deux fois, puis répondez.",
+      "consigne_es": "Lea las preguntas. Escuche el diálogo dos veces y luego responda.",
+      "audio": "audio/a2-co-2.mp3",
+      "ecoutesMax": 2,
+      "tempsLecture": 30,
+      "dureeMinutes": 6,
+      "transcription": "— Bonsoir, deux places pour « Le Voyage de Lina », s'il vous plaît.\n— Pour la séance de vingt heures ou de vingt-deux heures ?\n— Vingt heures.\n— Désolé, la séance de vingt heures est complète. Il reste des places à vingt-deux heures.\n— Bon, d'accord, vingt-deux heures alors. C'est combien ?\n— Neuf euros la place, mais avec la carte étudiant, c'est six euros.\n— Nous sommes étudiants, voici nos cartes.\n— Parfait, ça fait douze euros. Salle 4, au fond à gauche. Bonne séance !",
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "À quelle séance la cliente veut-elle aller d'abord ?",
+          "options": [
+            "18 h",
+            "20 h",
+            "22 h"
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« Vingt heures. »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Pourquoi ne peut-elle pas y aller ?",
+          "options": [
+            "La séance est complète.",
+            "Le film est annulé.",
+            "Le cinéma est fermé."
+          ],
+          "reponse": 0,
+          "points": 1,
+          "explication": "« la séance de vingt heures est complète »"
+        },
+        {
+          "type": "courte",
+          "enonce": "Combien paient-ils au total ? (Écrivez le prix.)",
+          "reponses": [
+            "12",
+            "12 euros",
+            "12 €",
+            "12€",
+            "douze euros"
+          ],
+          "points": 1,
+          "explication": "« ça fait douze euros » (2 × 6 € avec la carte étudiant)."
+        },
+        {
+          "type": "vf",
+          "enonce": "Le prix normal d'une place est de six euros.",
+          "reponse": "faux",
+          "points": 1,
+          "explication": "Le prix normal est de neuf euros ; six euros, c'est le tarif étudiant."
+        },
+        {
+          "type": "qcm",
+          "enonce": "Où se trouve la salle 4 ?",
+          "options": [
+            "Au fond à gauche.",
+            "Au premier étage.",
+            "À droite de l'entrée."
+          ],
+          "reponse": 0,
+          "points": 1,
+          "explication": "« Salle 4, au fond à gauche. »"
+        }
+      ]
+    },
+    {
+      "id": "a2-ce-1",
+      "niveau": "A2",
+      "competence": "CE",
+      "titre": "Petite annonce : colocation",
+      "resume": "Comprendre une annonce de logement.",
+      "consigne": "Lisez l'annonce, puis répondez aux questions.",
+      "consigne_es": "Lea el anuncio y luego responda las preguntas.",
+      "dureeMinutes": 10,
+      "document": {
+        "type": "texte",
+        "titre": "Cherche colocataire – Quartier Saint-Michel, Bordeaux",
+        "source": "Petite annonce en ligne",
+        "contenu": "Je m'appelle Thomas, j'ai 24 ans et je suis infirmier. Je cherche une personne calme et non fumeuse pour partager mon appartement de 70 m² à partir du 1er septembre.\n\nLa chambre est meublée (lit, bureau, armoire) et donne sur un petit jardin. Le loyer est de 380 euros par mois, charges comprises (eau, électricité, internet).\n\nL'appartement est à cinq minutes à pied du tramway et à dix minutes de l'université. Les animaux ne sont pas acceptés.\n\nContact : thomas.coloc@exemple.fr"
+      },
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Thomas cherche…",
+          "options": [
+            "un appartement.",
+            "un colocataire.",
+            "un travail."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« Je cherche une personne […] pour partager mon appartement »"
+        },
+        {
+          "type": "vf",
+          "enonce": "Thomas est étudiant.",
+          "reponse": "faux",
+          "points": 1,
+          "explication": "« je suis infirmier »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "La chambre…",
+          "options": [
+            "a une salle de bains privée.",
+            "est meublée.",
+            "a un balcon."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« La chambre est meublée (lit, bureau, armoire) »"
+        },
+        {
+          "type": "courte",
+          "enonce": "Combien coûte le loyer par mois ? (Écrivez le prix.)",
+          "reponses": [
+            "380",
+            "380 euros",
+            "380 €",
+            "380€"
+          ],
+          "points": 1,
+          "explication": "« Le loyer est de 380 euros par mois »"
+        },
+        {
+          "type": "vf",
+          "enonce": "Internet est compris dans le loyer.",
+          "reponse": "vrai",
+          "points": 1,
+          "explication": "« charges comprises (eau, électricité, internet) »"
+        },
+        {
+          "type": "vf",
+          "enonce": "Le futur colocataire peut venir avec son chat.",
+          "reponse": "faux",
+          "points": 1,
+          "explication": "« Les animaux ne sont pas acceptés. »"
+        }
+      ]
+    },
+    {
+      "id": "a2-ce-2",
+      "niveau": "A2",
+      "competence": "CE",
+      "titre": "Courriel : une sortie scolaire",
+      "resume": "Comprendre un message d'information pratique.",
+      "consigne": "Lisez le courriel, puis répondez aux questions.",
+      "consigne_es": "Lea el correo y luego responda las preguntas.",
+      "dureeMinutes": 10,
+      "document": {
+        "type": "texte",
+        "titre": "Objet : Sortie au musée du Louvre – jeudi 14 mars",
+        "source": "Courriel",
+        "contenu": "Chers parents,\n\nLe jeudi 14 mars, la classe de 3e B va visiter le musée du Louvre, à Paris. Le départ est prévu à 8 h devant le collège ; le retour, vers 17 h 30.\n\nLes élèves doivent apporter un pique-nique, une bouteille d'eau et un cahier pour prendre des notes. La sortie coûte 15 euros (transport et visite guidée).\n\nMerci de rendre l'autorisation signée et l'argent avant le lundi 11 mars.\n\nCordialement,\nMme Durand, professeure d'histoire"
+      },
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Qui a écrit ce message ?",
+          "options": [
+            "Un élève.",
+            "Une professeure.",
+            "Le directeur du musée."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« Mme Durand, professeure d'histoire »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "La classe va…",
+          "options": [
+            "à Paris.",
+            "à la mer.",
+            "au théâtre."
+          ],
+          "reponse": 0,
+          "points": 1,
+          "explication": "« visiter le musée du Louvre, à Paris »"
+        },
+        {
+          "type": "courte",
+          "enonce": "À quelle heure part le groupe ? (Ex. : 10 h)",
+          "reponses": [
+            "8 h",
+            "8h",
+            "8 heures",
+            "huit heures",
+            "8:00",
+            "8h00"
+          ],
+          "points": 1,
+          "explication": "« Le départ est prévu à 8 h »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Le prix de la sortie comprend…",
+          "options": [
+            "le repas.",
+            "le transport et la visite guidée.",
+            "un cadeau."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« 15 euros (transport et visite guidée) » ; les élèves apportent leur pique-nique."
+        },
+        {
+          "type": "courte",
+          "enonce": "Avant quelle date faut-il rendre l'autorisation ?",
+          "reponses": [
+            "lundi 11 mars",
+            "le lundi 11 mars",
+            "11 mars",
+            "le 11 mars"
+          ],
+          "points": 1,
+          "explication": "« avant le lundi 11 mars »"
+        }
+      ]
+    },
+    {
+      "id": "b1-co-1",
+      "niveau": "B1",
+      "competence": "CO",
+      "titre": "Interview : une année de volontariat",
+      "resume": "Comprendre le récit d'une expérience et ses motivations.",
+      "consigne": "Vous avez 1 minute pour lire les questions. Écoutez l'interview deux fois, puis répondez.",
+      "consigne_es": "Tiene 1 minuto para leer las preguntas. Escuche la entrevista dos veces y luego responda.",
+      "audio": "audio/b1-co-1.mp3",
+      "ecoutesMax": 2,
+      "tempsLecture": 60,
+      "dureeMinutes": 10,
+      "transcription": "— Bonjour Marco, vous rentrez d'une année de volontariat. Où étiez-vous ?\n— J'étais au Sénégal, à Saint-Louis, dans une association qui aide les enfants à faire leurs devoirs après l'école.\n— Pourquoi avoir choisi ce projet ?\n— Après mes études de commerce, j'avais envie de faire quelque chose d'utile avant de commencer à travailler. Et puis, je voulais améliorer mon français, parce que ma langue maternelle, c'est l'italien.\n— Qu'est-ce qui a été le plus difficile ?\n— Au début, la chaleur ! Et aussi le rythme : là-bas, on prend le temps. Moi, j'étais toujours pressé, et j'ai dû apprendre la patience.\n— Et maintenant ?\n— Je cherche un poste dans une ONG. Cette expérience m'a fait changer de projet professionnel : je ne veux plus travailler dans une grande entreprise.",
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Au Sénégal, Marco a travaillé…",
+          "options": [
+            "dans une école de commerce.",
+            "dans une association d'aide aux devoirs.",
+            "dans un hôpital."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« une association qui aide les enfants à faire leurs devoirs »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Avant de partir, Marco…",
+          "options": [
+            "avait terminé ses études.",
+            "travaillait dans une entreprise.",
+            "était professeur."
+          ],
+          "reponse": 0,
+          "points": 1,
+          "explication": "« Après mes études de commerce… »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Une des raisons de son départ était…",
+          "options": [
+            "de gagner de l'argent.",
+            "d'améliorer son français.",
+            "de rejoindre sa famille."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« je voulais améliorer mon français »"
+        },
+        {
+          "type": "courte",
+          "enonce": "Qu'est-ce que Marco a dû apprendre au Sénégal ? (Un mot.)",
+          "reponses": [
+            "la patience",
+            "patience",
+            "etre patient"
+          ],
+          "points": 1.5,
+          "explication": "« j'ai dû apprendre la patience »"
+        },
+        {
+          "type": "vf",
+          "enonce": "Aujourd'hui, Marco veut travailler dans une grande entreprise.",
+          "reponse": "faux",
+          "points": 1,
+          "explication": "« je ne veux plus travailler dans une grande entreprise » ; il cherche un poste dans une ONG."
+        }
+      ]
+    },
+    {
+      "id": "b1-co-2",
+      "niveau": "B1",
+      "competence": "CO",
+      "titre": "Reportage : les jardins partagés",
+      "resume": "Comprendre un court reportage radio sur un projet de quartier.",
+      "consigne": "Vous avez 1 minute pour lire les questions. Écoutez le reportage deux fois, puis répondez.",
+      "consigne_es": "Tiene 1 minuto para leer las preguntas. Escuche el reportaje dos veces y luego responda.",
+      "audio": "audio/b1-co-2.mp3",
+      "ecoutesMax": 2,
+      "tempsLecture": 60,
+      "dureeMinutes": 10,
+      "transcription": "Dans le quartier de la Croix-Rousse, à Lyon, un ancien parking abandonné est devenu un jardin partagé. Depuis trois ans, une quarantaine d'habitants y cultivent des légumes, des herbes aromatiques et des fleurs. Chacun dispose d'une petite parcelle, mais les outils et l'eau sont mis en commun. Pour Nadia, retraitée, c'est surtout un lieu de rencontre : « Avant, je ne connaissais pas mes voisins. Maintenant, on se retrouve ici tous les samedis. » Le jardin accueille aussi des écoles le mardi matin, pour sensibiliser les enfants à l'alimentation. La mairie souhaite créer cinq nouveaux jardins de ce type d'ici deux ans.",
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Avant, à la place du jardin, il y avait…",
+          "options": [
+            "un parking.",
+            "une école.",
+            "un marché."
+          ],
+          "reponse": 0,
+          "points": 1,
+          "explication": "« un ancien parking abandonné est devenu un jardin partagé »"
+        },
+        {
+          "type": "courte",
+          "enonce": "Combien d'habitants participent, environ ? (Écrivez le nombre.)",
+          "reponses": [
+            "40",
+            "quarante",
+            "une quarantaine",
+            "environ 40"
+          ],
+          "points": 1,
+          "explication": "« une quarantaine d'habitants »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Qu'est-ce qui est partagé entre les jardiniers ?",
+          "options": [
+            "Les parcelles.",
+            "Les outils et l'eau.",
+            "Les récoltes."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "Chacun a sa parcelle, mais « les outils et l'eau sont mis en commun »."
+        },
+        {
+          "type": "qcm",
+          "enonce": "Pour Nadia, le jardin est surtout…",
+          "options": [
+            "un moyen d'économiser.",
+            "un lieu de rencontre.",
+            "une activité pour ses petits-enfants."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« c'est surtout un lieu de rencontre »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Quel est le projet de la mairie ?",
+          "options": [
+            "Fermer le jardin.",
+            "Créer cinq autres jardins.",
+            "Construire un nouveau parking."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« créer cinq nouveaux jardins de ce type d'ici deux ans »"
+        }
+      ]
+    },
+    {
+      "id": "b1-ce-1",
+      "niveau": "B1",
+      "competence": "CE",
+      "titre": "Article : Grenoble, capitale du vélo ?",
+      "resume": "Comprendre un article d'information et justifier ses réponses.",
+      "consigne": "Lisez l'article, puis répondez aux questions. Pour les questions vrai/faux, recopiez la phrase du texte qui justifie votre réponse.",
+      "consigne_es": "Lea el artículo y responda. En las preguntas verdadero/falso, copie la frase del texto que justifica su respuesta.",
+      "dureeMinutes": 15,
+      "document": {
+        "type": "texte",
+        "titre": "Grenoble, capitale du vélo ?",
+        "source": "Article de presse (texte d'entraînement)",
+        "contenu": "En dix ans, le nombre de cyclistes a doublé à Grenoble. La ville a construit plus de 40 kilomètres de pistes cyclables protégées et propose un service de location de vélos à 3 euros par mois pour les étudiants. Pour l'adjointe au maire chargée des transports, « le vélo n'est plus un loisir, c'est un vrai moyen de transport ».\n\nTout le monde n'est pas convaincu. Certains commerçants du centre-ville se plaignent de la disparition de places de stationnement : selon eux, leurs clients qui viennent de la campagne ne peuvent plus se garer. La mairie répond que les études montrent le contraire : les cyclistes s'arrêtent plus souvent dans les petits commerces que les automobilistes.\n\nReste un problème : la sécurité. L'hiver, la nuit tombe tôt, et beaucoup de cyclistes circulent encore sans lumière. Une campagne de prévention commencera en novembre."
+      },
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Cet article parle surtout…",
+          "options": [
+            "du développement du vélo à Grenoble.",
+            "d'une course cycliste.",
+            "de la pollution de l'air."
+          ],
+          "reponse": 0,
+          "points": 1,
+          "explication": "Tout l'article porte sur la place croissante du vélo dans la ville."
+        },
+        {
+          "type": "vfj",
+          "enonce": "Les étudiants peuvent louer un vélo pour un prix bas.",
+          "reponse": "vrai",
+          "justification": "location de vélos à 3 euros par mois pour les étudiants",
+          "points": 1.5
+        },
+        {
+          "type": "vfj",
+          "enonce": "Tous les commerçants sont favorables aux pistes cyclables.",
+          "reponse": "faux",
+          "justification": "Certains commerçants du centre-ville se plaignent de la disparition de places de stationnement",
+          "points": 1.5
+        },
+        {
+          "type": "qcm",
+          "enonce": "Selon la mairie, les cyclistes…",
+          "options": [
+            "achètent moins que les automobilistes.",
+            "s'arrêtent plus souvent dans les petits commerces.",
+            "préfèrent les supermarchés."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« les cyclistes s'arrêtent plus souvent dans les petits commerces que les automobilistes »"
+        },
+        {
+          "type": "courte",
+          "enonce": "Quand commencera la campagne de prévention ? (Un mot.)",
+          "reponses": [
+            "novembre",
+            "en novembre"
+          ],
+          "points": 1,
+          "explication": "« Une campagne de prévention commencera en novembre. »"
+        }
+      ]
+    },
+    {
+      "id": "b1-ce-2",
+      "niveau": "B1",
+      "competence": "CE",
+      "titre": "Forum : le télétravail, vous aimez ?",
+      "resume": "Comprendre et comparer plusieurs opinions sur un forum.",
+      "consigne": "Lisez les messages du forum, puis répondez. Pour les questions vrai/faux, recopiez la phrase qui justifie votre réponse.",
+      "consigne_es": "Lea los mensajes del foro y responda. En las preguntas verdadero/falso, copie la frase que justifica su respuesta.",
+      "dureeMinutes": 15,
+      "document": {
+        "type": "texte",
+        "titre": "Forum « Vie pro » – Le télétravail, vous aimez ?",
+        "source": "Messages d'un forum (texte d'entraînement)",
+        "contenu": "Sabrina (Montréal) : Je travaille de chez moi trois jours par semaine depuis deux ans. Je gagne presque deux heures de transport par jour ! Par contre, mes collègues me manquent, alors je vais au bureau le lundi et le jeudi.\n\nPaul (Bruxelles) : Pour moi, c'est non. J'ai essayé pendant six mois, mais je n'arrivais pas à séparer vie privée et vie professionnelle. Je répondais à mes courriels à 22 heures… Je suis revenu au bureau à temps plein.\n\nAminata (Dakar) : C'est une bonne solution, à condition d'avoir un bon équipement. Mon entreprise m'a payé un écran et une chaise de bureau. Sans ça, j'aurais eu mal au dos !"
+      },
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Qui travaille aujourd'hui au bureau à temps plein ?",
+          "options": [
+            "Sabrina.",
+            "Paul.",
+            "Aminata."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« Je suis revenu au bureau à temps plein. »"
+        },
+        {
+          "type": "vfj",
+          "enonce": "Sabrina gagne du temps grâce au télétravail.",
+          "reponse": "vrai",
+          "justification": "Je gagne presque deux heures de transport par jour",
+          "points": 1.5
+        },
+        {
+          "type": "vfj",
+          "enonce": "Paul a fait du télétravail pendant deux ans.",
+          "reponse": "faux",
+          "justification": "J'ai essayé pendant six mois",
+          "points": 1.5
+        },
+        {
+          "type": "qcm",
+          "enonce": "Selon Aminata, le télétravail fonctionne si…",
+          "options": [
+            "on a un bon équipement.",
+            "on habite loin du bureau.",
+            "on travaille seul."
+          ],
+          "reponse": 0,
+          "points": 1,
+          "explication": "« à condition d'avoir un bon équipement »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Pourquoi Sabrina va-t-elle au bureau deux jours par semaine ?",
+          "options": [
+            "Son chef l'oblige.",
+            "Ses collègues lui manquent.",
+            "Elle n'a pas internet chez elle."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« mes collègues me manquent, alors je vais au bureau le lundi et le jeudi »"
+        }
+      ]
+    },
+    {
+      "id": "b2-co-1",
+      "niveau": "B2",
+      "competence": "CO",
+      "titre": "Chronique radio : les écrans et le sommeil",
+      "resume": "Comprendre une chronique d'information et le point de vue d'une experte.",
+      "consigne": "Vous avez 1 minute pour lire les questions. Écoutez la chronique deux fois, puis répondez.",
+      "consigne_es": "Tiene 1 minuto para leer las preguntas. Escuche la crónica dos veces y luego responda.",
+      "audio": "audio/b2-co-1.mp3",
+      "ecoutesMax": 2,
+      "tempsLecture": 60,
+      "dureeMinutes": 12,
+      "transcription": "Bonjour à tous. Aujourd'hui, parlons de nos nuits. Selon une enquête menée auprès de deux mille adolescents, près de six sur dix utilisent leur téléphone dans l'heure qui précède le coucher. Problème : la lumière bleue des écrans retarde la sécrétion de mélatonine, l'hormone qui prépare l'organisme au sommeil. Résultat : on s'endort plus tard, et le réveil, lui, ne change pas.\n\nMais attention aux raccourcis. Pour la chercheuse Hélène Dubreuil, ce n'est pas seulement la lumière qui pose problème. « Ce qui empêche de dormir, explique-t-elle, c'est surtout le contenu : une série dont on veut voir la suite, une discussion de groupe qui n'en finit pas. Le cerveau reste en alerte. »\n\nSes conseils ? Fixer une heure d'extinction des écrans, laisser le téléphone hors de la chambre et, pourquoi pas, renouer avec la lecture sur papier. Des gestes simples, mais qui demandent, reconnaît-elle, une bonne dose de volonté.",
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "D'après l'enquête citée, combien d'adolescents utilisent leur téléphone dans l'heure avant le coucher ?",
+          "options": [
+            "Un sur dix.",
+            "Près de six sur dix.",
+            "Presque tous."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« près de six sur dix »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "La lumière bleue des écrans…",
+          "options": [
+            "accélère l'endormissement.",
+            "retarde la production de mélatonine.",
+            "facilite le réveil."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« la lumière bleue des écrans retarde la sécrétion de mélatonine »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Pour Hélène Dubreuil, le principal problème est…",
+          "options": [
+            "la luminosité de l'écran.",
+            "le contenu consulté.",
+            "le prix des téléphones."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« c'est surtout le contenu » : le cerveau reste en alerte."
+        },
+        {
+          "type": "ouverte",
+          "enonce": "Citez deux conseils donnés par la chercheuse.",
+          "reponseModele": "Fixer une heure d'extinction des écrans ; laisser le téléphone hors de la chambre ; reprendre la lecture sur papier (deux de ces trois éléments).",
+          "points": 2
+        },
+        {
+          "type": "qcm",
+          "enonce": "Selon la chercheuse, appliquer ces conseils…",
+          "options": [
+            "est très facile.",
+            "exige de la volonté.",
+            "coûte cher."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« des gestes simples, mais qui demandent […] une bonne dose de volonté »"
+        }
+      ]
+    },
+    {
+      "id": "b2-co-2",
+      "niveau": "B2",
+      "competence": "CO",
+      "titre": "Débat : faut-il limiter le tourisme de masse ?",
+      "resume": "Comprendre deux positions argumentées dans un débat.",
+      "consigne": "Vous avez 1 minute pour lire les questions. Écoutez le débat deux fois, puis répondez.",
+      "consigne_es": "Tiene 1 minuto para leer las preguntas. Escuche el debate dos veces y luego responda.",
+      "audio": "audio/b2-co-2.mp3",
+      "ecoutesMax": 2,
+      "tempsLecture": 60,
+      "dureeMinutes": 12,
+      "transcription": "— Journaliste : Venise, Barcelone, Dubrovnik… Faut-il limiter l'accès aux sites touristiques ? Nous en débattons avec Laurent Fabre, économiste, et Inès Morel, urbaniste. Laurent Fabre ?\n— Laurent Fabre : Je comprends l'exaspération des habitants, mais n'oublions pas que le tourisme fait vivre des milliers de familles. Instaurer des quotas, c'est réserver le voyage à ceux qui peuvent payer le plus cher. Je préfère une meilleure répartition des visiteurs, dans le temps et dans l'espace.\n— Inès Morel : Une meilleure répartition, on en parle depuis vingt ans ! Pendant ce temps, les loyers explosent, les commerces de proximité disparaissent au profit des boutiques de souvenirs, et les habitants s'en vont. Une ville n'est pas un parc d'attractions : sans habitants, elle meurt.\n— Laurent Fabre : Je ne dis pas qu'il ne faut rien faire. Taxer davantage les locations de courte durée, oui. Mais fermer les portes, non.",
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Laurent Fabre est…",
+          "options": [
+            "urbaniste.",
+            "économiste.",
+            "habitant de Venise."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« Laurent Fabre, économiste »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Selon Laurent Fabre, des quotas…",
+          "options": [
+            "protégeraient les habitants.",
+            "favoriseraient les touristes les plus riches.",
+            "créeraient des emplois."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« c'est réserver le voyage à ceux qui peuvent payer le plus cher »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Que reproche Inès Morel à l'idée de « mieux répartir » les visiteurs ?",
+          "options": [
+            "Elle coûte trop cher.",
+            "On en parle depuis longtemps sans résultat.",
+            "Elle est injuste pour les touristes."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« on en parle depuis vingt ans ! Pendant ce temps… »"
+        },
+        {
+          "type": "ouverte",
+          "enonce": "Citez deux conséquences du tourisme de masse évoquées par Inès Morel.",
+          "reponseModele": "La hausse des loyers ; la disparition des commerces de proximité au profit des boutiques de souvenirs ; le départ des habitants (deux de ces trois éléments).",
+          "points": 2
+        },
+        {
+          "type": "qcm",
+          "enonce": "Quelle mesure Laurent Fabre accepte-t-il ?",
+          "options": [
+            "La fermeture de certains sites.",
+            "Une taxe plus forte sur les locations de courte durée.",
+            "La suppression des boutiques de souvenirs."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« Taxer davantage les locations de courte durée, oui. »"
+        }
+      ]
+    },
+    {
+      "id": "b2-ce-1",
+      "niveau": "B2",
+      "competence": "CE",
+      "titre": "Article : travailler moins pour travailler mieux ?",
+      "resume": "Comprendre un article argumentatif nuancé sur la semaine de quatre jours.",
+      "consigne": "Lisez l'article, puis répondez. Pour les questions vrai/faux, recopiez la phrase ou la partie de phrase qui justifie votre réponse.",
+      "consigne_es": "Lea el artículo y responda. En las preguntas verdadero/falso, copie la frase o parte de la frase que justifica su respuesta.",
+      "dureeMinutes": 20,
+      "document": {
+        "type": "texte",
+        "titre": "Travailler moins pour travailler mieux ?",
+        "source": "Article de presse (texte d'entraînement)",
+        "contenu": "Depuis le début de l'année, plusieurs entreprises françaises expérimentent la semaine de quatre jours, sans baisse de salaire. Les premiers bilans, publiés par les entreprises elles-mêmes, sont encourageants : moins d'absentéisme, des salariés qui se disent plus reposés et, dans certains cas, une productivité stable, voire en légère hausse.\n\nFaut-il pour autant généraliser le modèle ? Rien n'est moins sûr. D'abord parce que ces expériences concernent surtout des entreprises de services, où l'organisation du travail est souple. Dans un hôpital, une usine ou un commerce ouvert six jours sur sept, réduire le nombre de jours travaillés suppose d'embaucher, ce qui a un coût. Ensuite parce que la semaine de quatre jours prend parfois la forme d'une compression : les mêmes 35 heures concentrées en quatre journées plus longues, au risque d'une fatigue accrue.\n\nLes sociologues du travail invitent donc à la prudence. Pour eux, la question n'est pas tant le nombre de jours que le sens donné au travail et l'autonomie laissée aux salariés. Une semaine courte mais mal organisée ne rendra personne plus heureux."
+      },
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Les premiers bilans positifs ont été publiés par…",
+          "options": [
+            "des chercheurs indépendants.",
+            "les entreprises elles-mêmes.",
+            "le gouvernement."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« publiés par les entreprises elles-mêmes » : un détail qui invite à relativiser ces résultats."
+        },
+        {
+          "type": "vfj",
+          "enonce": "Dans les entreprises concernées, les salaires ont baissé.",
+          "reponse": "faux",
+          "justification": "sans baisse de salaire",
+          "points": 1.5
+        },
+        {
+          "type": "qcm",
+          "enonce": "Pourquoi le modèle est-il difficile à appliquer dans un hôpital ?",
+          "options": [
+            "Il faudrait recruter du personnel.",
+            "Les salariés le refusent.",
+            "La loi l'interdit."
+          ],
+          "reponse": 0,
+          "points": 1.5,
+          "explication": "« réduire le nombre de jours travaillés suppose d'embaucher »"
+        },
+        {
+          "type": "vfj",
+          "enonce": "La semaine de quatre jours signifie toujours une réduction du temps de travail.",
+          "reponse": "faux",
+          "justification": "les mêmes 35 heures concentrées en quatre journées plus longues",
+          "points": 1.5
+        },
+        {
+          "type": "qcm",
+          "enonce": "Pour les sociologues, l'essentiel est…",
+          "options": [
+            "le nombre de jours travaillés.",
+            "le sens du travail et l'autonomie des salariés.",
+            "le niveau des salaires."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« la question n'est pas tant le nombre de jours que le sens donné au travail et l'autonomie »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Le ton général de l'article est…",
+          "options": [
+            "enthousiaste.",
+            "nuancé.",
+            "hostile."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "L'article présente les résultats positifs, puis leurs limites, et appelle à la prudence."
+        }
+      ]
+    },
+    {
+      "id": "b2-ce-2",
+      "niveau": "B2",
+      "competence": "CE",
+      "titre": "Article : apprendre une langue à l'heure de l'IA",
+      "resume": "Comprendre la structure d'une argumentation et son vocabulaire imagé.",
+      "consigne": "Lisez l'article, puis répondez. Pour les questions vrai/faux, recopiez la phrase qui justifie votre réponse.",
+      "consigne_es": "Lea el artículo y responda. En las preguntas verdadero/falso, copie la frase que justifica su respuesta.",
+      "dureeMinutes": 20,
+      "document": {
+        "type": "texte",
+        "titre": "Apprendre une langue à l'heure de l'intelligence artificielle",
+        "source": "Tribune (texte d'entraînement)",
+        "contenu": "Traduction instantanée, correcteurs automatiques, assistants conversationnels : jamais il n'a été aussi simple de se faire comprendre dans une langue que l'on ne maîtrise pas. Faut-il en conclure que l'apprentissage des langues est devenu inutile ? Les didacticiens répondent par la négative, mais pour des raisons qui méritent d'être précisées.\n\nLa première tient à la nature même de la communication. Parler une langue, ce n'est pas seulement transmettre des informations ; c'est construire une relation, saisir l'humour, l'implicite, les références partagées. Aucun outil, aussi performant soit-il, ne remplace le plaisir de comprendre directement son interlocuteur.\n\nLa seconde est cognitive. Apprendre une langue, c'est entraîner sa mémoire, son attention et sa souplesse intellectuelle. Déléguer cet effort à une machine revient à se priver de ces bénéfices.\n\nPour autant, rejeter ces outils serait une erreur. Bien utilisés, ils permettent de s'exercer à toute heure, d'obtenir une rétroaction immédiate et de diversifier les supports. Tout l'enjeu est là : faire de l'outil un tremplin pour apprendre, et non une béquille qui dispense d'apprendre."
+      },
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Quelle est la position des didacticiens ?",
+          "options": [
+            "Apprendre une langue est devenu inutile.",
+            "Apprendre une langue reste nécessaire.",
+            "Les outils doivent remplacer les cours."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« Les didacticiens répondent par la négative » à l'idée que l'apprentissage serait inutile."
+        },
+        {
+          "type": "vfj",
+          "enonce": "Selon l'auteur, un outil performant peut remplacer le plaisir de comprendre directement son interlocuteur.",
+          "reponse": "faux",
+          "justification": "Aucun outil, aussi performant soit-il, ne remplace le plaisir de comprendre directement son interlocuteur.",
+          "points": 1.5
+        },
+        {
+          "type": "qcm",
+          "enonce": "Le deuxième argument est d'ordre…",
+          "options": [
+            "économique.",
+            "cognitif.",
+            "culturel."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« La seconde est cognitive. »"
+        },
+        {
+          "type": "ouverte",
+          "enonce": "Expliquez avec vos propres mots l'opposition entre « tremplin » et « béquille ».",
+          "reponseModele": "Un tremplin aide à aller plus loin : l'outil sert à progresser. Une béquille remplace un effort qu'on ne fait plus : l'outil dispense d'apprendre et rend dépendant.",
+          "points": 2
+        },
+        {
+          "type": "qcm",
+          "enonce": "Pour l'auteur, les outils numériques…",
+          "options": [
+            "doivent être interdits.",
+            "peuvent aider s'ils sont bien utilisés.",
+            "sont indispensables pour apprendre."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« Bien utilisés, ils permettent de s'exercer à toute heure… »"
+        }
+      ]
+    },
+    {
+      "id": "c1-co-1",
+      "niveau": "C1",
+      "competence": "CO",
+      "titre": "Conférence : la biodiversité en ville",
+      "resume": "Comprendre la structure et les arguments d'une conférence.",
+      "consigne": "Vous avez 1 minute pour lire les questions. Écoutez la conférence deux fois. Vous pouvez prendre des notes.",
+      "consigne_es": "Tiene 1 minuto para leer las preguntas. Escuche la conferencia dos veces. Puede tomar notas.",
+      "audio": "audio/c1-co-1.mp3",
+      "ecoutesMax": 2,
+      "tempsLecture": 60,
+      "dureeMinutes": 18,
+      "transcription": "Mesdames, messieurs, bonsoir. Lorsqu'on évoque la biodiversité, on pense spontanément aux forêts tropicales, aux récifs coralliens, bref, à des espaces lointains et préservés. Je voudrais ce soir défendre une idée qui peut sembler paradoxale : la ville, elle aussi, est un écosystème, et elle peut jouer un rôle décisif dans la préservation du vivant.\n\nPremier constat : nos villes abritent une diversité insoupçonnée. Les friches industrielles, les talus ferroviaires, les toitures végétalisées constituent autant de refuges pour des insectes pollinisateurs, des oiseaux, voire de petits mammifères. Encore faut-il que ces espaces soient reliés entre eux. C'est tout l'enjeu de ce que les urbanistes appellent les « trames vertes » : des corridors écologiques qui permettent aux espèces de circuler.\n\nDeuxième constat, plus inquiétant : la gestion traditionnelle des espaces verts – tonte rase, pesticides, plantes exotiques choisies pour leur seul aspect décoratif – a longtemps appauvri ces milieux. Plusieurs municipalités ont fait le choix de la gestion dite différenciée : on laisse certaines zones en herbe haute, on renonce aux produits chimiques, on privilégie les espèces locales.\n\nReste un obstacle, et non des moindres : l'acceptation par les habitants. Une pelouse non tondue est souvent perçue comme un signe de négligence. D'où l'importance de la pédagogie : expliquer, panneaux à l'appui, qu'un espace « sauvage » n'est pas un espace abandonné. Car la biodiversité urbaine ne se décrète pas ; elle se construit, avec et pour ceux qui habitent la ville.",
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Quelle thèse la conférencière défend-elle ?",
+          "options": [
+            "La ville est hostile au vivant.",
+            "La ville peut contribuer à préserver la biodiversité.",
+            "Seuls les espaces naturels lointains méritent d'être protégés."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« la ville […] peut jouer un rôle décisif dans la préservation du vivant »"
+        },
+        {
+          "type": "ouverte",
+          "enonce": "Qu'est-ce qu'une « trame verte », selon le document ?",
+          "reponseModele": "Un ensemble de corridors écologiques qui relient les espaces naturels de la ville et permettent aux espèces de circuler.",
+          "points": 2
+        },
+        {
+          "type": "qcm",
+          "enonce": "La gestion traditionnelle des espaces verts est critiquée parce qu'elle…",
+          "options": [
+            "coûte trop cher.",
+            "a appauvri les milieux.",
+            "attire trop d'insectes."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« a longtemps appauvri ces milieux »"
+        },
+        {
+          "type": "ouverte",
+          "enonce": "Citez deux pratiques de la « gestion différenciée ».",
+          "reponseModele": "Laisser certaines zones en herbe haute ; renoncer aux produits chimiques ; privilégier les espèces locales (deux de ces trois éléments).",
+          "points": 2
+        },
+        {
+          "type": "qcm",
+          "enonce": "Quel obstacle principal la conférencière identifie-t-elle ?",
+          "options": [
+            "Le manque de budget.",
+            "La perception des habitants.",
+            "L'opposition des urbanistes."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« l'acceptation par les habitants » : une pelouse non tondue paraît négligée."
+        },
+        {
+          "type": "qcm",
+          "enonce": "La conclusion insiste sur…",
+          "options": [
+            "la nécessité d'une loi.",
+            "la participation des habitants.",
+            "le rôle des scientifiques."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« elle se construit, avec et pour ceux qui habitent la ville »"
+        }
+      ]
+    },
+    {
+      "id": "c1-co-2",
+      "niveau": "C1",
+      "competence": "CO",
+      "titre": "Entretien : l'économie de la fonctionnalité",
+      "resume": "Comprendre un concept économique, son raisonnement et ses limites.",
+      "consigne": "Vous avez 1 minute pour lire les questions. Écoutez l'entretien deux fois. Vous pouvez prendre des notes.",
+      "consigne_es": "Tiene 1 minuto para leer las preguntas. Escuche la entrevista dos veces. Puede tomar notas.",
+      "audio": "audio/c1-co-2.mp3",
+      "ecoutesMax": 2,
+      "tempsLecture": 60,
+      "dureeMinutes": 18,
+      "transcription": "— Journaliste : Vous travaillez sur ce qu'on appelle l'économie de la fonctionnalité. De quoi s'agit-il ?\n— Chercheur : L'idée est simple ; ses implications le sont moins. Il s'agit de vendre l'usage d'un bien plutôt que le bien lui-même. Un fabricant de pneus, par exemple, ne vend plus des pneus aux transporteurs, mais des kilomètres parcourus. Il reste propriétaire du produit, il en assure l'entretien et le recyclage.\n— Journaliste : Quel intérêt pour l'entreprise ?\n— Chercheur : C'est là que le modèle devient intéressant : il renverse la logique de l'obsolescence. Si je vends des pneus, j'ai intérêt à ce qu'ils s'usent vite, pour en vendre davantage. Si je vends des kilomètres, j'ai au contraire intérêt à ce qu'ils durent le plus longtemps possible. L'intérêt économique rejoint alors l'intérêt écologique.\n— Journaliste : Cela semble presque trop beau…\n— Chercheur : Vous avez raison d'être sceptique. Ce modèle suppose une relation de confiance durable entre le fournisseur et le client, et une capacité à mesurer précisément l'usage. Il convient bien aux relations entre entreprises ; pour les particuliers, c'est plus délicat : beaucoup restent attachés à la propriété, qui est aussi un marqueur social. Bref, ce n'est pas une solution miracle, mais c'est une piste sérieuse pour découpler la croissance de la consommation de ressources.",
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "L'économie de la fonctionnalité consiste à…",
+          "options": [
+            "vendre des biens moins chers.",
+            "vendre l'usage d'un bien plutôt que le bien.",
+            "louer des locaux aux entreprises."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« vendre l'usage d'un bien plutôt que le bien lui-même »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Dans l'exemple donné, le fabricant de pneus…",
+          "options": [
+            "vend ses pneus aux transporteurs.",
+            "reste propriétaire des pneus.",
+            "abandonne le recyclage."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« Il reste propriétaire du produit, il en assure l'entretien et le recyclage. »"
+        },
+        {
+          "type": "ouverte",
+          "enonce": "Expliquez pourquoi ce modèle « renverse la logique de l'obsolescence ».",
+          "reponseModele": "Quand l'entreprise vend le produit, elle a intérêt à ce qu'il s'use vite pour en vendre davantage. Quand elle vend l'usage (des kilomètres), elle a intérêt à ce que le produit dure le plus longtemps possible : l'intérêt économique rejoint l'intérêt écologique.",
+          "points": 2.5
+        },
+        {
+          "type": "qcm",
+          "enonce": "Selon le chercheur, le modèle est plus difficile à appliquer aux particuliers parce que…",
+          "options": [
+            "ils n'ont pas confiance dans les entreprises.",
+            "la propriété a pour eux une valeur sociale.",
+            "ils consomment peu."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« beaucoup restent attachés à la propriété, qui est aussi un marqueur social »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Quelle est l'attitude finale du chercheur ?",
+          "options": [
+            "Enthousiaste, sans réserve.",
+            "Nuancée, mais favorable.",
+            "Franchement opposée."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "« ce n'est pas une solution miracle, mais c'est une piste sérieuse »"
+        }
+      ]
+    },
+    {
+      "id": "c1-ce-1",
+      "niveau": "C1",
+      "competence": "CE",
+      "titre": "Essai : éloge de la lenteur ?",
+      "resume": "Comprendre la thèse, la progression et le registre d'un essai.",
+      "consigne": "Lisez le texte, puis répondez aux questions. Justifiez lorsque c'est demandé.",
+      "consigne_es": "Lea el texto y responda las preguntas. Justifique cuando se le pida.",
+      "dureeMinutes": 25,
+      "document": {
+        "type": "texte",
+        "titre": "Éloge de la lenteur ?",
+        "source": "Essai (texte d'entraînement)",
+        "contenu": "On a coutume de présenter l'accélération comme le signe distinctif de notre époque. Communications instantanées, livraisons en vingt-quatre heures, informations en continu : tout semble conspirer à abolir l'attente. Il serait pourtant naïf d'opposer, de manière binaire, une vitesse coupable à une lenteur vertueuse.\n\nLa lenteur, d'abord, n'a rien d'une valeur en soi. Celle d'une administration qui laisse un dossier en souffrance pendant des mois n'est pas un art de vivre, c'est un dysfonctionnement. Ce que l'on regrette sous le nom de lenteur, c'est autre chose : la possibilité de choisir son rythme, de consacrer à chaque activité le temps qu'elle exige.\n\nCar certaines choses ne se laissent pas accélérer. On ne lit pas plus vite un poème sans en perdre la substance ; on ne noue pas une amitié en un clic ; on n'apprend pas une langue en accéléré, quoi qu'en disent certaines publicités. Ces activités ont en commun de transformer celui qui s'y livre, et toute transformation demande du temps.\n\nLe véritable enjeu n'est donc pas de ralentir en tout, mais de reconquérir une forme de souveraineté sur notre temps. Ce qui nous épuise, ce n'est pas la vitesse elle-même, c'est d'être sommés d'aller vite là où rien ne l'exige. Savoir distinguer ce qui mérite d'être accéléré de ce qui gagne à être attendu : telle pourrait être, au fond, la sagesse de notre siècle."
+      },
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "Dans le premier paragraphe, l'auteur…",
+          "options": [
+            "condamne la vitesse.",
+            "refuse une opposition simpliste entre vitesse et lenteur.",
+            "fait l'éloge des nouvelles technologies."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« Il serait pourtant naïf d'opposer, de manière binaire, une vitesse coupable à une lenteur vertueuse. »"
+        },
+        {
+          "type": "ouverte",
+          "enonce": "Pourquoi l'auteur évoque-t-il l'exemple de l'administration ?",
+          "reponseModele": "Pour montrer que la lenteur n'est pas une valeur en soi : elle peut être un simple dysfonctionnement. Ce qu'on valorise, c'est la liberté de choisir son rythme.",
+          "points": 2
+        },
+        {
+          "type": "vfj",
+          "enonce": "Selon l'auteur, on peut apprendre une langue beaucoup plus vite grâce à certaines méthodes.",
+          "reponse": "faux",
+          "justification": "on n'apprend pas une langue en accéléré, quoi qu'en disent certaines publicités",
+          "points": 1.5
+        },
+        {
+          "type": "qcm",
+          "enonce": "Le point commun des activités citées au troisième paragraphe est…",
+          "options": [
+            "qu'elles sont agréables.",
+            "qu'elles transforment la personne.",
+            "qu'elles sont gratuites."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« Ces activités ont en commun de transformer celui qui s'y livre »"
+        },
+        {
+          "type": "ouverte",
+          "enonce": "Reformulez la thèse de l'auteur en une phrase.",
+          "reponseModele": "Il ne s'agit pas de tout ralentir, mais de reprendre la maîtrise de notre temps en distinguant ce qui doit aller vite de ce qui exige du temps.",
+          "points": 2
+        },
+        {
+          "type": "qcm",
+          "enonce": "Le registre de ce texte est…",
+          "options": [
+            "polémique.",
+            "argumentatif et nuancé.",
+            "narratif."
+          ],
+          "reponse": 1,
+          "points": 1,
+          "explication": "L'auteur construit une argumentation progressive, avec concessions et exemples."
+        }
+      ]
+    },
+    {
+      "id": "c1-ce-2",
+      "niveau": "C1",
+      "competence": "CE",
+      "titre": "Article : le patrimoine culturel immatériel",
+      "resume": "Comprendre un article d'idées et ses nuances, à partir d'un exemple costaricien.",
+      "consigne": "Lisez l'article, puis répondez aux questions. Justifiez lorsque c'est demandé.",
+      "consigne_es": "Lea el artículo y responda las preguntas. Justifique cuando se le pida.",
+      "dureeMinutes": 25,
+      "document": {
+        "type": "texte",
+        "titre": "Protéger ce qui ne se touche pas",
+        "source": "Article (texte d'entraînement)",
+        "contenu": "Lorsqu'on parle de patrimoine, on pense d'abord aux monuments : cathédrales, châteaux, sites archéologiques. Depuis l'adoption par l'UNESCO, en 2003, d'une convention consacrée au patrimoine culturel immatériel, cette conception s'est considérablement élargie. Savoir-faire artisanaux, musiques, rituels, pratiques festives : ce qui se transmet de génération en génération, sans nécessairement laisser de trace matérielle, est désormais reconnu comme un bien commun à préserver.\n\nLe Costa Rica en offre une illustration éloquente avec la tradition du « boyeo » et des charrettes peintes, reconnue par l'UNESCO. Ce qui est protégé ici, ce n'est pas tant l'objet – la charrette – que l'ensemble des savoirs qui l'entourent : la technique de fabrication des roues, l'art des motifs décoratifs, les gestes du bouvier, les fêtes qui rassemblent les communautés.\n\nCette reconnaissance n'est pourtant pas sans ambiguïté. Inscrire une pratique sur une liste internationale, c'est lui donner de la visibilité, mais c'est aussi courir le risque de la figer. Une tradition vivante évolue, s'adapte, se réinvente ; transformée en vitrine touristique, elle peut perdre ce qui faisait sa raison d'être. Les spécialistes insistent donc sur un point : la sauvegarde ne peut réussir que si les communautés concernées en restent les premières actrices."
+      },
+      "questions": [
+        {
+          "type": "qcm",
+          "enonce": "La convention de l'UNESCO de 2003 a…",
+          "options": [
+            "limité le patrimoine aux monuments.",
+            "élargi la notion de patrimoine.",
+            "supprimé les listes du patrimoine."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« cette conception s'est considérablement élargie »"
+        },
+        {
+          "type": "qcm",
+          "enonce": "Dans l'exemple costaricien, ce qui est protégé, c'est surtout…",
+          "options": [
+            "la charrette en tant qu'objet.",
+            "l'ensemble des savoirs et des pratiques liés à la charrette.",
+            "les routes rurales."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« ce n'est pas tant l'objet […] que l'ensemble des savoirs qui l'entourent »"
+        },
+        {
+          "type": "vfj",
+          "enonce": "Selon l'article, l'inscription sur une liste de l'UNESCO ne présente que des avantages.",
+          "reponse": "faux",
+          "justification": "Cette reconnaissance n'est pourtant pas sans ambiguïté.",
+          "points": 1.5
+        },
+        {
+          "type": "ouverte",
+          "enonce": "Expliquez le risque de « figer » une tradition.",
+          "reponseModele": "Une tradition vivante évolue et se réinvente. Si on la fixe dans une forme officielle ou si on la transforme en spectacle touristique, elle cesse d'évoluer et peut perdre son sens pour la communauté.",
+          "points": 2.5
+        },
+        {
+          "type": "qcm",
+          "enonce": "Selon les spécialistes, la sauvegarde réussit à condition que…",
+          "options": [
+            "l'État en prenne le contrôle.",
+            "les communautés en restent les premières actrices.",
+            "le tourisme se développe."
+          ],
+          "reponse": 1,
+          "points": 1.5,
+          "explication": "« la sauvegarde ne peut réussir que si les communautés concernées en restent les premières actrices »"
+        }
+      ]
+    }
+  ],
+  "ressources": [
+    {
+      "id": "fei-delf-a1",
+      "titre": "DELF A1 – exemples de sujets officiels",
+      "niveau": [
+        "A1"
+      ],
+      "competence": "Toutes",
+      "type": "Sujet officiel",
+      "description": "Exemples d'épreuves, documents audio et grilles d'évaluation publiés par France Éducation International.",
+      "source": "France Éducation International",
+      "lien": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-a1/exemples-sujets"
+    },
+    {
+      "id": "fei-delf-a2",
+      "titre": "DELF A2 – exemples de sujets officiels",
+      "niveau": [
+        "A2"
+      ],
+      "competence": "Toutes",
+      "type": "Sujet officiel",
+      "description": "Deux exemples d'épreuves collectives (un par format), l'épreuve individuelle et les grilles d'évaluation.",
+      "source": "France Éducation International",
+      "lien": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-a2/exemples-sujets"
+    },
+    {
+      "id": "fei-delf-b1",
+      "titre": "DELF B1 – exemples de sujets officiels",
+      "niveau": [
+        "B1"
+      ],
+      "competence": "Toutes",
+      "type": "Sujet officiel",
+      "description": "Exemples d'épreuves, documents audio et critères d'évaluation du niveau B1.",
+      "source": "France Éducation International",
+      "lien": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-b1/exemples-sujets"
+    },
+    {
+      "id": "fei-delf-b2",
+      "titre": "DELF B2 – exemples de sujets officiels",
+      "niveau": [
+        "B2"
+      ],
+      "competence": "Toutes",
+      "type": "Sujet officiel",
+      "description": "Exemples d'épreuves, documents audio et critères d'évaluation du niveau B2.",
+      "source": "France Éducation International",
+      "lien": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-b2/exemples-sujets"
+    },
+    {
+      "id": "fei-dalf-c1",
+      "titre": "DALF C1 – exemples de sujets officiels",
+      "niveau": [
+        "C1"
+      ],
+      "competence": "Toutes",
+      "type": "Sujet officiel",
+      "description": "Exemple d'épreuves collectives et individuelle du DALF C1, avec les grilles d'évaluation.",
+      "source": "France Éducation International",
+      "lien": "https://www.france-education-international.fr/diplome/dalf/exemples-sujets"
+    },
+    {
+      "id": "fei-dalf-c1-conseils",
+      "titre": "DALF C1 – conseils de préparation",
+      "niveau": [
+        "C1"
+      ],
+      "competence": "Toutes",
+      "type": "Méthodologie",
+      "description": "Conseils officiels pour chacune des quatre épreuves du DALF C1.",
+      "source": "France Éducation International",
+      "lien": "https://www.france-education-international.fr/article/dalf-c1-conseils"
+    },
+    {
+      "id": "tv5monde",
+      "titre": "TV5MONDE – Apprendre le français",
+      "niveau": [
+        "Tous"
+      ],
+      "competence": "CO",
+      "type": "Site d'entraînement",
+      "description": "Exercices interactifs à partir de vidéos authentiques, classés par niveau du CECRL.",
+      "source": "TV5MONDE",
+      "lien": "https://apprendre.tv5monde.com/fr"
+    },
+    {
+      "id": "cecrl",
+      "titre": "Le Cadre européen commun de référence pour les langues (CECRL)",
+      "niveau": [
+        "Tous"
+      ],
+      "competence": "Toutes",
+      "type": "Référence",
+      "description": "Présentation officielle du CECRL et de ses niveaux, par le Conseil de l'Europe.",
+      "source": "Conseil de l'Europe",
+      "lien": "https://www.coe.int/fr/web/common-european-framework-reference-languages"
+    },
+    {
+      "id": "fiche-connecteurs",
+      "titre": "Fiche : les connecteurs logiques",
+      "niveau": [
+        "B1",
+        "B2"
+      ],
+      "competence": "CE",
+      "type": "Fiche",
+      "description": "Repérer la cause, la conséquence, l'opposition et la concession pour comprendre l'organisation d'un texte argumentatif.",
+      "source": "MSc. Eduardo Umaña Álvarez",
+      "lien": ""
+    },
+    {
+      "id": "fiche-strategies-co",
+      "titre": "Fiche : stratégies pour la compréhension de l'oral",
+      "niveau": [
+        "A2",
+        "B1",
+        "B2",
+        "C1"
+      ],
+      "competence": "CO",
+      "type": "Méthodologie",
+      "description": "Avant, pendant et après l'écoute : anticiper, repérer les mots-clés, prendre des notes efficaces.",
+      "source": "MSc. Eduardo Umaña Álvarez",
+      "lien": ""
+    }
+  ],
+  "groupes": [
+    {
+      "id": "groupe-a",
+      "nom": "Français Avancé – Groupe A",
+      "description": "Espace d'échange et annonces du groupe A.",
+      "horaire": "Lundi et mercredi",
+      "service": "Padlet",
+      "integration": "iframe",
+      "url": "",
+      "annonces": [
+        {
+          "date": "2026-11-17",
+          "titre": "Bienvenue sur le nouvel espace du groupe",
+          "texte": "Bonjour à toutes et à tous ! Cet espace remplace nos échanges par courriel. Vous y trouverez les annonces du cours et un mur d'échange. Pensez à faire au moins deux exercices de compréhension par semaine dans l'onglet Pratiques.",
+          "texte_es": "Este espacio reemplaza nuestros intercambios por correo. Haga al menos dos ejercicios de comprensión por semana en la pestaña Prácticas."
+        }
+      ]
+    },
+    {
+      "id": "groupe-b",
+      "nom": "Français Avancé – Groupe B",
+      "description": "Espace d'échange et annonces du groupe B.",
+      "horaire": "Mardi et jeudi",
+      "service": "Google Classroom",
+      "integration": "lien",
+      "url": "",
+      "annonces": [
+        {
+          "date": "2026-11-17",
+          "titre": "Projet du trimestre",
+          "texte": "Le projet « Guide numérique de notre quartier » commence la semaine prochaine. Consultez la fiche du projet dans l'onglet Projets et formez des équipes de trois ou quatre personnes."
+        }
+      ]
+    }
+  ],
+  "projets": [
+    {
+      "id": "guide-quartier",
+      "titre": "Guide numérique de notre quartier",
+      "niveau": [
+        "B1",
+        "B2"
+      ],
+      "statut": "En cours",
+      "duree": "5 semaines",
+      "modalite": "Équipes de 3 ou 4 personnes",
+      "resume": "Créer un guide en ligne qui présente un quartier de notre ville à des visiteurs francophones.",
+      "tacheFinale": "Votre équipe réalise un guide numérique (site, présentation ou brochure en ligne) destiné à des visiteurs francophones. Le guide présente au moins cinq lieux du quartier, avec un texte descriptif, des informations pratiques et une recommandation personnelle. Chaque équipe présente son guide à la classe en 8 minutes.",
+      "tacheFinale_es": "Su equipo realiza una guía digital para visitantes francófonos, con al menos cinco lugares del barrio, y la presenta a la clase en 8 minutos.",
+      "objectifs": [
+        "Décrire un lieu, son histoire et son ambiance de manière détaillée.",
+        "Donner des informations pratiques claires (horaires, accès, prix).",
+        "Exprimer une recommandation et la justifier.",
+        "Rechercher et sélectionner des informations dans des documents variés.",
+        "Collaborer en français pour planifier et répartir les tâches."
+      ],
+      "livrables": [
+        "Le guide numérique (lien à partager avec le professeur).",
+        "Un journal de bord d'équipe (répartition des tâches, difficultés, solutions).",
+        "Une présentation orale de 8 minutes."
+      ],
+      "etapes": [
+        {
+          "titre": "Lancement",
+          "quand": "Semaine 1",
+          "description": "Formation des équipes, choix du quartier, observation de guides touristiques francophones."
+        },
+        {
+          "titre": "Recherche",
+          "quand": "Semaine 2",
+          "description": "Sélection des lieux, prise de notes, photos (avec autorisation), entretiens éventuels avec des habitants."
+        },
+        {
+          "titre": "Rédaction",
+          "quand": "Semaine 3",
+          "description": "Rédaction des fiches de lieux et des informations pratiques ; relecture croisée entre équipes."
+        },
+        {
+          "titre": "Mise en forme",
+          "quand": "Semaine 4",
+          "description": "Création du guide numérique, intégration des textes et des images, vérification des sources."
+        },
+        {
+          "titre": "Présentation",
+          "quand": "Semaine 5",
+          "description": "Présentation orale à la classe, questions du public, auto-évaluation de l'équipe."
+        }
+      ],
+      "grille": {
+        "fichier": "",
+        "criteres": [
+          {
+            "critere": "Réalisation de la tâche",
+            "descripteur": "Le guide présente au moins cinq lieux, avec description, informations pratiques et recommandation.",
+            "points": 5
+          },
+          {
+            "critere": "Cohérence et organisation",
+            "descripteur": "Les informations sont organisées de façon logique ; les textes sont faciles à suivre.",
+            "points": 4
+          },
+          {
+            "critere": "Lexique",
+            "descripteur": "Vocabulaire précis et varié pour décrire des lieux et donner des conseils.",
+            "points": 4
+          },
+          {
+            "critere": "Morphosyntaxe",
+            "descripteur": "Bonne maîtrise des structures du niveau ; les erreurs ne gênent pas la compréhension.",
+            "points": 4
+          },
+          {
+            "critere": "Présentation orale",
+            "descripteur": "Présentation claire, fluide, dans le temps imparti ; réponses adaptées aux questions.",
+            "points": 5
+          },
+          {
+            "critere": "Travail d'équipe",
+            "descripteur": "Participation équilibrée, journal de bord complet, usage du français dans le groupe.",
+            "points": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "debat-citoyen",
+      "titre": "Débat citoyen : quelle ville pour demain ?",
+      "niveau": [
+        "B2",
+        "C1"
+      ],
+      "statut": "À venir",
+      "duree": "4 semaines",
+      "modalite": "Groupe-classe, en équipes de 4",
+      "resume": "Préparer et animer un débat public sur un enjeu environnemental de notre ville.",
+      "tacheFinale": "La classe organise un débat citoyen sur une question d'aménagement urbain (mobilité, espaces verts, gestion des déchets…). Chaque équipe représente un acteur (habitants, mairie, commerçants, association écologiste), prépare un dossier argumenté et intervient dans le débat. Le débat aboutit à une liste de propositions rédigée collectivement.",
+      "tacheFinale_es": "La clase organiza un debate ciudadano sobre un tema urbano. Cada equipo representa a un actor, prepara argumentos e interviene. Al final se redacta una lista común de propuestas.",
+      "objectifs": [
+        "Comprendre et synthétiser des documents d'opinion et d'information.",
+        "Défendre une position avec des arguments structurés et des exemples.",
+        "Réfuter un argument et nuancer son propos.",
+        "Interagir dans un débat : prendre la parole, interrompre poliment, reformuler.",
+        "Co-rédiger un texte de propositions."
+      ],
+      "livrables": [
+        "Un dossier argumentatif d'équipe (2 pages).",
+        "La participation au débat (25 minutes).",
+        "La liste collective de propositions."
+      ],
+      "etapes": [
+        {
+          "titre": "Choix de la question",
+          "quand": "Semaine 1",
+          "description": "Vote de la classe, répartition des rôles, lecture de documents de départ."
+        },
+        {
+          "titre": "Dossier argumentatif",
+          "quand": "Semaine 2",
+          "description": "Recherche de sources, construction des arguments et anticipation des contre-arguments."
+        },
+        {
+          "titre": "Entraînement",
+          "quand": "Semaine 3",
+          "description": "Mini-débats, travail sur les expressions pour argumenter et réfuter."
+        },
+        {
+          "titre": "Débat et propositions",
+          "quand": "Semaine 4",
+          "description": "Débat public, puis rédaction collective des propositions."
+        }
+      ],
+      "grille": {
+        "fichier": "",
+        "criteres": [
+          {
+            "critere": "Qualité de l'argumentation",
+            "descripteur": "Arguments pertinents, développés et illustrés par des exemples précis.",
+            "points": 6
+          },
+          {
+            "critere": "Interaction",
+            "descripteur": "Réagit aux interventions, réfute, nuance, relance le débat.",
+            "points": 5
+          },
+          {
+            "critere": "Lexique",
+            "descripteur": "Vocabulaire riche et précis, adapté au thème et au registre.",
+            "points": 4
+          },
+          {
+            "critere": "Morphosyntaxe",
+            "descripteur": "Structures complexes maîtrisées ; erreurs rares.",
+            "points": 4
+          },
+          {
+            "critere": "Dossier écrit",
+            "descripteur": "Dossier structuré, sources citées, synthèse claire.",
+            "points": 6
+          }
+        ]
+      }
+    }
+  ],
+  "evaluations": [
+    {
+      "id": "eval-co-b1-1",
+      "titre": "Évaluation de compréhension de l'oral – B1",
+      "niveau": "B1",
+      "competence": "CO",
+      "groupe": "Français Avancé – Groupes A et B",
+      "ouverture": "2026-11-16T07:00:00-06:00",
+      "fermeture": "2026-12-11T22:00:00-06:00",
+      "dureeMinutes": 25,
+      "plateforme": "google",
+      "url": "",
+      "consignes": "Installez-vous dans un endroit calme, avec des écouteurs. Vous pouvez écouter chaque document deux fois. Vous ne pouvez envoyer le formulaire qu'une seule fois.",
+      "consignes_es": "Ubíquese en un lugar tranquilo, con audífonos. Puede escuchar cada documento dos veces. Solo puede enviar el formulario una vez."
+    },
+    {
+      "id": "eval-ce-b2-1",
+      "titre": "Évaluation de compréhension des écrits – B2",
+      "niveau": "B2",
+      "competence": "CE",
+      "groupe": "Français Avancé – Groupe A",
+      "ouverture": "2027-01-18T07:00:00-06:00",
+      "fermeture": "2027-01-29T22:00:00-06:00",
+      "dureeMinutes": 60,
+      "plateforme": "microsoft",
+      "url": "",
+      "consignes": "Lisez attentivement chaque document. Pour les questions vrai/faux, recopiez la phrase qui justifie votre réponse.",
+      "consignes_es": "Lea con atención cada documento. En las preguntas verdadero/falso, copie la frase que justifica su respuesta."
+    }
+  ]
+};
+</script>
+<script>
+/* ==========================================================
+   Français Avancé – Pratiques DELF/DALF
+   Application monopage en JavaScript vanilla (sans dépendance).
+   Tout le contenu est lu dans les fichiers JSON du dossier /data.
+   Auteur : MSc. Eduardo Umaña Álvarez – Licence CC BY-NC-SA 4.0
+   ========================================================== */
+(function () {
+  "use strict";
+
+  var DATA = {
+    site: null,
+    exercices: [],
+    ressources: [],
+    groupes: [],
+    projets: [],
+    evaluations: []
+  };
+
+  var NIVEAUX = ["A1", "A2", "B1", "B2", "C1"];
+  var COMPETENCES = { CO: "Compréhension de l'oral", CE: "Compréhension des écrits" };
+  /* Icônes (traits simples, couleur héritée du texte) */
+  function svg(chemin) {
+    return '<svg class="icone" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + chemin + "</svg>";
+  }
+  var ICONES = {
+    entrainement: svg('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>'),
+    materiel: svg('<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/><path d="M9 7h6"/>'),
+    groupe: svg('<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/>'),
+    projets: svg('<path d="M5 15c-1.5 1.5-2 4-2 6 2 0 4.5-.5 6-2"/><path d="M9 15l-3-3 6-7c2-2 5-2.5 7-2-.5 2 0 5-2 7l-7 6z"/><circle cx="15" cy="9" r="1.5"/>'),
+    evaluations: svg('<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M9 12l2 2 4-4"/>'),
+    CO: svg('<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>'),
+    CE: svg('<path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"/><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>'),
+    fleche: svg('<path d="M5 12h14M13 6l6 6-6 6"/>')
+  };
+
+  var CLE_PROGRESSION = "fle-progression-v1";
+  var CLE_ES = "fle-espagnol";
+  var app = document.getElementById("app");
+
+  /* Nettoyage à chaque changement de page (audio, minuteurs…) */
+  var nettoyages = [];
+  function auNettoyage(fn) { nettoyages.push(fn); }
+  function nettoyer() {
+    while (nettoyages.length) {
+      try { nettoyages.pop()(); } catch (e) { /* rien */ }
+    }
+  }
+
+  /* ---------- Utilitaires ---------- */
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
+
+  /* Transforme un texte avec retours à la ligne en paragraphes */
+  function paragraphes(texte) {
+    return String(texte || "").split(/\n\s*\n/).map(function (p) {
+      return "<p>" + esc(p).replace(/\n/g, "<br>") + "</p>";
+    }).join("");
+  }
+
+  /* Bloc bilingue : français toujours visible, espagnol si activé */
+  function bi(fr, es, balise) {
+    balise = balise || "p";
+    var h = "<" + balise + ">" + esc(fr) + "</" + balise + ">";
+    if (es) h += '<p class="es" lang="es">' + esc(es) + "</p>";
+    return h;
+  }
+
+  function normaliser(s) {
+    return String(s || "").toLowerCase()
+      .normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z0-9]/g, "");
+  }
+
+  function stockage(cle, valeur) {
+    try {
+      if (valeur === undefined) return JSON.parse(localStorage.getItem(cle));
+      if (valeur === null) localStorage.removeItem(cle);
+      else localStorage.setItem(cle, JSON.stringify(valeur));
+    } catch (e) { return null; }
+    return null;
+  }
+
+  function tagNiveau(n) { return '<span class="tag tag-niv niv-' + esc(n) + '">' + esc(n) + "</span>"; }
+  function tagCompetence(c) {
+    return '<span class="tag tag-' + esc(String(c).toLowerCase()) + '">' + (ICONES[c] || "") + esc(c) + "</span>";
+  }
+
+  function formatDate(iso, avecHeure) {
+    if (!iso) return "";
+    var d = new Date(iso);
+    if (isNaN(d)) return esc(iso);
+    var opts = { day: "numeric", month: "long", year: "numeric" };
+    if (avecHeure) { opts.hour = "2-digit"; opts.minute = "2-digit"; }
+    return d.toLocaleString("fr-FR", opts);
+  }
+
+  function arrondi(x) { return Math.round(x * 10) / 10; }
+  /* Nombre affiché à la française : 4,5 */
+  function nb(x) { return String(arrondi(x)).replace(".", ","); }
+
+  function listeNiveaux(v) {
+    if (!v) return [];
+    return Array.isArray(v) ? v : [v];
+  }
+
+  /* ---------- Chargement des données ---------- */
+
+  function charger(url) {
+    return fetch(url, { cache: "no-cache" }).then(function (r) {
+      if (!r.ok) throw new Error(url + " (" + r.status + ")");
+      return r.json();
+    });
+  }
+
+  function sansAide(liste) {
+    return (liste || []).filter(function (x) { return x && !x._aide_seulement; });
+  }
+
+  function chargerTout() {
+    /* Version en un seul fichier : les données sont intégrées dans la page */
+    if (window.DONNEES_SITE) {
+      var D = window.DONNEES_SITE;
+      DATA.site = D.site;
+      DATA.exercices = sansAide(D.exercices);
+      DATA.ressources = sansAide(D.ressources);
+      DATA.groupes = sansAide(D.groupes);
+      DATA.projets = sansAide(D.projets);
+      DATA.evaluations = sansAide(D.evaluations);
+      return Promise.resolve();
+    }
+    return charger("data/site.json").then(function (site) {
+      DATA.site = site;
+      var fichiers = site.fichiersExercices || [];
+      return Promise.all([
+        Promise.all(fichiers.map(function (f) {
+          return charger(f).catch(function (e) { console.warn(e); return []; });
+        })),
+        charger("data/ressources.json").catch(function () { return []; }),
+        charger("data/groupes.json").catch(function () { return []; }),
+        charger("data/projets.json").catch(function () { return []; }),
+        charger("data/evaluations.json").catch(function () { return []; })
+      ]);
+    }).then(function (r) {
+      DATA.exercices = sansAide([].concat.apply([], r[0]));
+      DATA.ressources = sansAide(r[1]);
+      DATA.groupes = sansAide(r[2]);
+      DATA.projets = sansAide(r[3]);
+      DATA.evaluations = sansAide(r[4]);
+    });
+  }
+
+  /* ---------- Progression (localStorage) ---------- */
+
+  function progression() { return stockage(CLE_PROGRESSION) || {}; }
+
+  function enregistrerResultat(ex, score, total) {
+    var p = progression();
+    var ancien = p[ex.id] || { tentatives: 0, meilleur: 0 };
+    var pct = total ? score / total : 0;
+    p[ex.id] = {
+      niveau: ex.niveau,
+      competence: ex.competence,
+      dernier: arrondi(score),
+      total: total,
+      pourcentage: Math.round(pct * 100),
+      meilleur: Math.max(ancien.meilleur || 0, Math.round(pct * 100)),
+      tentatives: (ancien.tentatives || 0) + 1,
+      date: new Date().toISOString()
+    };
+    stockage(CLE_PROGRESSION, p);
+  }
+
+  /* ---------- Routeur ---------- */
+
+  function analyserHash() {
+    var h = location.hash.replace(/^#\/?/, "");
+    var parts = h.split("?");
+    var chemin = parts[0].split("/").filter(Boolean);
+    var params = {};
+    if (parts[1]) {
+      parts[1].split("&").forEach(function (kv) {
+        var x = kv.split("=");
+        params[decodeURIComponent(x[0])] = decodeURIComponent(x[1] || "");
+      });
+    }
+    return { page: chemin[0] || "accueil", id: chemin[1] ? decodeURIComponent(chemin[1]) : null, params: params };
+  }
+
+  var PAGES = {
+    accueil: pageAccueil,
+    pratiques: pagePratiques,
+    exercice: pageExercice,
+    materiel: pageMateriel,
+    messagerie: pageMessagerie,
+    projets: pageProjets,
+    evaluations: pageEvaluations
+  };
+
+  var SECTION_NAV = { exercice: "pratiques" };
+
+  function router() {
+    nettoyer();
+    var r = analyserHash();
+    var fn = PAGES[r.page] || pageIntrouvable;
+    var actif = SECTION_NAV[r.page] || r.page;
+    document.body.classList.toggle("page-accueil", r.page === "accueil" || !PAGES[r.page]);
+    document.querySelectorAll(".main-nav a").forEach(function (a) {
+      if (a.getAttribute("data-route") === actif) a.setAttribute("aria-current", "page");
+      else a.removeAttribute("aria-current");
+    });
+    fn(r);
+    var titre = app.querySelector("h1");
+    document.title = (titre ? titre.textContent + " – " : "") + (DATA.site && DATA.site.titre || "Français Avancé");
+    window.scrollTo(0, 0);
+    var main = document.getElementById("main");
+    if (main && r.page !== "accueil") main.focus({ preventScroll: true });
+  }
+
+  function pageIntrouvable() {
+    app.innerHTML = "<h1>Page introuvable</h1><p><a href=\"#/\">Retour à l'accueil</a></p>";
+  }
+
+  /* ==========================================================
+     ACCUEIL
+     ========================================================== */
+
+  function pageAccueil() {
+    var s = DATA.site;
+    var a = s.accueil || {};
+    var noms = a.niveaux || {};
+    var compte = {};
+    DATA.exercices.forEach(function (e) { compte[e.niveau] = (compte[e.niveau] || 0) + 1; });
+    var prog = progression();
+
+    var h = '<section class="accueil-intro">' +
+      "<h1>" + esc(a.titre || s.titre) + "</h1>" +
+      '<p class="lead">' + esc(a.texte || "") + "</p>" +
+      (a.texte_es ? '<p class="es" lang="es">' + esc(a.texte_es) + "</p>" : "") +
+      "</section>";
+
+    h += '<div class="tuiles-niveaux">';
+    NIVEAUX.forEach(function (n) {
+      var faits = DATA.exercices.filter(function (e) { return e.niveau === n && prog[e.id]; }).length;
+      var total = compte[n] || 0;
+      h += '<a class="tuile-niveau niv-' + n + '" href="#/pratiques?niveau=' + n + '">' +
+        '<span class="tuile-code">' + n + "</span>" +
+        '<span class="tuile-nom">' + esc(noms[n] || "") + "</span>" +
+        '<span class="tuile-info">' + (n === "C1" ? "DALF" : "DELF") + " · " + total + " exercices</span>" +
+        (faits ? '<span class="tuile-faits">' + faits + " / " + total + " faits</span>" : "") +
+        '<span class="tuile-fleche">' + ICONES.fleche + "</span></a>";
+    });
+    h += "</div>";
+
+    h += '<h2 class="titre-section">Sur ce site</h2><div class="grille grille-services">';
+    (a.modeEmploi || []).forEach(function (m) {
+      h += '<a class="carte carte-lien carte-service" href="' + esc(m.lien) + '">' +
+        '<span class="pastille-icone">' + (ICONES[m.icone] || ICONES.fleche) + "</span>" +
+        "<h3>" + esc(m.titre) + "</h3>" + bi(m.texte, m.texte_es) + "</a>";
+    });
+    h += "</div>";
+
+    if (a.avertissement) {
+      h += '<div class="encart info"><p>' + esc(a.avertissement) + "</p>" +
+        (a.avertissement_es ? '<p class="es" lang="es">' + esc(a.avertissement_es) + "</p>" : "") + "</div>";
+    }
+    app.innerHTML = h;
+  }
+
+  /* ==========================================================
+     PRATIQUES : liste + tableau de bord
+     ========================================================== */
+
+  function pagePratiques(r) {
+    var niveau = r.params.niveau || "";
+    var comp = r.params.competence || "";
+    var s = DATA.site;
+
+    var h = "<h1>Pratiques DELF/DALF – CO et CE</h1>" +
+      bi("Entraînez-vous à la compréhension de l'oral et des écrits, du niveau A1 au niveau C1. Les documents sont des créations originales destinées à l'entraînement : ce ne sont pas des sujets officiels.",
+        "Practique la comprensión oral y escrita, del nivel A1 al C1. Los documentos son creaciones originales para la práctica; no son exámenes oficiales.", "p");
+
+    h += tableauDeBord();
+
+    h += '<form class="filtres" id="filtres" role="search" aria-label="Filtrer les exercices">' +
+      '<label>Niveau<select name="niveau"><option value="">Tous les niveaux</option>' +
+      NIVEAUX.map(function (n) { return "<option" + (n === niveau ? " selected" : "") + ">" + n + "</option>"; }).join("") +
+      "</select></label>" +
+      '<label>Compétence<select name="competence"><option value="">CO et CE</option>' +
+      Object.keys(COMPETENCES).map(function (c) {
+        return '<option value="' + c + '"' + (c === comp ? " selected" : "") + ">" + c + " – " + COMPETENCES[c] + "</option>";
+      }).join("") + "</select></label></form>";
+
+    var liste = DATA.exercices.filter(function (e) {
+      return (!niveau || e.niveau === niveau) && (!comp || e.competence === comp);
+    });
+    liste.sort(function (x, y) {
+      return NIVEAUX.indexOf(x.niveau) - NIVEAUX.indexOf(y.niveau) || x.competence.localeCompare(y.competence) || String(x.id).localeCompare(String(y.id));
+    });
+
+    var prog = progression();
+    h += '<p class="compteur" role="status">' + liste.length + " exercice" + (liste.length > 1 ? "s" : "") + "</p>";
+    if (!liste.length) h += '<p class="vide">Aucun exercice pour ce filtre.</p>';
+    h += '<div class="grille">';
+    liste.forEach(function (e) {
+      var p = prog[e.id];
+      h += '<a class="carte carte-lien carte-exercice niv-' + esc(e.niveau) + '" href="#/exercice/' + encodeURIComponent(e.id) + '">' +
+        '<div class="tags">' + tagNiveau(e.niveau) + tagCompetence(e.competence) +
+        (p ? '<span class="tag tag-ok">Fait · meilleur ' + p.meilleur + " %</span>" : "") + "</div>" +
+        "<h3>" + esc(e.titre) + "</h3>" +
+        "<p>" + esc(e.resume || COMPETENCES[e.competence]) + "</p>" +
+        '<p class="note-discrete">' + (e.questions || []).length + " questions" +
+        (e.dureeMinutes ? " · " + e.dureeMinutes + " min" : "") +
+        (e.competence === "CO" ? " · " + (e.ecoutesMax || 2) + " écoute" + ((e.ecoutesMax || 2) > 1 ? "s" : "") : "") +
+        "</p></a>";
+    });
+    h += "</div>";
+
+    if (s.liensOfficiels && s.liensOfficiels.length) {
+      h += "<h2>Exemples de sujets officiels</h2>" +
+        bi("Pour vous familiariser avec le format réel de l'examen, consultez les exemples publiés par France Éducation International.",
+          "Para conocer el formato real del examen, consulte los ejemplos publicados por France Éducation International.") +
+        '<div class="tags" style="gap:.6rem">';
+      s.liensOfficiels.forEach(function (l) {
+        h += '<a class="btn btn-secondaire btn-petit" href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.titre) + " ↗</a>";
+      });
+      h += "</div>";
+    }
+
+    app.innerHTML = h;
+
+    var f = document.getElementById("filtres");
+    f.addEventListener("change", function () {
+      var n = f.niveau.value, c = f.competence.value, q = [];
+      if (n) q.push("niveau=" + n);
+      if (c) q.push("competence=" + c);
+      location.hash = "#/pratiques" + (q.length ? "?" + q.join("&") : "");
+    });
+    brancherRaz();
+  }
+
+  function tableauDeBord() {
+    var prog = progression();
+    var ids = Object.keys(prog);
+    var h = '<section class="tableau-bord" aria-labelledby="tdb-titre"><h2 id="tdb-titre">Mon tableau de bord</h2>';
+    if (!ids.length) {
+      h += '<p class="note-discrete">Vous n\'avez encore fait aucun exercice sur cet appareil. Vos résultats apparaîtront ici.</p>';
+    } else {
+      h += '<div class="stats-niveaux">';
+      NIVEAUX.forEach(function (n) {
+        var total = DATA.exercices.filter(function (e) { return e.niveau === n; }).length;
+        var faits = ids.filter(function (id) { return prog[id].niveau === n && DATA.exercices.some(function (e) { return e.id === id; }); });
+        var moy = faits.length ? Math.round(faits.reduce(function (s, id) { return s + prog[id].meilleur; }, 0) / faits.length) : 0;
+        h += '<div class="stat niv-' + n + '"><span>' + n + "</span><strong>" + faits.length + " / " + total + "</strong>" +
+          "<span>" + (faits.length ? "moyenne " + moy + " %" : "—") + "</span>" +
+          '<div class="barre" aria-hidden="true"><i style="width:' + (total ? Math.round(faits.length / total * 100) : 0) + '%"></i></div></div>';
+      });
+      h += "</div>";
+    }
+    h += '<div class="actions">' +
+      (ids.length ? '<button type="button" class="btn btn-secondaire btn-petit" id="raz">Remettre à zéro ma progression</button>' : "") +
+      '<span class="note-discrete">Les résultats sont enregistrés uniquement dans ce navigateur, sur cet appareil. Ils ne sont pas envoyés au professeur.</span></div>';
+    h += "</section>";
+    return h;
+  }
+
+  function brancherRaz() {
+    var b = document.getElementById("raz");
+    if (!b) return;
+    var etape = 0;
+    b.addEventListener("click", function () {
+      if (etape === 0) {
+        etape = 1;
+        b.textContent = "Confirmer : tout effacer";
+        b.classList.add("btn-rouge");
+        b.classList.remove("btn-secondaire");
+        setTimeout(function () {
+          if (etape === 1 && document.body.contains(b)) {
+            etape = 0; b.textContent = "Remettre à zéro ma progression";
+            b.classList.remove("btn-rouge"); b.classList.add("btn-secondaire");
+          }
+        }, 5000);
+      } else {
+        stockage(CLE_PROGRESSION, null);
+        router();
+      }
+    });
+  }
+
+  /* ==========================================================
+     EXERCICE
+     ========================================================== */
+
+  function pageExercice(r) {
+    var ex = DATA.exercices.filter(function (e) { return e.id === r.id; })[0];
+    if (!ex) { pageIntrouvable(); return; }
+
+    var aDocument = ex.competence === "CE" && ex.document;
+    var questions = ex.questions || [];
+    var total = questions.reduce(function (s, q) { return s + (Number(q.points) || 1); }, 0);
+
+    var h = '<p class="breadcrumb"><a href="#/pratiques?niveau=' + esc(ex.niveau) + '">← Exercices ' + esc(ex.niveau) + "</a></p>";
+    h += '<div class="exercice-entete niv-' + esc(ex.niveau) + '"><div>' +
+      '<div class="tags">' + tagNiveau(ex.niveau) + tagCompetence(ex.competence) +
+      '<span class="tag tag-ferme">' + (ex.niveau === "C1" ? "DALF" : "DELF") + "</span></div>" +
+      "<h1>" + esc(ex.titre) + "</h1></div>";
+    if (ex.dureeMinutes) {
+      h += '<div class="minuteur" id="minuteur"><label><input type="checkbox" id="minuteur-on"> Minuteur</label>' +
+        '<output id="minuteur-aff" aria-live="off">' + ex.dureeMinutes + ":00</output></div>";
+    }
+    h += "</div>";
+
+    h += '<div class="consigne">' + bi(ex.consigne, ex.consigne_es) + "</div>";
+
+    if (ex.competence === "CO") h += '<div id="lecteur"></div>';
+
+    h += '<div class="zone-exercice' + (aDocument ? " avec-document" : "") + '">';
+    if (aDocument) h += renduDocument(ex.document);
+    h += '<form id="form-ex" class="questions" novalidate>';
+    questions.forEach(function (q, i) { h += renduQuestion(q, i); });
+    h += '<div class="barre-validation">' +
+      '<button type="submit" class="btn btn-accent" id="valider">Valider mes réponses</button>' +
+      '<span class="note-discrete">Total : ' + nb(total) + " point" + (total > 1 ? "s" : "") + "</span></div>";
+    h += "</form></div>";
+    h += '<div id="resultat"></div>';
+
+    app.innerHTML = h;
+
+    var etat = { valide: false, ex: ex, total: total, autoeval: {} };
+
+    if (ex.competence === "CO") lecteurAudio(document.getElementById("lecteur"), ex);
+    if (ex.dureeMinutes) minuteur(ex.dureeMinutes, function () {
+      if (!etat.valide) valider(etat, true);
+    });
+
+    document.getElementById("form-ex").addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (!etat.valide) valider(etat, false);
+    });
+  }
+
+  function renduDocument(d) {
+    if (d.type === "image") {
+      return '<figure class="document"><img src="' + esc(d.src) + '" alt="' + esc(d.alt || "") + '">' +
+        (d.titre ? "<figcaption>" + esc(d.titre) + "</figcaption>" : "") + "</figure>";
+    }
+    return '<article class="document" aria-label="Document support">' +
+      (d.titre ? "<h2>" + esc(d.titre) + "</h2>" : "") +
+      (d.source ? '<div class="doc-meta">' + esc(d.source) + "</div>" : "") +
+      paragraphes(d.contenu) + "</article>";
+  }
+
+  function renduQuestion(q, i) {
+    var n = "q" + i;
+    var pts = Number(q.points) || 1;
+    var entete = '<span class="num" aria-hidden="true">' + (i + 1) + "</span><span>" + esc(q.enonce) + "</span>" +
+      '<span class="pts">' + nb(pts) + " pt" + (pts > 1 ? "s" : "") + "</span>";
+    var h = "";
+
+    if (q.type === "qcm") {
+      h = '<fieldset class="question" id="' + n + '"><legend>' + entete + "</legend><div class=\"options\">";
+      (q.options || []).forEach(function (o, j) {
+        h += '<label class="option"><input type="radio" name="' + n + '" value="' + j + '"> <span>' + esc(o) + "</span></label>";
+      });
+      h += "</div></fieldset>";
+    } else if (q.type === "vf" || q.type === "vfj") {
+      var opts = [["vrai", "Vrai"], ["faux", "Faux"]];
+      if (q.nsp) opts.push(["nsp", "On ne sait pas"]);
+      h = '<fieldset class="question" id="' + n + '"><legend>' + entete + '</legend><div class="options ligne">';
+      opts.forEach(function (o) {
+        h += '<label class="option"><input type="radio" name="' + n + '" value="' + o[0] + '"> <span>' + o[1] + "</span></label>";
+      });
+      h += "</div>";
+      if (q.type === "vfj") {
+        h += '<label class="champ-label" for="' + n + '-j">Justification (citez le texte)</label>' +
+          '<textarea class="champ" id="' + n + '-j" name="' + n + '-j" rows="2"></textarea>';
+      }
+      h += "</fieldset>";
+    } else if (q.type === "courte") {
+      h = '<div class="question" id="' + n + '"><label class="enonce" for="' + n + '-c">' + entete + "</label>" +
+        '<input class="champ" type="text" id="' + n + '-c" name="' + n + '-c" autocomplete="off"></div>';
+    } else if (q.type === "ouverte") {
+      h = '<div class="question" id="' + n + '"><label class="enonce" for="' + n + '-o">' + entete + "</label>" +
+        '<textarea class="champ" id="' + n + '-o" name="' + n + '-o" rows="3"></textarea></div>';
+    }
+    return h;
+  }
+
+  function valider(etat, tempsEcoule) {
+    etat.valide = true;
+    var ex = etat.ex;
+    var form = document.getElementById("form-ex");
+    var score = 0;
+    var aAutoeval = false;
+
+    (ex.questions || []).forEach(function (q, i) {
+      var n = "q" + i;
+      var bloc = document.getElementById(n);
+      var pts = Number(q.points) || 1;
+      var juste = false, neutre = false, msg = "";
+
+      if (q.type === "qcm") {
+        var c = form.querySelector('input[name="' + n + '"]:checked');
+        var val = c ? Number(c.value) : -1;
+        juste = val === q.reponse;
+        bloc.querySelectorAll(".option").forEach(function (lab, j) {
+          if (j === q.reponse) lab.classList.add("juste");
+          else if (j === val) lab.classList.add("faux");
+        });
+        msg = juste ? "Bonne réponse." : "Réponse attendue : « " + q.options[q.reponse] + " ».";
+      } else if (q.type === "vf" || q.type === "vfj") {
+        var c2 = form.querySelector('input[name="' + n + '"]:checked');
+        var v = c2 ? c2.value : "";
+        var libelle = { vrai: "Vrai", faux: "Faux", nsp: "On ne sait pas" };
+        bloc.querySelectorAll(".option").forEach(function (lab) {
+          var inp = lab.querySelector("input");
+          if (inp.value === q.reponse) lab.classList.add("juste");
+          else if (inp.value === v) lab.classList.add("faux");
+        });
+        var vfJuste = v === q.reponse;
+        if (q.type === "vf") {
+          juste = vfJuste;
+          msg = juste ? "Bonne réponse." : "Réponse attendue : " + libelle[q.reponse] + ".";
+        } else {
+          neutre = true;
+          aAutoeval = true;
+          msg = (vfJuste ? "Vrai/Faux correct. " : "Vrai/Faux incorrect (réponse : " + libelle[q.reponse] + "). ") +
+            "Justification attendue : « " + (q.justification || "") + " »";
+          etat.autoeval[n] = { pts: pts, vfJuste: vfJuste, choisi: null };
+        }
+      } else if (q.type === "courte") {
+        var saisie = (form.querySelector('[name="' + n + '-c"]') || {}).value || "";
+        var attendues = q.reponses || [];
+        juste = attendues.some(function (a) { return normaliser(a) === normaliser(saisie); }) && normaliser(saisie) !== "";
+        msg = juste ? "Bonne réponse." : "Réponse attendue : " + attendues[0] + ".";
+      } else if (q.type === "ouverte") {
+        neutre = true;
+        aAutoeval = true;
+        msg = "Réponse modèle : " + (q.reponseModele || "");
+        etat.autoeval[n] = { pts: pts, vfJuste: true, choisi: null };
+      }
+
+      if (!neutre && juste) score += pts;
+
+      var cl = neutre ? "neutre" : (juste ? "juste" : "faux");
+      var retour = '<div class="retour ' + cl + '" role="note"><p><strong>' +
+        (neutre ? "À vous d'évaluer" : (juste ? "✔ Correct" : "✘ Incorrect")) + "</strong> – " + esc(msg) + "</p>" +
+        (q.explication ? "<p>" + esc(q.explication) + "</p>" : "");
+      if (neutre) {
+        var cond = q.type === "vfj" ? "Les points ne sont accordés que si le vrai/faux ET la justification sont corrects." : "Comparez votre réponse avec la réponse modèle.";
+        retour += "<p class=\"note-discrete\">" + cond + "</p>" +
+          '<div class="autoeval" data-q="' + n + '">' +
+          '<button type="button" class="btn btn-petit" data-ok="1">Ma réponse est correcte</button>' +
+          '<button type="button" class="btn btn-secondaire btn-petit" data-ok="0">Ma réponse est incorrecte</button></div>';
+      }
+      retour += "</div>";
+      bloc.insertAdjacentHTML("beforeend", retour);
+    });
+
+    form.querySelectorAll("input, textarea").forEach(function (el) { el.disabled = true; });
+    document.getElementById("valider").disabled = true;
+
+    etat.scoreAuto = score;
+    afficherResultat(etat, tempsEcoule, aAutoeval);
+
+    form.querySelectorAll(".autoeval").forEach(function (div) {
+      div.addEventListener("click", function (e) {
+        var b = e.target.closest("button");
+        if (!b) return;
+        var a = etat.autoeval[div.getAttribute("data-q")];
+        a.choisi = b.getAttribute("data-ok") === "1";
+        div.querySelectorAll("button").forEach(function (x) {
+          x.setAttribute("aria-pressed", x === b ? "true" : "false");
+          x.className = "btn btn-petit" + (x === b ? "" : " btn-secondaire");
+        });
+        afficherResultat(etat, tempsEcoule, true);
+      });
+    });
+
+    if (ex.competence === "CO" && ex.transcription) {
+      document.getElementById("resultat").insertAdjacentHTML("beforeend",
+        '<details class="transcription"><summary><strong>Afficher la transcription</strong></summary>' +
+        paragraphes(ex.transcription) + "</details>");
+    }
+  }
+
+  function afficherResultat(etat, tempsEcoule, aAutoeval) {
+    var score = etat.scoreAuto;
+    var enAttente = 0;
+    Object.keys(etat.autoeval).forEach(function (k) {
+      var a = etat.autoeval[k];
+      if (a.choisi === null) enAttente++;
+      else if (a.choisi && a.vfJuste) score += a.pts;
+    });
+    var total = etat.total;
+    var pct = total ? Math.round(score / total * 100) : 0;
+    var sur25 = total ? arrondi(score / total * 25) : 0;
+
+    var h = '<section class="resultat" aria-live="polite"><h2>Votre résultat</h2>' +
+      (tempsEcoule ? '<p class="tag tag-rouge">Temps écoulé : vos réponses ont été validées automatiquement.</p>' : "") +
+      '<div class="score-grand">' + nb(score) + " / " + nb(total) + " <small>(" + pct + " %)</small></div>" +
+      "<p>Projection sur le barème de l'épreuve : <strong>" + nb(sur25) + " / 25</strong>. " +
+      '<span class="note-discrete">Indication seulement : une épreuve réelle comporte plusieurs exercices.</span></p>';
+    if (enAttente) {
+      h += '<p class="tag tag-attente">' + enAttente + " réponse" + (enAttente > 1 ? "s" : "") + " à auto-évaluer ci-dessus</p>";
+    }
+    h += '<div class="actions"><a class="btn" href="#/exercice/' + encodeURIComponent(etat.ex.id) + '" id="refaire">Refaire l\'exercice</a>' +
+      '<a class="btn btn-secondaire" href="#/pratiques?niveau=' + esc(etat.ex.niveau) + '">Autres exercices ' + esc(etat.ex.niveau) + "</a></div></section>";
+
+    var zone = document.getElementById("resultat");
+    var trans = zone.querySelector(".transcription");
+    zone.innerHTML = h;
+    if (trans) zone.appendChild(trans);
+
+    var refaire = document.getElementById("refaire");
+    refaire.addEventListener("click", function (e) { e.preventDefault(); router(); });
+
+    if (!etat.enregistre) {
+      enregistrerResultat(etat.ex, score, total);
+      etat.enregistre = true;
+    } else {
+      /* Auto-évaluation : mise à jour du score sans compter une nouvelle tentative */
+      var p = progression();
+      if (p[etat.ex.id]) {
+        p[etat.ex.id].dernier = arrondi(score);
+        p[etat.ex.id].pourcentage = pct;
+        p[etat.ex.id].meilleur = Math.max(p[etat.ex.id].meilleur, pct);
+        stockage(CLE_PROGRESSION, p);
+      }
+    }
+    if (!etat.scrolled) { zone.scrollIntoView({ behavior: "smooth", block: "start" }); etat.scrolled = true; }
+  }
+
+  /* ---------- Minuteur optionnel ---------- */
+
+  function minuteur(minutes, finCallback) {
+    var box = document.getElementById("minuteur");
+    var chk = document.getElementById("minuteur-on");
+    var aff = document.getElementById("minuteur-aff");
+    var reste = minutes * 60, t = null;
+    function afficher() {
+      var m = Math.floor(reste / 60), s = reste % 60;
+      aff.textContent = m + ":" + (s < 10 ? "0" : "") + s;
+      box.classList.toggle("urgent", reste <= 60);
+    }
+    chk.addEventListener("change", function () {
+      if (chk.checked) {
+        chk.disabled = true;
+        t = setInterval(function () {
+          reste--;
+          afficher();
+          if (reste === 60) aff.setAttribute("aria-live", "assertive");
+          if (reste <= 0) { clearInterval(t); finCallback(); }
+        }, 1000);
+      }
+    });
+    auNettoyage(function () { if (t) clearInterval(t); });
+  }
+
+  /* ---------- Lecteur audio à écoutes limitées ---------- */
+
+  function lecteurAudio(conteneur, ex) {
+    var max = ex.ecoutesMax || 2;
+    var lecture = ex.tempsLecture || 0;
+    var faites = 0, enCours = false, modeTTS = false, audio = null, indisponible = false, detruit = false;
+
+    var niveauVitesse = { A1: 0.82, A2: 0.88, B1: 0.95, B2: 1, C1: 1 };
+
+    conteneur.innerHTML = '<div class="lecteur" role="region" aria-label="Lecteur audio">' +
+      '<div class="lecteur-ligne">' +
+      '<button type="button" class="btn" id="btn-ecoute" disabled>▶ Écouter</button>' +
+      '<span class="ecoutes" aria-hidden="true">' + new Array(max + 1).join("<i></i>") + "</span>" +
+      '<span class="lecteur-statut" id="statut-ecoute" aria-live="polite"></span>' +
+      "</div>" +
+      '<p class="note-discrete">Nombre d\'écoutes autorisées : <strong>' + max + "</strong>. Vous ne pouvez pas mettre en pause ni revenir en arrière, comme le jour de l'examen.</p>" +
+      '<div id="zone-tts"></div></div>';
+
+    var btn = document.getElementById("btn-ecoute");
+    var statut = document.getElementById("statut-ecoute");
+    var pastilles = conteneur.querySelectorAll(".ecoutes i");
+
+    function activerModeTTS() {
+      if (modeTTS) return;
+      modeTTS = true;
+      var ok = "speechSynthesis" in window && ex.transcription;
+      document.getElementById("zone-tts").innerHTML = ok
+        ? '<p class="avertissement-tts">Démonstration : l\'enregistrement audio n\'a pas encore été ajouté. Le texte est lu par la voix de synthèse de votre navigateur.</p>'
+        : '<p class="avertissement-tts">L\'enregistrement audio de cet exercice n\'est pas disponible.</p>';
+      if (!ok) { indisponible = true; btn.disabled = true; }
+    }
+
+    if (ex.audio) {
+      audio = new Audio();
+      audio.preload = "auto";
+      audio.addEventListener("error", function () { if (!detruit) activerModeTTS(); });
+      audio.addEventListener("ended", finEcoute);
+      audio.src = ex.audio;
+    } else {
+      activerModeTTS();
+    }
+
+    function majPastilles() {
+      pastilles.forEach(function (p, i) { p.classList.toggle("faite", i < faites); });
+    }
+
+    function finEcoute() {
+      enCours = false;
+      faites++;
+      majPastilles();
+      if (faites >= max) {
+        btn.disabled = true;
+        btn.textContent = "Écoutes terminées";
+        statut.textContent = "Vous avez utilisé toutes vos écoutes. Terminez vos réponses.";
+      } else {
+        btn.disabled = false;
+        btn.textContent = "▶ Écoute " + (faites + 1) + " / " + max;
+        statut.textContent = "Écoute " + faites + " terminée.";
+      }
+    }
+
+    function voixFrancaise() {
+      var voix = window.speechSynthesis.getVoices() || [];
+      return voix.filter(function (v) { return /^fr(-|_)FR/i.test(v.lang); })[0] ||
+        voix.filter(function (v) { return /^fr/i.test(v.lang); })[0] || null;
+    }
+
+    function lireTTS() {
+      var synth = window.speechSynthesis;
+      synth.cancel();
+      var u = new SpeechSynthesisUtterance(ex.transcription.replace(/[—–]\s*/g, ""));
+      u.lang = "fr-FR";
+      var v = voixFrancaise();
+      if (v) u.voice = v;
+      u.rate = niveauVitesse[ex.niveau] || 1;
+      u.onend = function () { if (!detruit) finEcoute(); };
+      u.onerror = function () { if (enCours && !detruit) finEcoute(); };
+      synth.speak(u);
+    }
+
+    btn.addEventListener("click", function () {
+      if (enCours || faites >= max) return;
+      enCours = true;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="onde" aria-hidden="true"><i></i><i></i><i></i><i></i></span> Lecture en cours…';
+      statut.textContent = "Écoute " + (faites + 1) + " sur " + max + ".";
+      if (!modeTTS && audio) {
+        audio.currentTime = 0;
+        var p = audio.play();
+        if (p && p.catch) p.catch(function () {
+          activerModeTTS();
+          if (!indisponible) lireTTS();
+          else { enCours = false; btn.textContent = "Audio indisponible"; }
+        });
+      } else {
+        lireTTS();
+      }
+    });
+
+    /* Temps de lecture des questions avant la première écoute */
+    if (lecture > 0) {
+      var reste = lecture;
+      statut.innerHTML = "Lisez les questions : <strong>" + reste + " s</strong> ";
+      var passer = document.createElement("button");
+      passer.type = "button";
+      passer.className = "btn btn-secondaire btn-petit";
+      passer.textContent = "Je suis prêt(e)";
+      conteneur.querySelector(".lecteur-ligne").appendChild(passer);
+      var t = setInterval(function () {
+        reste--;
+        if (reste <= 0) { fin(); return; }
+        statut.innerHTML = "Lisez les questions : <strong>" + reste + " s</strong>";
+      }, 1000);
+      var fin = function () {
+        clearInterval(t);
+        if (passer.parentNode) passer.parentNode.removeChild(passer);
+        statut.textContent = "Vous pouvez lancer l'écoute.";
+        if (!indisponible) btn.disabled = false;
+      };
+      passer.addEventListener("click", fin);
+      auNettoyage(function () { clearInterval(t); });
+    } else if (!indisponible) {
+      btn.disabled = false;
+    }
+
+    auNettoyage(function () {
+      detruit = true;
+      if (audio) { audio.pause(); audio.removeAttribute("src"); audio.load(); }
+      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+    });
+  }
+
+  /* ==========================================================
+     MATÉRIEL PÉDAGOGIQUE
+     ========================================================== */
+
+  function pageMateriel(r) {
+    var types = [];
+    var comps = [];
+    DATA.ressources.forEach(function (x) {
+      if (x.type && types.indexOf(x.type) < 0) types.push(x.type);
+      if (x.competence && x.competence !== "Toutes" && comps.indexOf(x.competence) < 0) comps.push(x.competence);
+    });
+    types.sort(); comps.sort();
+
+    var h = "<h1>Matériel pédagogique</h1>" +
+      bi("Fiches, documents et liens utiles pour travailler en autonomie.",
+        "Fichas, documentos y enlaces útiles para trabajar de forma autónoma.");
+    h += '<form class="filtres" id="filtres-mat" role="search" aria-label="Filtrer les ressources">' +
+      '<label>Rechercher<input type="search" name="q" placeholder="Mot-clé…"></label>' +
+      '<label>Niveau<select name="niveau"><option value="">Tous</option>' +
+      NIVEAUX.map(function (n) { return "<option>" + n + "</option>"; }).join("") + "</select></label>" +
+      '<label>Compétence<select name="competence"><option value="">Toutes</option>' +
+      comps.map(function (c) { return "<option>" + esc(c) + "</option>"; }).join("") + "</select></label>" +
+      '<label>Type<select name="type"><option value="">Tous</option>' +
+      types.map(function (t) { return "<option>" + esc(t) + "</option>"; }).join("") + "</select></label></form>" +
+      '<p class="compteur" id="compteur-mat" role="status"></p><div class="grille" id="liste-mat"></div>';
+    app.innerHTML = h;
+
+    var f = document.getElementById("filtres-mat");
+    function filtrer() {
+      var q = normaliser(f.q.value);
+      var n = f.niveau.value, c = f.competence.value, t = f.type.value;
+      var liste = DATA.ressources.filter(function (x) {
+        var niv = listeNiveaux(x.niveau);
+        if (n && niv.indexOf(n) < 0 && niv.indexOf("Tous") < 0) return false;
+        if (c && x.competence !== c && x.competence !== "Toutes") return false;
+        if (t && x.type !== t) return false;
+        if (q && normaliser([x.titre, x.description, x.type, x.competence, x.source].join(" ")).indexOf(q) < 0) return false;
+        return true;
+      });
+      document.getElementById("compteur-mat").textContent = liste.length + " ressource" + (liste.length > 1 ? "s" : "");
+      document.getElementById("liste-mat").innerHTML = liste.length ? liste.map(function (x) {
+        var lien = x.lien
+          ? '<a class="btn btn-petit" href="' + esc(x.lien) + '" target="_blank" rel="noopener">Ouvrir ↗<span class="sr-only"> (nouvel onglet)</span></a>'
+          : '<span class="tag tag-attente">Lien à ajouter</span>';
+        return '<article class="carte"><div class="tags">' +
+          listeNiveaux(x.niveau).map(tagNiveau).join("") +
+          (x.competence ? '<span class="tag tag-ferme">' + esc(x.competence) + "</span>" : "") +
+          (x.type ? '<span class="tag tag-rouge">' + esc(x.type) + "</span>" : "") + "</div>" +
+          "<h3>" + esc(x.titre) + "</h3><p>" + esc(x.description) + "</p>" +
+          (x.source ? '<p class="note-discrete">Source : ' + esc(x.source) + "</p>" : "") +
+          '<div class="actions">' + lien + "</div></article>";
+      }).join("") : '<p class="vide">Aucune ressource ne correspond à votre recherche.</p>';
+    }
+    f.addEventListener("input", filtrer);
+    f.addEventListener("submit", function (e) { e.preventDefault(); });
+    filtrer();
+  }
+
+  /* ==========================================================
+     MESSAGERIE – FRANÇAIS AVANCÉ
+     ========================================================== */
+
+  function pageMessagerie(r) {
+    if (r.id) { pageGroupe(r.id); return; }
+    var h = "<h1>Messagerie – Français Avancé</h1>" +
+      bi("Choisissez votre groupe pour lire les annonces et participer aux échanges.",
+        "Elija su grupo para leer los anuncios y participar en los intercambios.");
+    if (!DATA.groupes.length) h += '<p class="vide">Aucun groupe n\'est configuré pour le moment.</p>';
+    h += '<div class="grille">';
+    DATA.groupes.forEach(function (g) {
+      var nb = (g.annonces || []).length;
+      h += '<a class="carte carte-lien" href="#/messagerie/' + encodeURIComponent(g.id) + '">' +
+        '<div class="tags">' + (g.horaire ? '<span class="tag">' + esc(g.horaire) + "</span>" : "") +
+        (nb ? '<span class="tag tag-rouge">' + nb + " annonce" + (nb > 1 ? "s" : "") + "</span>" : "") + "</div>" +
+        "<h3>" + esc(g.nom) + "</h3><p>" + esc(g.description || "") + "</p></a>";
+    });
+    h += "</div>";
+    h += '<div class="encart attention"><p><strong>Règles de la messagerie :</strong> écrivez en français, restez respectueux, ne publiez pas de données personnelles (téléphone, adresse, photos d\'autres personnes).</p>' +
+      '<p class="es" lang="es">Escriba en francés, sea respetuoso y no publique datos personales.</p></div>';
+    app.innerHTML = h;
+  }
+
+  function pageGroupe(id) {
+    var g = DATA.groupes.filter(function (x) { return x.id === id; })[0];
+    if (!g) { pageIntrouvable(); return; }
+    var h = '<p class="breadcrumb"><a href="#/messagerie">← Tous les groupes</a></p>' +
+      "<h1>" + esc(g.nom) + "</h1>" + (g.description ? '<p class="lead">' + esc(g.description) + "</p>" : "");
+
+    var annonces = (g.annonces || []).slice().sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); });
+    h += "<h2>Annonces</h2>";
+    if (!annonces.length) h += '<p class="vide">Pas d\'annonce pour le moment.</p>';
+    h += '<div class="annonces">';
+    annonces.forEach(function (a) {
+      h += '<article class="annonce"><time datetime="' + esc(a.date) + '">' + formatDate(a.date) + "</time>" +
+        "<h3>" + esc(a.titre) + "</h3>" + paragraphes(a.texte) +
+        (a.texte_es ? '<p class="es" lang="es">' + esc(a.texte_es) + "</p>" : "") + "</article>";
+    });
+    h += "</div>";
+
+    h += "<h2>Espace d'échange" + (g.service ? " – " + esc(g.service) : "") + "</h2>";
+    var integ = g.integration || "iframe";
+    if (integ === "giscus" && g.giscus && g.giscus.repo) {
+      h += '<div class="encart info"><p>Pour écrire un message, connectez-vous avec votre compte GitHub.</p></div><div id="giscus-zone" class="cadre-integre" style="padding:1rem"></div>';
+    } else if (!g.url) {
+      h += '<div class="encart attention"><p>L\'espace d\'échange de ce groupe n\'est pas encore configuré.</p></div>';
+    } else if (integ === "lien") {
+      h += '<p><a class="btn" href="' + esc(g.url) + '" target="_blank" rel="noopener">Ouvrir l\'espace du groupe sur ' + esc(g.service || "le service") + " ↗</a></p>";
+    } else {
+      h += '<div class="cadre-integre"><iframe src="' + esc(g.url) + '" title="Messagerie ' + esc(g.nom) + '" loading="lazy" allow="clipboard-write" allowfullscreen></iframe></div>' +
+        '<p class="note-discrete">Si l\'espace ne s\'affiche pas, <a href="' + esc(g.url) + '" target="_blank" rel="noopener">ouvrez-le dans un nouvel onglet</a>.</p>';
+    }
+    app.innerHTML = h;
+
+    if (integ === "giscus" && g.giscus && g.giscus.repo) {
+      var s = document.createElement("script");
+      s.src = "https://giscus.app/client.js";
+      s.async = true;
+      s.crossOrigin = "anonymous";
+      var cfg = {
+        "data-repo": g.giscus.repo,
+        "data-repo-id": g.giscus.repoId,
+        "data-category": g.giscus.categorie,
+        "data-category-id": g.giscus.categorieId,
+        "data-mapping": "specific",
+        "data-term": g.giscus.terme || g.id,
+        "data-reactions-enabled": "1",
+        "data-input-position": "top",
+        "data-theme": "light",
+        "data-lang": "fr"
+      };
+      Object.keys(cfg).forEach(function (k) { s.setAttribute(k, cfg[k]); });
+      document.getElementById("giscus-zone").appendChild(s);
+    }
+  }
+
+  /* ==========================================================
+     PROJETS
+     ========================================================== */
+
+  function pageProjets(r) {
+    if (r.id) { pageProjet(r.id); return; }
+    var h = "<h1>Projets</h1>" +
+      bi("Des projets menés selon la perspective actionnelle : chaque projet aboutit à une tâche finale concrète, réalisée en groupe.",
+        "Proyectos según el enfoque accional: cada proyecto termina con una tarea final concreta, realizada en grupo.");
+    if (!DATA.projets.length) h += '<p class="vide">Aucun projet pour le moment.</p>';
+    h += '<div class="grille">';
+    DATA.projets.forEach(function (p) {
+      h += '<a class="carte carte-lien" href="#/projets/' + encodeURIComponent(p.id) + '">' +
+        '<div class="tags">' + listeNiveaux(p.niveau).map(tagNiveau).join("") +
+        (p.statut ? '<span class="tag tag-ok">' + esc(p.statut) + "</span>" : "") + "</div>" +
+        "<h3>" + esc(p.titre) + "</h3><p>" + esc(p.resume || "") + "</p>" +
+        (p.duree ? '<p class="note-discrete">Durée : ' + esc(p.duree) + "</p>" : "") + "</a>";
+    });
+    h += "</div>";
+    app.innerHTML = h;
+  }
+
+  function pageProjet(id) {
+    var p = DATA.projets.filter(function (x) { return x.id === id; })[0];
+    if (!p) { pageIntrouvable(); return; }
+    var h = '<p class="breadcrumb"><a href="#/projets">← Tous les projets</a></p>' +
+      '<div class="tags">' + listeNiveaux(p.niveau).map(tagNiveau).join("") + "</div>" +
+      "<h1>" + esc(p.titre) + "</h1>" + (p.resume ? '<p class="lead">' + esc(p.resume) + "</p>" : "");
+
+    h += '<div class="encart info"><h2 style="margin-top:0">Tâche finale</h2>' + paragraphes(p.tacheFinale) +
+      (p.tacheFinale_es ? '<p class="es" lang="es">' + esc(p.tacheFinale_es) + "</p>" : "") + "</div>";
+
+    h += '<div class="deux-colonnes"><section><h2>Objectifs (CECRL)</h2><ul>' +
+      (p.objectifs || []).map(function (o) { return "<li>" + esc(o) + "</li>"; }).join("") + "</ul></section>" +
+      "<section><h2>Livrables</h2><ul>" +
+      (p.livrables || []).map(function (o) { return "<li>" + esc(o) + "</li>"; }).join("") + "</ul>" +
+      (p.duree ? '<dl class="fiche"><dt>Durée</dt><dd>' + esc(p.duree) + "</dd>" + (p.modalite ? "<dt>Modalité</dt><dd>" + esc(p.modalite) + "</dd>" : "") + "</dl>" : "") +
+      "</section></div>";
+
+    if (p.etapes && p.etapes.length) {
+      h += '<h2>Étapes et calendrier</h2><ol class="etapes">';
+      p.etapes.forEach(function (e) {
+        h += "<li><strong>" + esc(e.titre) + (e.quand ? " · " + esc(e.quand) : "") + "</strong>" + esc(e.description || "") + "</li>";
+      });
+      h += "</ol>";
+    }
+
+    if (p.grille && p.grille.criteres) {
+      var tot = p.grille.criteres.reduce(function (s, c) { return s + (Number(c.points) || 0); }, 0);
+      h += '<section id="grille-impr"><h2>Grille d\'évaluation</h2>' +
+        '<div class="tableau-wrap"><table class="grille-eval"><caption class="sr-only">Grille d\'évaluation du projet</caption>' +
+        '<thead><tr><th scope="col">Critère</th><th scope="col">Descripteur</th><th scope="col">Points</th><th scope="col">Note</th></tr></thead><tbody>';
+      p.grille.criteres.forEach(function (c) {
+        h += "<tr><th scope=\"row\">" + esc(c.critere) + "</th><td>" + esc(c.descripteur) + "</td><td>" + esc(c.points) + "</td><td></td></tr>";
+      });
+      h += '</tbody><tfoot><tr><td colspan="2">Total</td><td>' + tot + "</td><td></td></tr></tfoot></table></div></section>" +
+        '<p class="no-print" style="margin-top:1rem;display:flex;gap:.6rem;flex-wrap:wrap">' +
+        '<button type="button" class="btn" id="imprimer">Imprimer / enregistrer la grille en PDF</button>' +
+        (p.grille.fichier ? '<a class="btn btn-secondaire" href="' + esc(p.grille.fichier) + '" download>Télécharger la grille</a>' : "") + "</p>";
+    }
+    app.innerHTML = h;
+    var b = document.getElementById("imprimer");
+    if (b) b.addEventListener("click", function () { window.print(); });
+  }
+
+  /* ==========================================================
+     ÉVALUATIONS (Google Forms / Microsoft Forms)
+     ========================================================== */
+
+  function statutEval(e) {
+    var maintenant = new Date();
+    var o = e.ouverture ? new Date(e.ouverture) : null;
+    var f = e.fermeture ? new Date(e.fermeture) : null;
+    if (o && maintenant < o) return "avenir";
+    if (f && maintenant > f) return "fermee";
+    return "ouverte";
+  }
+
+  var LIBELLE_STATUT = {
+    ouverte: '<span class="tag tag-ok">Ouverte</span>',
+    avenir: '<span class="tag tag-attente">À venir</span>',
+    fermee: '<span class="tag tag-ferme">Fermée</span>'
+  };
+
+  function urlIntegration(e) {
+    var u = e.url || "";
+    if (!u) return "";
+    if (/docs\.google\.com\/forms/.test(u) && !/embedded=true/.test(u)) {
+      u += (u.indexOf("?") < 0 ? "?" : "&") + "embedded=true";
+    }
+    if (/forms\.(office|microsoft)\.com/.test(u) && !/embed=true/.test(u)) {
+      u += (u.indexOf("?") < 0 ? "?" : "&") + "embed=true";
+    }
+    return u;
+  }
+
+  function pageEvaluations(r) {
+    if (r.id) { pageEvaluation(r.id); return; }
+    var h = "<h1>Évaluations</h1>" +
+      bi("Les évaluations de compréhension de l'oral et des écrits se font avec un formulaire en ligne. Elles ne sont accessibles que pendant leur période d'ouverture.",
+        "Las evaluaciones de comprensión oral y escrita se hacen con un formulario en línea. Solo están disponibles durante su período de apertura.");
+    var ordre = { ouverte: 0, avenir: 1, fermee: 2 };
+    var liste = DATA.evaluations.slice().sort(function (a, b) {
+      return ordre[statutEval(a)] - ordre[statutEval(b)] || String(a.ouverture).localeCompare(String(b.ouverture));
+    });
+    if (!liste.length) h += '<p class="vide">Aucune évaluation programmée.</p>';
+    h += '<div class="grille">';
+    liste.forEach(function (e) {
+      var st = statutEval(e);
+      h += '<article class="carte"><div class="tags">' + LIBELLE_STATUT[st] + tagNiveau(e.niveau) + tagCompetence(e.competence) + "</div>" +
+        "<h3>" + esc(e.titre) + "</h3>" +
+        '<dl class="fiche"><dt>Ouverture</dt><dd>' + formatDate(e.ouverture, true) + "</dd>" +
+        "<dt>Fermeture</dt><dd>" + formatDate(e.fermeture, true) + "</dd>" +
+        (e.dureeMinutes ? "<dt>Durée</dt><dd>" + esc(e.dureeMinutes) + " min</dd>" : "") +
+        (e.groupe ? "<dt>Groupe</dt><dd>" + esc(e.groupe) + "</dd>" : "") + "</dl>" +
+        '<div class="actions">' + (st === "ouverte"
+          ? '<a class="btn btn-petit" href="#/evaluations/' + encodeURIComponent(e.id) + '">Commencer</a>'
+          : '<a class="btn btn-secondaire btn-petit" href="#/evaluations/' + encodeURIComponent(e.id) + '">Détails</a>') +
+        "</div></article>";
+    });
+    h += "</div>";
+    app.innerHTML = h;
+  }
+
+  function pageEvaluation(id) {
+    var e = DATA.evaluations.filter(function (x) { return x.id === id; })[0];
+    if (!e) { pageIntrouvable(); return; }
+    var st = statutEval(e);
+    var h = '<p class="breadcrumb"><a href="#/evaluations">← Toutes les évaluations</a></p>' +
+      '<div class="tags">' + LIBELLE_STATUT[st] + tagNiveau(e.niveau) + tagCompetence(e.competence) + "</div>" +
+      "<h1>" + esc(e.titre) + "</h1>" +
+      '<dl class="fiche"><dt>Ouverture</dt><dd>' + formatDate(e.ouverture, true) + "</dd>" +
+      "<dt>Fermeture</dt><dd>" + formatDate(e.fermeture, true) + "</dd>" +
+      (e.dureeMinutes ? "<dt>Durée conseillée</dt><dd>" + esc(e.dureeMinutes) + " min</dd>" : "") +
+      "<dt>Plateforme</dt><dd>" + (e.plateforme === "microsoft" ? "Microsoft Forms" : "Google Forms") + "</dd></dl>";
+    if (e.consignes) h += '<div class="consigne">' + bi(e.consignes, e.consignes_es) + "</div>";
+
+    if (st === "avenir") {
+      h += '<div class="encart attention"><p>Cette évaluation n\'est pas encore ouverte. Revenez le ' + formatDate(e.ouverture, true) + ".</p></div>";
+    } else if (st === "fermee") {
+      h += '<div class="encart"><p>Cette évaluation est fermée depuis le ' + formatDate(e.fermeture, true) + ".</p></div>";
+    } else if (!e.url) {
+      h += '<div class="encart attention"><p>Le formulaire de cette évaluation n\'a pas encore été ajouté par le professeur.</p></div>';
+    } else {
+      var u = urlIntegration(e);
+      h += '<div class="cadre-integre"><iframe src="' + esc(u) + '" title="Formulaire : ' + esc(e.titre) + '" loading="lazy" allowfullscreen>Chargement…</iframe></div>' +
+        '<p class="note-discrete">Si le formulaire ne s\'affiche pas, <a href="' + esc(e.url) + '" target="_blank" rel="noopener">ouvrez-le dans un nouvel onglet</a>.</p>';
+    }
+    app.innerHTML = h;
+  }
+
+  /* ==========================================================
+     Initialisation
+     ========================================================== */
+
+  function initEspagnol() {
+    var b = document.getElementById("toggle-es");
+    function appliquer(on) {
+      document.body.classList.toggle("show-es", on);
+      b.setAttribute("aria-pressed", on ? "true" : "false");
+    }
+    appliquer(!!stockage(CLE_ES));
+    b.addEventListener("click", function () {
+      var on = !document.body.classList.contains("show-es");
+      appliquer(on);
+      stockage(CLE_ES, on);
+    });
+  }
+
+  /* Bannière d'en-tête : image + message défilant (grande sur l'accueil, compacte ailleurs) */
+  function initBanniere() {
+    var s = DATA.site;
+    var ban = (s.accueil || {}).banniere;
+    var zone = document.getElementById("entete-banniere");
+    if (!zone || !ban || !ban.image) return;
+    var msg = esc(ban.message || s.titre);
+    var item = '<span class="ban-msg">' + msg + '</span><span class="ban-sep" aria-hidden="true">◆</span>';
+    var serie = new Array(5).join(item);
+    zone.insertAdjacentHTML("afterbegin",
+      '<a class="banniere-lien" href="#/" aria-label="Accueil – ' + msg + '">' +
+      '<img class="banniere-img" src="' + esc(ban.image) + '" alt="' + esc(ban.alt || "") + '" onerror="this.style.visibility=\'hidden\'">' + "</a>" +
+      '<div class="banniere-bandeau" aria-hidden="true"><div class="banniere-piste">' +
+      '<div class="banniere-serie">' + serie + '</div><div class="banniere-serie">' + serie + "</div>" +
+      "</div></div>");
+    /* Nom du site posé sur la photo, façon passeport */
+    var nom = ban.nom;
+    if (nom) {
+      var t = nom.tampon || [];
+      zone.insertAdjacentHTML("beforeend",
+        '<div class="titre-passeport">' +
+        (nom.etiquette ? '<span class="tp-etiquette">' + esc(nom.etiquette) + "</span>" : "") +
+        '<p class="tp-nom"><span class="tp-mot1">' + esc(nom.mot1) + '</span> <span class="tp-mot2">' + esc(nom.mot2) + "</span></p>" +
+        (nom.slogan ? '<p class="tp-slogan">' + esc(nom.slogan) + "</p>" : "") +
+        (nom.bouton ? '<a class="tp-bouton" href="' + esc(nom.lienBouton || "#/pratiques") + '">' + esc(nom.bouton) + " " + ICONES.fleche + "</a>" : "") +
+        "</div>" +
+        (t.length ? '<div class="tampon" aria-hidden="true"><span class="tampon-haut">' + esc(t[0] || "") + '</span><span class="tampon-milieu">' + esc(t[1] || "") + '</span><span class="tampon-bas">' + esc(t[2] || "") + "</span></div>" : ""));
+    }
+    zone.querySelector(".entete-outils").insertAdjacentHTML("afterbegin",
+      '<button type="button" class="banniere-pause" id="banniere-pause" aria-pressed="false" aria-label="Mettre le texte défilant en pause">❚❚</button>');
+    var img = zone.querySelector(".banniere-img");
+    /* Fond flou de la même photo sur les côtés (grands écrans) */
+    var entete = document.querySelector(".site-header");
+    if (entete) entete.style.setProperty("--img-ban", 'url("' + ban.image.replace(/"/g, "") + '")');
+    function cadrer() {
+      var acc = document.body.classList.contains("page-accueil");
+      img.style.objectPosition = acc ? (ban.cadrage || "center") : (ban.cadrageCompact || ban.cadrage || "center");
+    }
+    cadrer();
+    window.addEventListener("hashchange", cadrer);
+    var bp = document.getElementById("banniere-pause");
+    bp.addEventListener("click", function () {
+      var p = zone.classList.toggle("en-pause");
+      bp.setAttribute("aria-pressed", p ? "true" : "false");
+      bp.textContent = p ? "▶" : "❚❚";
+      bp.setAttribute("aria-label", p ? "Relancer le texte défilant" : "Mettre le texte défilant en pause");
+    });
+  }
+
+  function initSite() {
+    var s = DATA.site;
+    document.getElementById("footer-text").textContent = "© " + new Date().getFullYear() + " " + (s.auteur || "") + (s.fonction ? " – " + s.fonction : "");
+    if (s.licence) {
+      document.getElementById("footer-licence").innerHTML = 'Contenus sous licence <a href="' + esc(s.licence.url) + '" target="_blank" rel="noopener">' + esc(s.licence.nom) + "</a>. " +
+        (s.mentionFEI ? esc(s.mentionFEI) : "");
+    }
+  }
+
+  initEspagnol();
+  if ("speechSynthesis" in window) { window.speechSynthesis.getVoices(); }
+
+  chargerTout().then(function () {
+    initSite();
+    window.addEventListener("hashchange", router);
+    router();
+    initBanniere();
+  }).catch(function (err) {
+    console.error(err);
+    app.innerHTML = '<div class="encart attention"><h1>Impossible de charger le contenu</h1>' +
+      "<p>Les fichiers du dossier <code>data</code> n'ont pas pu être lus (" + esc(err.message) + ").</p>" +
+      "<p>Si vous ouvrez le fichier <code>index.html</code> directement depuis votre ordinateur, le navigateur bloque la lecture des fichiers JSON. " +
+      "Publiez le site sur GitHub Pages ou lancez un petit serveur local (voir le README).</p></div>";
+  });
+})();
+
+</script>
+</body>
+</html>
 
