@@ -1269,6 +1269,78 @@ body:not(.page-accueil) .tp-mot2 { margin-left: .28em; }
 .bloc-aprendo-actions { display: flex; flex-wrap: wrap; gap: .6rem; }
 @media (prefers-reduced-motion: reduce) { .frav-annee { transition: none; } .frav-annee:hover { transform: none; } }
 
+
+/* ---------- Accès directs (Teams, PNE, Aprendo Pura Vida) ---------- */
+.liens-directs {
+  display: grid;
+  gap: .8rem;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  margin: 0 0 1.6rem;
+}
+.lien-direct {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .85rem 1rem;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid var(--bord);
+  border-left: 6px solid var(--ld);
+  color: var(--texte);
+  text-decoration: none;
+  box-shadow: var(--ombre);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.lien-direct:hover { color: var(--texte); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(20,30,60,.14); }
+.ld-icone {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 12px;
+  background: var(--ld);
+  color: #fff;
+}
+.ld-icone .icone { width: 1.5rem; height: 1.5rem; }
+.ld-texte { display: flex; flex-direction: column; line-height: 1.3; }
+.ld-texte strong { font-family: var(--police-titres); color: var(--bleu-fonce); }
+.ld-texte small { color: var(--texte-doux); font-size: .85rem; }
+
+/* ---------- Outils du prof ---------- */
+.main-nav ul a.onglet-prof { color: #b8f3d0; }
+.main-nav ul a.onglet-prof[aria-current="page"] { color: #fff; }
+.outils-entete { display: flex; gap: 1rem; align-items: center; }
+.outils-entete .pastille-icone { width: 3.4rem; height: 3.4rem; background: var(--niv-A1-clair); color: var(--niv-A1); }
+.outils-entete h1 { margin: 0; }
+.outils-entete .lead { margin: .2rem 0 0; }
+.outils-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin: .4rem 0 1rem; }
+.chip {
+  font: inherit;
+  font-weight: 700;
+  font-size: .9rem;
+  padding: .4rem .9rem;
+  border-radius: 999px;
+  border: 1px solid var(--bord);
+  background: #fff;
+  color: var(--bleu-fonce);
+  cursor: pointer;
+  min-height: 40px;
+}
+.chip:hover { border-color: var(--bleu); }
+.chip.actif { background: var(--bleu-fonce); color: #fff; border-color: var(--bleu-fonce); }
+.outils-cat { font-size: 1.15rem; margin: 1.4rem 0 .7rem; padding-left: .6rem; border-left: 5px solid var(--rouge); }
+.compteur-liste { font-size: .9rem; color: var(--texte-doux); margin: 0; }
+.carte-outil { border-top: 4px solid var(--bleu-clair); }
+
+/* ---------- Pied de page : liens et compteur ---------- */
+.footer-liens a { color: #ffd166; font-weight: 700; text-decoration: none; }
+.footer-liens a:hover { text-decoration: underline; }
+.site-footer .compteur { margin-top: .7rem; min-height: 28px; }
+.site-footer .compteur img { vertical-align: middle; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) { .lien-direct { transition: none; } .lien-direct:hover { transform: none; } }
+.main-nav ul a { padding-left: .7rem; padding-right: .7rem; font-size: .93rem; }
+
 </style>
   <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTIiIGZpbGw9IiMxZDNhNmUiLz48cmVjdCB4PSI0NCIgeT0iMCIgd2lkdGg9IjIwIiBoZWlnaHQ9IjY0IiBmaWxsPSIjYzgxMDJlIiByeD0iMCIvPjx0ZXh0IHg9IjIyIiB5PSI0MiIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjI0IiBmb250LXdlaWdodD0iNzAwIiBmaWxsPSIjZmZmIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj5GQTwvdGV4dD48L3N2Zz4K" type="image/svg+xml">
 </head>
@@ -1290,11 +1362,12 @@ body:not(.page-accueil) .tp-mot2 { margin-left: .28em; }
         <ul>
           <li><a href="#/" data-route="accueil">Accueil</a></li>
           <li><a href="#/frav" data-route="frav" class="onglet-frav">Français Avancé LMFA</a></li>
-          <li><a href="#/pratiques" data-route="pratiques">Pratiques DELF/DALF</a></li>
+          <li><a href="#/pratiques" data-route="pratiques">Pratiques</a></li>
           <li><a href="#/materiel" data-route="materiel">Matériel</a></li>
           <li><a href="#/messagerie" data-route="messagerie">Messagerie</a></li>
           <li><a href="#/projets" data-route="projets">Projets</a></li>
           <li><a href="#/evaluations" data-route="evaluations">Évaluations</a></li>
+          <li><a href="#/outils" data-route="outils" class="onglet-prof">Outils du prof</a></li>
           <li><a href="https://aprendo-pura-vida.learningpassport.org/" target="_blank" rel="noopener" class="onglet-externe">Aprendo Pura Vida <span aria-hidden="true">↗</span><span class="sr-only"> (nouvel onglet)</span></a></li>
         </ul>
       </div>
@@ -1308,7 +1381,9 @@ body:not(.page-accueil) .tp-mot2 { margin-left: .28em; }
 
   <footer class="site-footer">
     <p id="footer-text">© MSc. Eduardo Umaña Álvarez</p>
+    <p class="footer-liens" id="footer-liens"></p>
     <p class="footer-licence" id="footer-licence"></p>
+    <p class="compteur" id="compteur"></p>
   </footer>
 
   <noscript>
@@ -1430,6 +1505,35 @@ window.DONNEES_SITE = {
         "B2": "Avancé",
         "C1": "Autonome"
       }
+    },
+    "liensDirects": [
+      {
+        "id": "teams",
+        "titre": "Ma classe sur Teams",
+        "texte": "Rejoins l'équipe Teams du cours avec ton compte @est.mep.go.cr.",
+        "url": "https://teams.microsoft.com/",
+        "couleur": "#5b5fc7",
+        "_aide": "Remplacez url par le lien de votre équipe Teams (Équipe > … > Obtenir le lien vers l'équipe)."
+      },
+      {
+        "id": "pne",
+        "titre": "Pratique PNE Français",
+        "texte": "La prueba de práctica officielle de la Prueba Nacional Estandarizada de Lengua Extranjera Francés (MEP).",
+        "url": "https://dgec.mep.go.cr/PRUEBAS_LE_2026/FRANCES-SECUNDARIA-2026_ORIGINAL",
+        "couleur": "#b40d27"
+      },
+      {
+        "id": "aprendo",
+        "titre": "Aprendo Pura Vida",
+        "texte": "La plateforme de cours en ligne du MEP.",
+        "url": "https://aprendo-pura-vida.learningpassport.org/",
+        "couleur": "#c2410c"
+      }
+    ],
+    "compteur": {
+      "actif": true,
+      "libelle": "Visiteurs",
+      "_aide": "Compteur public hits.sh : il compte chaque chargement du site. Mettez actif à false pour le désactiver."
     }
   },
   "exercices": [
@@ -3272,6 +3376,96 @@ window.DONNEES_SITE = {
       "url": "https://aprendo-pura-vida.learningpassport.org/",
       "guide": "https://www.mep.go.cr/sites/default/files/2023-10/como-ingresar-aprendo-pura-vida.pdf"
     }
+  },
+  "outils": {
+    "_aide": "Onglet « Outils du prof ». Chaque outil : titre, categorie, type, description, lien. ATTENTION : le site est public ; pour vos documents personnels, mettez un lien OneDrive ou Teams protégé par votre compte MEP.",
+    "categories": [
+      "Planification",
+      "Évaluation",
+      "DELF / DALF",
+      "Prueba Nacional Estandarizada",
+      "Ressources didactiques",
+      "Documents institutionnels"
+    ],
+    "outils": [
+      {
+        "titre": "Pratique officielle PNE Français 2026",
+        "categorie": "Prueba Nacional Estandarizada",
+        "type": "Lien MEP",
+        "description": "Prueba de práctica de la Prueba Nacional Estandarizada de Lengua Extranjera Francés, publiée par la DGEC.",
+        "lien": "https://dgec.mep.go.cr/PRUEBAS_LE_2026/FRANCES-SECUNDARIA-2026_ORIGINAL"
+      },
+      {
+        "titre": "Tabla de especificaciones PNE Francés 2026",
+        "categorie": "Prueba Nacional Estandarizada",
+        "type": "PDF",
+        "description": "Tableau de spécifications officiel de la PNE Francés 2026 (DGEC).",
+        "lien": "https://dgec.mep.go.cr/wp-content/uploads/2026/05/Tabla-de-especificaciones_Frances-.pdf"
+      },
+      {
+        "titre": "Marco de referencia PNE Francés",
+        "categorie": "Prueba Nacional Estandarizada",
+        "type": "PDF",
+        "description": "Cadre de référence de la Prueba Nacional Estandarizada de Lengua Extranjera Francés (DGEC).",
+        "lien": "https://dgec.mep.go.cr/wp-content/uploads/2024/04/FRANCES-ESPANOL.pdf"
+      },
+      {
+        "titre": "Informations PNE Lenguas Extranjeras 2026",
+        "categorie": "Prueba Nacional Estandarizada",
+        "type": "Lien MEP",
+        "description": "Guides d'application, critères techniques et formulaires de la DGEC.",
+        "lien": "https://dgec.mep.go.cr/lenguas-extranjeras/informacion-2026/"
+      },
+      {
+        "titre": "DELF tout public – exemples de sujets A1",
+        "categorie": "DELF / DALF",
+        "type": "Lien FEI",
+        "description": "Sujets d'exemple et grilles officielles de France Éducation International.",
+        "lien": "https://www.france-education-international.fr/diplome/delf-tout-public/niveau-a1/exemples-sujets"
+      },
+      {
+        "titre": "DALF C1 – exemples de sujets",
+        "categorie": "DELF / DALF",
+        "type": "Lien FEI",
+        "description": "Sujets d'exemple et grilles officielles du DALF C1.",
+        "lien": "https://www.france-education-international.fr/diplome/dalf/exemples-sujets"
+      },
+      {
+        "titre": "CECRL – Conseil de l'Europe",
+        "categorie": "Ressources didactiques",
+        "type": "Référence",
+        "description": "Présentation officielle du Cadre européen commun de référence pour les langues.",
+        "lien": "https://www.coe.int/fr/web/common-european-framework-reference-languages"
+      },
+      {
+        "titre": "Guide de connexion Aprendo Pura Vida",
+        "categorie": "Documents institutionnels",
+        "type": "PDF",
+        "description": "Guide du MEP pour accéder à la plateforme Aprendo Pura Vida.",
+        "lien": "https://www.mep.go.cr/sites/default/files/2023-10/como-ingresar-aprendo-pura-vida.pdf"
+      },
+      {
+        "titre": "Lineamiento Office 365 y Teams (DM-0003-2021)",
+        "categorie": "Documents institutionnels",
+        "type": "PDF",
+        "description": "Lignes directrices du MEP pour l'usage d'Office 365 et de Teams dans les centres éducatifs.",
+        "lien": "https://mep.go.cr/sites/default/files/2022-07/dm-0003-2021.pdf"
+      },
+      {
+        "titre": "Mes planifications FRAV",
+        "categorie": "Planification",
+        "type": "OneDrive",
+        "description": "Planifications annuelles et trimestrielles de 7e à 11e année.",
+        "lien": ""
+      },
+      {
+        "titre": "Banque d'instruments d'évaluation",
+        "categorie": "Évaluation",
+        "type": "OneDrive",
+        "description": "Tests, rubriques et tables de spécifications de mes cours.",
+        "lien": ""
+      }
+    ]
   }
 };
 </script>
@@ -3292,7 +3486,8 @@ window.DONNEES_SITE = {
     groupes: [],
     projets: [],
     evaluations: [],
-    frav: null
+    frav: null,
+    outils: null
   };
 
   var NIVEAUX = ["A1", "A2", "B1", "B2", "C1"];
@@ -3309,6 +3504,10 @@ window.DONNEES_SITE = {
     evaluations: svg('<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M9 12l2 2 4-4"/>'),
     CO: svg('<path d="M4 15v-3a8 8 0 0 1 16 0v3"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/>'),
     CE: svg('<path d="M3 5h6a3 3 0 0 1 3 3v12a2 2 0 0 0-2-2H3z"/><path d="M21 5h-6a3 3 0 0 0-3 3v12a2 2 0 0 1 2-2h7z"/>'),
+    teams: svg('<rect x="3" y="6" width="12" height="12" rx="2"/><path d="M6.5 9.5h5M9 9.5V15"/><circle cx="18.5" cy="7.5" r="2"/><path d="M15 12h5a1 1 0 0 1 1 1v2a3 3 0 0 1-3 3h-3"/>'),
+    pne: svg('<path d="M4 4h16v16H4z"/><path d="M8 9h8M8 13h5"/><path d="M14.5 16.5l1.5 1.5 3-3"/>'),
+    aprendo: svg('<path d="M12 3l9 5-9 5-9-5z"/><path d="M7 10.5V15c0 1.5 2.5 3 5 3s5-1.5 5-3v-4.5"/>'),
+    outil: svg('<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>'),
     fleche: svg('<path d="M5 12h14M13 6l6 6-6 6"/>')
   };
 
@@ -3410,6 +3609,7 @@ window.DONNEES_SITE = {
       DATA.projets = sansAide(D.projets);
       DATA.evaluations = sansAide(D.evaluations);
       DATA.frav = D.frav || null;
+      DATA.outils = D.outils || null;
       return Promise.resolve();
     }
     return charger("data/site.json").then(function (site) {
@@ -3423,7 +3623,8 @@ window.DONNEES_SITE = {
         charger("data/groupes.json").catch(function () { return []; }),
         charger("data/projets.json").catch(function () { return []; }),
         charger("data/evaluations.json").catch(function () { return []; }),
-        charger("data/frav.json").catch(function () { return null; })
+        charger("data/frav.json").catch(function () { return null; }),
+        charger("data/outils.json").catch(function () { return null; })
       ]);
     }).then(function (r) {
       DATA.exercices = sansAide([].concat.apply([], r[0]));
@@ -3432,6 +3633,7 @@ window.DONNEES_SITE = {
       DATA.projets = sansAide(r[3]);
       DATA.evaluations = sansAide(r[4]);
       DATA.frav = r[5];
+      DATA.outils = r[6];
     });
   }
 
@@ -3480,7 +3682,8 @@ window.DONNEES_SITE = {
     messagerie: pageMessagerie,
     projets: pageProjets,
     evaluations: pageEvaluations,
-    frav: pageFrav
+    frav: pageFrav,
+    outils: pageOutils
   };
 
   var SECTION_NAV = { exercice: "pratiques" };
@@ -3511,6 +3714,18 @@ window.DONNEES_SITE = {
      ACCUEIL
      ========================================================== */
 
+  /* Accès directs : Teams, pratique PNE, Aprendo Pura Vida */
+  function liensDirects() {
+    var L = DATA.site.liensDirects || [];
+    if (!L.length) return "";
+    return '<div class="liens-directs">' + L.map(function (l) {
+      return '<a class="lien-direct" href="' + esc(l.url) + '" target="_blank" rel="noopener" style="--ld:' + esc(l.couleur || "#1d3a6e") + '">' +
+        '<span class="ld-icone">' + (ICONES[l.id] || ICONES.fleche) + "</span>" +
+        '<span class="ld-texte"><strong>' + esc(l.titre) + ' <span aria-hidden="true">↗</span></strong><small>' + esc(l.texte || "") + "</small></span>" +
+        '<span class="sr-only"> (nouvel onglet)</span></a>';
+    }).join("") + "</div>";
+  }
+
   function pageAccueil() {
     var s = DATA.site;
     var a = s.accueil || {};
@@ -3525,6 +3740,7 @@ window.DONNEES_SITE = {
       (a.texte_es ? '<p class="es" lang="es">' + esc(a.texte_es) + "</p>" : "") +
       "</section>";
 
+    h += liensDirects();
     h += '<div class="tuiles-niveaux">';
     NIVEAUX.forEach(function (n) {
       var faits = DATA.exercices.filter(function (e) { return e.niveau === n && prog[e.id]; }).length;
@@ -3551,6 +3767,69 @@ window.DONNEES_SITE = {
         (a.avertissement_es ? '<p class="es" lang="es">' + esc(a.avertissement_es) + "</p>" : "") + "</div>";
     }
     app.innerHTML = h;
+  }
+
+  /* ==========================================================
+     OUTILS DU PROF
+     ========================================================== */
+
+  function pageOutils() {
+    var O = DATA.outils || { outils: [], categories: [] };
+    var liste = (O.outils || []).filter(function (x) { return x && x.titre; });
+    var cats = (O.categories || []).slice();
+    liste.forEach(function (x) { if (x.categorie && cats.indexOf(x.categorie) < 0) cats.push(x.categorie); });
+    var types = [];
+    liste.forEach(function (x) { if (x.type && types.indexOf(x.type) < 0) types.push(x.type); });
+
+    var h = '<div class="outils-entete"><span class="pastille-icone">' + ICONES.outil + "</span><div>" +
+      "<h1>Outils du prof</h1>" +
+      '<p class="lead">Planifications, évaluations, documents officiels et ressources pour le travail en classe.</p></div></div>' +
+      '<div class="encart attention"><p><strong>Rappel :</strong> ce site est public. Pour vos documents personnels ou ceux qui contiennent des données d\'élèves, placez ici un lien OneDrive ou Teams protégé par votre compte MEP, jamais le fichier lui-même.</p></div>' +
+      '<form class="filtres" id="filtres-outils" role="search" aria-label="Filtrer les outils">' +
+      '<label>Rechercher<input type="search" name="q" placeholder="Mot-clé…"></label>' +
+      '<label>Type<select name="type"><option value="">Tous</option>' + types.map(function (t) { return "<option>" + esc(t) + "</option>"; }).join("") + "</select></label></form>" +
+      '<div class="outils-chips" id="chips-outils"><button type="button" class="chip actif" data-cat="">Tout</button>' +
+      cats.map(function (c) { return '<button type="button" class="chip" data-cat="' + esc(c) + '">' + esc(c) + "</button>"; }).join("") + "</div>" +
+      '<div id="liste-outils"></div>';
+    app.innerHTML = h;
+
+    var f = document.getElementById("filtres-outils");
+    var chips = document.getElementById("chips-outils");
+    var cat = "";
+    function rendre() {
+      var q = normaliser(f.q.value), t = f.type.value;
+      var res = liste.filter(function (x) {
+        if (cat && x.categorie !== cat) return false;
+        if (t && x.type !== t) return false;
+        if (q && normaliser([x.titre, x.description, x.categorie, x.type].join(" ")).indexOf(q) < 0) return false;
+        return true;
+      });
+      var html = '<p class="compteur-liste" role="status">' + res.length + " outil" + (res.length > 1 ? "s" : "") + "</p>";
+      var groupes = cat ? [cat] : cats;
+      groupes.forEach(function (c) {
+        var items = res.filter(function (x) { return x.categorie === c; });
+        if (!items.length) return;
+        html += '<h2 class="outils-cat">' + esc(c) + '</h2><div class="grille">' + items.map(function (x) {
+          var lien = x.lien
+            ? '<a class="btn btn-petit" href="' + esc(x.lien) + '" target="_blank" rel="noopener">Ouvrir ↗<span class="sr-only"> (nouvel onglet)</span></a>'
+            : '<span class="tag tag-attente">Lien à ajouter</span>';
+          return '<article class="carte carte-outil"><div class="tags"><span class="tag tag-ferme">' + esc(x.type || "") + "</span></div>" +
+            "<h3>" + esc(x.titre) + "</h3><p>" + esc(x.description || "") + '</p><div class="actions">' + lien + "</div></article>";
+        }).join("") + "</div>";
+      });
+      if (!res.length) html += '<p class="vide">Aucun outil ne correspond.</p>';
+      document.getElementById("liste-outils").innerHTML = html;
+    }
+    f.addEventListener("input", rendre);
+    f.addEventListener("submit", function (e) { e.preventDefault(); });
+    chips.addEventListener("click", function (e) {
+      var b = e.target.closest(".chip");
+      if (!b) return;
+      cat = b.getAttribute("data-cat");
+      chips.querySelectorAll(".chip").forEach(function (x) { x.classList.toggle("actif", x === b); x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+      rendre();
+    });
+    rendre();
   }
 
   /* ==========================================================
@@ -3604,7 +3883,7 @@ window.DONNEES_SITE = {
         (A.niveauCECRL ? '<span class="frav-cecrl">Niveau visé : ' + esc(A.niveauCECRL) + "</span>" : "") +
         '<span class="tuile-fleche">' + ICONES.fleche + "</span></a>";
     });
-    h2 += "</div>" + blocAprendo(F.aprendo);
+    h2 += "</div>" + liensDirects();
     app.innerHTML = h2;
   }
 
@@ -4485,6 +4764,19 @@ window.DONNEES_SITE = {
 
   function initSite() {
     var s = DATA.site;
+    var fl = document.getElementById("footer-liens");
+    if (fl && s.liensDirects) {
+      fl.innerHTML = s.liensDirects.map(function (l) {
+        return '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.titre) + " ↗</a>";
+      }).join(" · ");
+    }
+    /* Compteur de visiteurs (hits.sh), seulement sur le site publié */
+    var cpt = document.getElementById("compteur");
+    if (cpt && s.compteur && s.compteur.actif && /\.github\.io$/.test(location.hostname)) {
+      var cle = (location.hostname + location.pathname).replace(/\/+$/, "").replace(/index\.html$/, "").replace(/\/$/, "");
+      cpt.innerHTML = '<img src="https://hits.sh/' + cle + '.svg?label=' + encodeURIComponent(s.compteur.libelle || "Visiteurs") +
+        '&style=for-the-badge&color=ffd166&labelColor=142a52" alt="Compteur de visites du site" referrerpolicy="no-referrer" loading="lazy" height="28">';
+    }
     document.getElementById("footer-text").textContent = "© " + new Date().getFullYear() + " " + (s.auteur || "") + (s.fonction ? " – " + s.fonction : "");
     if (s.licence) {
       document.getElementById("footer-licence").innerHTML = 'Contenus sous licence <a href="' + esc(s.licence.url) + '" target="_blank" rel="noopener">' + esc(s.licence.nom) + "</a>. " +
