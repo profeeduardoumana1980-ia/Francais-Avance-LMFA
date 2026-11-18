@@ -85,9 +85,6 @@ a:hover { color: var(--rouge); }
   background: var(--bleu);
   color: #fff;
   border-bottom: 4px solid var(--rouge);
-  position: sticky;
-  top: 0;
-  z-index: 50;
 }
 
 .header-inner {
@@ -292,6 +289,113 @@ body.show-es span.es { display: inline; }
 .breadcrumb { font-size: .9rem; margin-bottom: .5rem; }
 .breadcrumb a { text-decoration: none; }
 
+/* ---------- Bannière d'en-tête (image + message défilant) ---------- */
+
+.site-header { padding: 0; border-bottom: 0; }
+.entete-banniere {
+  position: relative;
+  max-width: 1160px;
+  margin: 0 auto;
+  height: clamp(300px, 50vw, 600px);
+  overflow: hidden;
+  background: var(--bleu-fonce);
+  transition: height .35s ease;
+}
+body:not(.page-accueil) .entete-banniere { height: clamp(150px, 20vw, 230px); }
+.banniere-lien { display: block; height: 100%; }
+.banniere-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.entete-banniere::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20,42,82,.35) 0%, rgba(20,42,82,0) 25%, rgba(20,42,82,0) 55%, rgba(20,42,82,.55) 100%);
+  pointer-events: none;
+}
+.banniere-bandeau {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6%;
+  z-index: 1;
+  overflow: hidden;
+  background: rgba(20, 42, 82, .82);
+  border-top: 3px solid var(--rouge);
+  border-bottom: 3px solid var(--rouge);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+}
+body:not(.page-accueil) .banniere-bandeau { bottom: 8%; }
+.banniere-piste {
+  display: flex;
+  width: max-content;
+  animation: defilement 40s linear infinite;
+}
+.banniere-serie { display: flex; align-items: center; flex: none; }
+.ban-msg {
+  color: #fff;
+  font-weight: 800;
+  font-size: clamp(1.05rem, 2.6vw, 1.75rem);
+  letter-spacing: .01em;
+  white-space: nowrap;
+  padding: .6rem 0;
+  text-shadow: 0 2px 6px rgba(0,0,0,.35);
+}
+body:not(.page-accueil) .ban-msg { font-size: clamp(.95rem, 1.8vw, 1.2rem); padding: .4rem 0; }
+.ban-sep { color: var(--rouge); margin: 0 1.6rem; font-size: .9rem; }
+.entete-banniere:hover .banniere-piste,
+.entete-banniere.en-pause .banniere-piste { animation-play-state: paused; }
+
+/* Boutons posés sur l'image : pause et espagnol */
+.entete-outils {
+  position: absolute;
+  top: .7rem;
+  right: .7rem;
+  z-index: 2;
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+}
+.entete-outils .toggle-es {
+  background: rgba(15,26,46,.7);
+  border-color: rgba(255,255,255,.8);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  min-height: 40px;
+}
+.entete-outils .toggle-es[aria-pressed="true"] { background: #fff; color: var(--bleu); }
+.banniere-pause {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.8);
+  background: rgba(15,26,46,.7);
+  color: #fff;
+  font: inherit;
+  font-size: .75rem;
+  cursor: pointer;
+}
+.banniere-pause:hover, .entete-outils .toggle-es[aria-pressed="false"]:hover { background: rgba(15,26,46,.9); }
+.entete-outils .toggle-es[aria-pressed="true"]:hover { background: #e8eef8; color: var(--bleu-fonce); }
+@media (prefers-reduced-motion: reduce) {
+  .entete-banniere { transition: none; }
+  .banniere-piste { animation: none; width: auto; justify-content: center; }
+  .banniere-serie + .banniere-serie, .banniere-serie .ban-msg ~ .ban-msg, .banniere-serie .ban-sep, .banniere-pause { display: none; }
+  .ban-msg { white-space: normal; text-align: center; padding: .6rem 1rem; }
+}
+
+/* Le menu défilant reste visible en haut de l'écran */
+.main-nav.bandeau {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 4px solid var(--rouge);
+}
+
 .hero {
   background: linear-gradient(135deg, var(--bleu) 0%, #2b4f8f 100%);
   color: #fff;
@@ -475,7 +579,7 @@ body.show-es span.es { display: inline; }
 }
 @media (min-width: 980px) {
   .zone-exercice.avec-document { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
-  .zone-exercice.avec-document .document { position: sticky; top: 9rem; max-height: calc(100vh - 11rem); overflow: auto; }
+  .zone-exercice.avec-document .document { position: sticky; top: 4.5rem; max-height: calc(100vh - 6rem); overflow: auto; }
 }
 
 .document {
@@ -758,21 +862,15 @@ main:focus, main:focus-visible { outline: none; }
   <a class="skip-link" href="#main">Aller au contenu</a>
 
   <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="#/">
-        <span class="brand-mark" aria-hidden="true">FLE</span>
-        <span class="brand-text">
-          <span class="brand-title" id="site-title">Français Avancé</span>
-          <span class="brand-sub" id="site-subtitle">Pratiques DELF/DALF</span>
-        </span>
-      </a>
-      <div class="header-tools">
-        <button type="button" class="toggle-es" id="toggle-es" aria-pressed="false">
+    <div class="entete-banniere" id="entete-banniere">
+      <div class="entete-outils">
+        <button type="button" class="toggle-es" id="toggle-es" aria-pressed="false" lang="es">
           <span aria-hidden="true">ES</span>
-          <span class="toggle-label">Consignes en espagnol</span>
+          <span class="toggle-label">Ver consignas en español</span>
         </button>
       </div>
     </div>
+  </header>
     <nav class="main-nav bandeau" id="main-nav" aria-label="Navigation principale">
       <span class="bandeau-etiquette" aria-hidden="true">MENU</span>
       <div class="bandeau-fenetre">
@@ -797,7 +895,6 @@ main:focus, main:focus-visible { outline: none; }
       </div>
       <button type="button" class="bandeau-pause" id="bandeau-pause" aria-pressed="false" aria-label="Mettre le menu en pause">❚❚</button>
     </nav>
-  </header>
 
   <main id="main" tabindex="-1">
     <div id="app" aria-live="polite">
@@ -860,6 +957,13 @@ window.DONNEES_SITE = {
       }
     ],
     "accueil": {
+      "banniere": {
+        "image": "banniere-lmfa.jpg",
+        "alt": "Classe de Français Avancé du Liceo Mauro Fernández : un professeur s'entretient en français avec un élève, sous une bannière « Certifications officielles en français : DELF junior et DALF ».",
+        "message": "Français Avancé et FLE · Pratiques DELF/DALF · MSc. Eduardo Umaña Álvarez · Formateur FEI",
+        "cadrage": "center 42%",
+        "cadrageCompact": "center 22%"
+      },
       "titre": "Bienvenue sur l'espace Français Avancé",
       "texte": "Cet espace accompagne votre préparation au DELF et au DALF ainsi que le travail de nos groupes de Français Avancé.\n\nVous y trouverez des exercices autocorrigés de compréhension de l'oral et des écrits du niveau A1 au niveau C1, du matériel pédagogique, les projets du cours, les annonces de votre groupe et les évaluations en ligne.",
       "texte_es": "Este espacio acompaña su preparación para el DELF y el DALF, así como el trabajo de los grupos de Francés Avanzado: ejercicios autocorregidos de comprensión oral y escrita (A1 a C1), material didáctico, proyectos, anuncios del grupo y evaluaciones en línea.",
@@ -2882,6 +2986,7 @@ window.DONNEES_SITE = {
     var r = analyserHash();
     var fn = PAGES[r.page] || pageIntrouvable;
     var actif = SECTION_NAV[r.page] || r.page;
+    document.body.classList.toggle("page-accueil", r.page === "accueil" || !PAGES[r.page]);
     document.querySelectorAll(".main-nav a").forEach(function (a) {
       if (a.getAttribute("data-route") === actif) a.setAttribute("aria-current", "page");
       else a.removeAttribute("aria-current");
@@ -2908,7 +3013,8 @@ window.DONNEES_SITE = {
     var compte = {};
     DATA.exercices.forEach(function (e) { compte[e.niveau] = (compte[e.niveau] || 0) + 1; });
 
-    var h = '<section class="hero">' +
+    var h = "";
+    h += '<section class="hero">' +
       "<h1>" + esc(a.titre || s.titre) + "</h1>" +
       paragraphes(a.texte) +
       (a.texte_es ? '<p class="es" lang="es">' + esc(a.texte_es) + "</p>" : "") +
@@ -3803,10 +3909,41 @@ window.DONNEES_SITE = {
     appliquer();
   }
 
+  /* Bannière d'en-tête : image + message défilant (grande sur l'accueil, compacte ailleurs) */
+  function initBanniere() {
+    var s = DATA.site;
+    var ban = (s.accueil || {}).banniere;
+    var zone = document.getElementById("entete-banniere");
+    if (!zone || !ban || !ban.image) return;
+    var msg = esc(ban.message || s.titre);
+    var item = '<span class="ban-msg">' + msg + '</span><span class="ban-sep" aria-hidden="true">◆</span>';
+    var serie = new Array(5).join(item);
+    zone.insertAdjacentHTML("afterbegin",
+      '<a class="banniere-lien" href="#/" aria-label="Accueil – ' + msg + '">' +
+      '<img class="banniere-img" src="' + esc(ban.image) + '" alt="' + esc(ban.alt || "") + '" onerror="this.style.visibility=\'hidden\'">' + "</a>" +
+      '<div class="banniere-bandeau" aria-hidden="true"><div class="banniere-piste">' +
+      '<div class="banniere-serie">' + serie + '</div><div class="banniere-serie">' + serie + "</div>" +
+      "</div></div>");
+    zone.querySelector(".entete-outils").insertAdjacentHTML("afterbegin",
+      '<button type="button" class="banniere-pause" id="banniere-pause" aria-pressed="false" aria-label="Mettre le texte défilant en pause">❚❚</button>');
+    var img = zone.querySelector(".banniere-img");
+    function cadrer() {
+      var acc = document.body.classList.contains("page-accueil");
+      img.style.objectPosition = acc ? (ban.cadrage || "center") : (ban.cadrageCompact || ban.cadrage || "center");
+    }
+    cadrer();
+    window.addEventListener("hashchange", cadrer);
+    var bp = document.getElementById("banniere-pause");
+    bp.addEventListener("click", function () {
+      var p = zone.classList.toggle("en-pause");
+      bp.setAttribute("aria-pressed", p ? "true" : "false");
+      bp.textContent = p ? "▶" : "❚❚";
+      bp.setAttribute("aria-label", p ? "Relancer le texte défilant" : "Mettre le texte défilant en pause");
+    });
+  }
+
   function initSite() {
     var s = DATA.site;
-    if (s.titre) document.getElementById("site-title").textContent = s.titre;
-    if (s.sousTitre) document.getElementById("site-subtitle").textContent = s.sousTitre;
     document.getElementById("footer-text").textContent = "© " + new Date().getFullYear() + " " + (s.auteur || "") + (s.fonction ? " – " + s.fonction : "");
     if (s.licence) {
       document.getElementById("footer-licence").innerHTML = 'Contenus sous licence <a href="' + esc(s.licence.url) + '" target="_blank" rel="noopener">' + esc(s.licence.nom) + "</a>. " +
@@ -3822,6 +3959,7 @@ window.DONNEES_SITE = {
     initSite();
     window.addEventListener("hashchange", router);
     router();
+    initBanniere();
   }).catch(function (err) {
     console.error(err);
     app.innerHTML = '<div class="encart attention"><h1>Impossible de charger le contenu</h1>' +
